@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const PageNotFound = () => {
   return (
-    <div className='flex flex-col-reverse md:flex-row justify-center items-center grow'>
+    <div className='flex flex-col-reverse h-screen md:flex-row justify-center items-center'>
       <div className='text-center px-5 mx-5'>
         <h2 className={`${titleFont.className} antialiased text-9xl`}>404</h2>
         <p className='font-semibold text-xl'>
