@@ -10,7 +10,7 @@ export default function ShopLayout({
   return (
     <main className='min-h-screen flex flex-col'>
       <TopMenu />
-      {children}
+      <div className='container mx-auto'>{children}</div>
     </main>
   )
 }
