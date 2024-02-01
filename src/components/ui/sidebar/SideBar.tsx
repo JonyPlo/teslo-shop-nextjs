@@ -67,7 +67,6 @@ export const SideBar = () => {
       {isSideMenuOpen && (
         <div className='fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30' />
       )}
-
       {/* Blur */}
       {isSideMenuOpen && (
         <div
@@ -75,7 +74,6 @@ export const SideBar = () => {
           className='fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm'
         />
       )}
-
       {/* Side Menu */}
       <nav
         className={
@@ -95,7 +93,6 @@ export const SideBar = () => {
           className='absolute top-5 right-5 cursor-pointer'
           onClick={closeMenu}
         />
-
         {/* Input */}
         <div className='relative mt-14'>
           <IoSearchOutline size={20} className='absolute top-2 left-2' />
@@ -105,15 +102,12 @@ export const SideBar = () => {
             className='w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200 focus:outline-none focus:border-blue-500'
           />
         </div>
-
         {/* User Menu */}
         {userItems.map((item) => (
           <SideBarItem key={item.path} item={item} />
         ))}
-
         {/* Line Separator */}
         <div className='w-full h-px bg-gray-200 my-10 rounded' />
-
         {/* Administration Menu */}
         {administrationItems.map((item) => (
           <SideBarItem key={item.path} item={item} />
