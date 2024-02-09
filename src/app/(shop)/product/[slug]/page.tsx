@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { initialData } from '@/seed/seed'
 import { titleFont } from '@/config/fonts'
+import { SizeSelector } from '@/components'
 
 const seedProducts = initialData.products
 
@@ -35,7 +36,7 @@ export default function ProductPage({ params }: Props) {
         <p className='text-lg mb-5'>${product.price}</p>
 
         {/* Sizes selector */}
-
+        <SizeSelector selectedSize={ product.sizes[0]} availableSizes={product.sizes}/>
         {/* Quantity selector */}
 
         {/* Button */}
