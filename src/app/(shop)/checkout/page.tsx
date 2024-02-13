@@ -49,19 +49,19 @@ export default function CartPage() {
           <div className='bg-white rounded-xl shadow-xl p-7 h-min'>
             <h2 className='text-2xl mb-2'>Delivery Address</h2>
             <div className='mb-5'>
-              <p className='text-xl'>Jonathan Plodzien</p>
+              <p>Jonathan Plodzien</p>
               <p className='font-bold'>Marcos Avellaneda 1571</p>
               <p>San Miguel de Tucuman</p>
               <p>Tucuman</p>
               <p>CP 4000</p>
-              <p>123123123</p>
+              <p>3816126830</p>
             </div>
 
             {/* Divider */}
-            <div className='w-full h-0.5 rounded-none bg-gray-200 mb-10' />
+            <div className='w-full h-0.5 rounded-none bg-gray-200 mb-5' />
 
             <h2 className='text-2xl mb-2'>Order Summary</h2>
-            <div className='grid grid-cols-2'>
+            <div className='grid grid-cols-2 mb-5'>
               <span>Products number</span>
               <span className='text-right'>3 Items</span>
               <span>Subtotal</span>
@@ -69,12 +69,18 @@ export default function CartPage() {
               <span>Taxes (15%)</span>
               <span className='text-right'>$ 100</span>
             </div>
-            <div className='grid grid-cols-2'>
-              <span className='text-2xl mt-5'>Total</span>
-              <span className='text-2xl mt-5 text-right'>$ 100</span>
+            <div className='grid grid-cols-2 mb-5'>
+              <span className='text-2xl'>Total</span>
+              <span className='text-2xl text-right'>$ 100</span>
             </div>
-            <div className='mt-5 mb-2 w-full'>
-              <p className='mb-5'>
+            <div className='w-full'>
+              <Link
+                href={`/orders/123`}
+                className='flex btn-primary justify-center mb-5'
+              >
+                Place order
+              </Link>
+              <p>
                 {/* Disclaimer */}
                 <span className='text-xs'>
                   By clicking on &quot;Place order&quot;, you accept our{' '}
@@ -83,12 +89,6 @@ export default function CartPage() {
                   </a>
                 </span>
               </p>
-              <Link
-                href={`/orders/123`}
-                className='flex btn-primary justify-center'
-              >
-                Place order
-              </Link>
             </div>
           </div>
         </div>
