@@ -11,7 +11,7 @@ export default function ShopLayout({
     <main className='min-h-screen flex flex-col'>
       <TopMenu />
       <SideBar />
-      <div className='container mx-auto'>
+      <div className='container grow mx-auto'>
         {children}
       </div>
       <Footer />
