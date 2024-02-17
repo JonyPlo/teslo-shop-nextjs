@@ -12,6 +12,7 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0"
   },
   "dependencies": {
+    "@prisma/client": "5.9.1",
     "clsx": "2.1.0",
     "conventional-changelog-cli": "4.1.0",
     "immer": "10.0.3",
