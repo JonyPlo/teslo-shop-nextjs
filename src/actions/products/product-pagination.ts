@@ -2,9 +2,22 @@
 
 import prisma from '@/lib/prisma'
 
-export const getPaginatedProductsWithImages = async () => {
+interface PaginationOptions {
+  page?: number
+  take?: number
+}
+
+export const getPaginatedProductsWithImages = async ({
+  page = 1,
+  take = 12,
+}: PaginationOptions) => {
+  if (isNaN(Number(page))) page = 1
+  if (page < 1) page = 1
+
   try {
     const products = await prisma.product.findMany({
+      take,
+      skip: (page - 1) * take,
       // Con include estoy filtrando la búsqueda de productos
       include: {
         // Y aqui pido que incluya el ProductImage, en otras palabras, buscar en la tabla de ProductImage, las imagenes que esten relacionadas con cada producto.
@@ -20,17 +33,24 @@ export const getPaginatedProductsWithImages = async () => {
       },
     })
 
-    console.log(products)
-
     return {
+      // Pagination
       currentPage: 1,
       totalPages: 10,
-      products: products.map((product) => ({
-        ...product,
-        images: product.ProductImage.map((image) => image.url),
-      })),
+
+      // Products
+      products: products.map((product) => {
+        const { ProductImage, ...rest } = product
+
+        const productModify = {
+          ...rest,
+          images: ProductImage.map((image) => image.url),
+        }
+
+        return productModify
+      }),
     }
   } catch (error) {
-    throw new Error('Unable to charge products')
+    throw new Error('Unable to get products')
   }
 }
