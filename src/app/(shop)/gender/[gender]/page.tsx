@@ -1,7 +1,9 @@
+export const revalidate = 60
+
 import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, ProductGrid, Title } from '@/components'
 import { Gender } from '@/interfaces'
-import { notFound, redirect } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 interface Props {
   params: {
@@ -31,10 +33,6 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     women: 'Women',
     kid: 'Kids',
     unisex: 'everyone',
-  }
-
-  if (!labels) {
-    notFound()
   }
 
   return (

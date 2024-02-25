@@ -1,3 +1,6 @@
+// Con export const revalidate = 60 estoy diciendo que la pagina con los productos se revalidara cada 60 segundos, es decir, la informacion permanecerá en cache por 60 segundos y una vez pasado ese tiempo, si se vuelve a este componente se realizara la peticion correspondiente para volver a cargar todo
+export const revalidate = 60
+
 import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, ProductGrid, Title } from '@/components'
 import { redirect } from 'next/navigation'
