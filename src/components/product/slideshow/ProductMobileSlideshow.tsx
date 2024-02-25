@@ -1,7 +1,7 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules'
+import { Autoplay, FreeMode, Pagination } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/free-mode'
@@ -21,8 +21,9 @@ export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
     <div className={className}>
       <Swiper
         style={{
-          width: '100vw',
+          width: '85vw',
           height: '500px',
+          borderRadius: '5px'
         }}
         pagination
         autoplay={{
@@ -38,7 +39,7 @@ export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
               height={500}
               src={`/products/${image}`}
               alt={title}
-              className='object-fill'
+              className='object-cover rounded'
             />
           </SwiperSlide>
         ))}
