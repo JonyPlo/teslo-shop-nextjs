@@ -23,10 +23,11 @@ export const ProductGridItem = ({ product }: Props) => {
           height={500}
           onMouseEnter={() => setDisplayImage(product.images[1])}
           onMouseLeave={() => setDisplayImage(product.images[0])}
+          priority
         />
       </Link>
 
-      <div className='p-4 flex flex-col'>
+      <div className='py-4 flex flex-col'>
         <Link className='hover:text-blue-600' href={`/product/${product.slug}`}>
           {product.title}
         </Link>

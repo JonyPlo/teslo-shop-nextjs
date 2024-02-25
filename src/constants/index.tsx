@@ -10,22 +10,22 @@ import {
 
 export const userItems: SideBarItems[] = [
   {
-    path: '/',
+    path: '/profile',
     text: 'Profile',
     icon: <IoPersonOutline size={30} />,
   },
   {
-    path: '/',
+    path: '/orders',
     text: 'Orders',
     icon: <IoTicketOutline size={30} />,
   },
   {
-    path: '/',
+    path: '/login',
     text: 'Log In',
     icon: <IoLogInOutline size={30} />,
   },
   {
-    path: '/',
+    path: '/logout',
     text: 'Log Out',
     icon: <IoLogOutOutline size={30} />,
   },
@@ -33,18 +33,18 @@ export const userItems: SideBarItems[] = [
 
 export const administrationItems: SideBarItems[] = [
   {
-    path: '/',
+    path: '/products',
     text: 'Products',
     icon: <IoShirtOutline size={30} />,
   },
 
   {
-    path: '/',
+    path: '/orders',
     text: 'Orders',
     icon: <IoTicketOutline size={30} />,
   },
   {
-    path: '/',
+    path: '/users',
     text: 'Users',
     icon: <IoPeopleOutline size={30} />,
   },
