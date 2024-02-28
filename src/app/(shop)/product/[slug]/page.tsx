@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { titleFont } from '@/config/fonts'
 import {
+  AddToCartButton,
   ProductMobileSlideshow,
   ProductSlideshow,
   QuantitySelector,
@@ -58,7 +59,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Quantity selector */}
         <QuantitySelector quantity={2} />
         {/* Button */}
-        <button className='btn-primary my-5'>Add to cart</button>
+        <AddToCartButton slug={product.slug} />
         {/* Description */}
         <h3 className='font-bold text-sm'>Description</h3>
         <p className='font-light'>{product.description}</p>

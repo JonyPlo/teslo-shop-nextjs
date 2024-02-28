@@ -18,14 +18,27 @@ export const StockLabel = ({ slug }: Props) => {
     const getStock = async () => {
       const inStock = await getStockBySlug(slug)
       setStock(inStock)
+      setIsLoading(false)
     }
 
     getStock()
   }, [slug])
 
   return (
-    <h2 className={`${titleFont.className} antialiased font-bold text-lg`}>
-      Stock: {stock}
-    </h2>
+    <>
+      {isLoading ? (
+        //  Skeleton
+        <h2
+          className={`${titleFont.className} antialiased font-bold text-lg bg-gray-200 animate-pulse w-[81px] rounded`}
+        >
+          &nbsp;
+        </h2>
+      ) : (
+        //  Stock Info
+        <h2 className={`${titleFont.className} antialiased font-bold text-lg w-fit`}>
+          Stock: {stock}
+        </h2>
+      )}
+    </>
   )
 }
