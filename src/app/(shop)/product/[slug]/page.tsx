@@ -4,10 +4,12 @@ import { notFound } from 'next/navigation'
 
 import { titleFont } from '@/config/fonts'
 import {
+  AddToCartButton,
   ProductMobileSlideshow,
   ProductSlideshow,
   QuantitySelector,
   SizeSelector,
+  StockLabel,
 } from '@/components'
 import { getProductBySlug } from '@/actions'
 
@@ -20,7 +22,6 @@ interface Props {
 export default async function ProductPage({ params }: Props) {
   const { slug } = params
   const product = await getProductBySlug(slug)
-console.log(product);
 
   if (!product) {
     notFound()
@@ -45,6 +46,7 @@ console.log(product);
       </div>
       {/* Details */}
       <div className='px-5'>
+        <StockLabel slug={product.slug} />
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
@@ -57,7 +59,7 @@ console.log(product);
         {/* Quantity selector */}
         <QuantitySelector quantity={2} />
         {/* Button */}
-        <button className='btn-primary my-5'>Add to cart</button>
+        <AddToCartButton slug={product.slug} />
         {/* Description */}
         <h3 className='font-bold text-sm'>Description</h3>
         <p className='font-light'>{product.description}</p>
