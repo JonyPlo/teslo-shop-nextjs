@@ -1,8 +1,13 @@
 'use server'
 
-export const getProductBySlug = async (slug: string) => {
+import { Product } from '@/interfaces'
+import prisma from '@/lib/prisma'
+
+export const getProductBySlug = async (
+  slug: string
+): Promise<Product | null> => {
   try {
-    const productBySlug = await prisma?.product.findFirst({
+    const productBySlug = await prisma.product.findFirst({
       include: {
         ProductImage: {
           select: {

@@ -1,5 +1,6 @@
 'use server'
 
+import { PaginatedProductsResult } from '@/interfaces'
 import prisma from '@/lib/prisma'
 import { Gender } from '@prisma/client'
 
@@ -13,7 +14,7 @@ export const getPaginatedProductsWithImages = async ({
   page = 1,
   take = 12,
   gender,
-}: PaginationOptions) => {
+}: PaginationOptions): Promise<PaginatedProductsResult> => {
   if (isNaN(Number(page))) page = 1
   if (page < 1) page = 1
 
