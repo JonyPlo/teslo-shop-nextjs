@@ -11,7 +11,7 @@ export const generatePaginationNumbers = (currentPage: number, totalPages: numbe
 
   // Si la pagina actual esta entre las ultimas 3 paginas, entonces mostramos las primeras 2, puntos suspensivos, y las ultimas 3 paginas
   if (currentPage >= totalPages - 2) {
-    return [1, 2, '...', totalPages - 2, totalPages - 2, totalPages]
+    return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages]
   }
 
   // Si la pagina actual esta en otro lugar medio, entonces mostramos la primera pagina, punto suspensivos, la pagina actual y las que siguen
