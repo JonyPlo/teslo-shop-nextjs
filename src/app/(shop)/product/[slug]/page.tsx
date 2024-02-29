@@ -27,25 +27,37 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug
- 
+
   // obtengo el producto basado en el slug de la url
   const product = await getProductBySlug(slug)
- 
+
   // optionally access and extend (rather than replace) parent metadata
   // const previousImages = (await parent).openGraph?.images || []
- 
+
   return {
     title: product?.title ?? 'Product not found',
     description: product?.description ?? '',
     openGraph: {
       title: product?.title ?? 'Product not found',
       description: product?.description ?? '',
-      // En la propiedad image tomamos una imagen de la carpeta public
-      images: [`/products/${product?.images[1]}`],
+      url: 'http://localhost:3000',
+      siteName: 'Teslo Shop',
+      // En la propiedad image tomamos una imagen basada en el producto que obtenemos actualmente y queremos obtener esa imagen, en este caso de carpeta public para que esa imagen se muestre cuando compartimos la url a alguien, es decir, si copiamos el link de un producto, entonces cuando le mandemos el link a alguien la otra persona recibirá el enlace junto a una imagen del producto que le queremos mostrar.
+      // Tener en cuenta que normalmente en esta propiedad se agrega la url de la imagen subida en la nube, y no desde mi proyecto ya que se recomienda que las imagenes esten subidas en otro lado aparte al proyecto
+      images: [
+        {
+          url: `/products/${product?.images[1]}`, // Tiene que ser una ruta absoluta
+          width: 800, // Opcional
+          height: 600, // Opcional
+          alt: product?.title, // Opcional
+        },
+      ],
+      // Forma resumida sin opciones
+      // images: [`/products/${product?.images[1]}`],
+      type: 'website',
     },
   }
 }
- 
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = params
