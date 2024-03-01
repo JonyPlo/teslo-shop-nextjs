@@ -3,49 +3,49 @@ import Link from 'next/link'
 
 export default function AddressPage() {
   return (
-    <div className='flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0'>
-      <div className='w-full  xl:w-[1000px] flex flex-col justify-center text-left'>
+    <div className='mb-72 flex flex-col px-10 sm:items-center sm:justify-center sm:px-0'>
+      <div className='flex  w-full flex-col justify-center text-left xl:w-[1000px]'>
         <Title title='Address' subtitle='Delivery Address' />
-        <div className='grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2'>
-          <div className='flex flex-col mb-2'>
+        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-5'>
+          <div className='mb-2 flex flex-col'>
             <span>Name</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Surname</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Address</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Address 2 (Optional)</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Postal Code</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>City</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Country</span>
-            <select className='p-2 border rounded-md bg-gray-200'>
+            <select className='rounded-md border bg-gray-200 p-2'>
               <option value=''>[ Select ]</option>
               <option value='CRI'>Costa Rica</option>
             </select>
           </div>
-          <div className='flex flex-col mb-2'>
+          <div className='mb-2 flex flex-col'>
             <span>Telephone</span>
-            <input type='text' className='p-2 border rounded-md bg-gray-200' />
+            <input type='text' className='rounded-md border bg-gray-200 p-2' />
           </div>
-          <div className='flex flex-col mb-2 sm:mt-10'>
+          <div className='mb-2 flex flex-col sm:mt-10'>
             <Link
               href='/checkout'
-              className='btn-primary flex w-full sm:w-1/2 justify-center '
+              className='btn-primary flex w-full justify-center sm:w-1/2 '
             >
               Next
             </Link>

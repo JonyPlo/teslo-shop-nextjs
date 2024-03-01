@@ -4,20 +4,20 @@ import Link from 'next/link'
 
 export const PageNotFound = () => {
   return (
-    <div className='flex flex-col-reverse min-h-[calc(100vh-56px-56px)] md:flex-row justify-center items-center'>
-      <div className='text-center px-5 mx-5'>
-        <h2 className={`${titleFont.className} antialiased text-9xl`}>404</h2>
-        <p className='font-semibold text-xl'>
+    <div className='flex min-h-[calc(100vh-56px-56px)] flex-col-reverse items-center justify-center md:flex-row'>
+      <div className='mx-5 px-5 text-center'>
+        <h2 className={`${titleFont.className} text-9xl antialiased`}>404</h2>
+        <p className='text-xl font-semibold'>
           The page you are looking for does not exist
         </p>
         <p className='font-light'>
           <span>Return to </span>
-          <Link href='/' className='font-normal hover:underline transition-all'>
+          <Link href='/' className='font-normal transition-all hover:underline'>
             Home
           </Link>
         </p>
       </div>
-      <div className='px-5 mx-5'>
+      <div className='mx-5 px-5'>
         <Image
           src='/imgs/starman_750x750.png'
           alt='Starman'

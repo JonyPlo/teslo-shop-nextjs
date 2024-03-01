@@ -29,13 +29,15 @@ export const StockLabel = ({ slug }: Props) => {
       {isLoading ? (
         //  Skeleton
         <h2
-          className={`${titleFont.className} antialiased font-bold text-lg bg-gray-200 animate-pulse w-[81px] rounded`}
+          className={`${titleFont.className} w-[81px] animate-pulse rounded bg-gray-200 text-lg font-bold antialiased`}
         >
           &nbsp;
         </h2>
       ) : (
         //  Stock Info
-        <h2 className={`${titleFont.className} antialiased font-bold text-lg w-fit`}>
+        <h2
+          className={`${titleFont.className} w-fit text-lg font-bold antialiased`}
+        >
           Stock: {stock}
         </h2>
       )}

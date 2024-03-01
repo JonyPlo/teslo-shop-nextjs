@@ -36,7 +36,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   }
 
   return (
-    <div className='flex flex-col min-h-[calc(100vh-56px-56px)]'>
+    <div className='flex min-h-[calc(100vh-56px-56px)] flex-col'>
       <Title
         title={`Products for ${labels[gender]}`}
         subtitle='All products'

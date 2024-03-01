@@ -25,11 +25,14 @@ const main = async () => {
 
   const categoriesDB = await prisma.category.findMany()
 
-  const categoriesMap = categoriesDB.reduce((map, category) => {
-    map[category.name.toLowerCase()] = category.id
+  const categoriesMap = categoriesDB.reduce(
+    (map, category) => {
+      map[category.name.toLowerCase()] = category.id
 
-    return map
-  }, {} as Record<string, string>)
+      return map
+    },
+    {} as Record<string, string>
+  )
 
   products.forEach(async (product) => {
     const { type, images, ...rest } = product
@@ -56,7 +59,7 @@ const main = async () => {
   console.log('Seed executed')
 }
 
-(() => {
+;(() => {
   // Esta condicional es importante para que la funcion no se ejecute una vez que el proyecto ya esta en producción
   if (process.env.NODE_ENV === 'production') return
 

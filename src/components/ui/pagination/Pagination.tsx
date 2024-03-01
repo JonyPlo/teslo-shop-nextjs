@@ -48,12 +48,12 @@ export const Pagination = ({ totalPages }: Props) => {
   }
 
   return (
-    <div className='flex justify-center mt-10 mb-32'>
+    <div className='mb-32 mt-10 flex justify-center'>
       <nav aria-label='navigation example'>
-        <ul className='flex list-style-none'>
+        <ul className='list-style-none flex'>
           <li className='page-item'>
             <Link
-              className='page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none'
+              className='page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800 focus:shadow-none'
               href={createPageUrl(currentPage - 1)}
             >
               <IoChevronBackOutline size={30} />
@@ -64,11 +64,11 @@ export const Pagination = ({ totalPages }: Props) => {
               <Link
                 className={twMerge(
                   // Base styles
-                  'page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200',
+                  'page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800',
 
                   // Current page styles
                   page === currentPage &&
-                    'bg-blue-600 text-white hover:text-white hover:bg-blue-500 shadow-md focus:shadow-md '
+                    'bg-blue-600 text-white shadow-md hover:bg-blue-500 hover:text-white focus:shadow-md '
                 )}
                 href={createPageUrl(page)}
               >
@@ -78,7 +78,7 @@ export const Pagination = ({ totalPages }: Props) => {
           ))}
           <li className='page-item'>
             <Link
-              className='page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none'
+              className='page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800 focus:shadow-none'
               href={createPageUrl(currentPage + 1)}
             >
               <IoChevronForwardOutline size={30} />

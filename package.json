@@ -10,7 +10,8 @@
     "prepare": "husky",
     "commitlint": "commitlint --edit",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0",
-    "seed": "ts-node src/seed/seed-database.ts"
+    "seed": "ts-node src/seed/seed-database.ts",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "@prisma/client": "5.9.1",
@@ -32,11 +33,13 @@
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
     "autoprefixer": "10.4.17",
-    "eslint": "8.56.0",
     "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "9.1.0",
     "husky": "9.0.10",
     "lint-staged": "15.2.2",
     "postcss": "8.4.35",
+    "prettier": "3.2.5",
+    "prettier-plugin-tailwindcss": "0.5.11",
     "prisma": "5.9.1",
     "tailwindcss": "3.4.1",
     "ts-node": "10.9.2",

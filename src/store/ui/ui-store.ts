@@ -13,10 +13,7 @@ interface UiState {
 
 const storeAPI: StateCreator<
   UiState,
-  [
-    ['zustand/devtools', never],
-    ['zustand/immer', never]
-  ]
+  [['zustand/devtools', never], ['zustand/immer', never]]
 > = (set) => ({
   // States
   isSideMenuOpen: false,
@@ -26,10 +23,4 @@ const storeAPI: StateCreator<
   closeSideMenu: () => set({ isSideMenuOpen: false }),
 })
 
-export const useUiStore = create<UiState>()(
-  devtools(
-    immer(
-      storeAPI
-    )
-  )
-)
+export const useUiStore = create<UiState>()(devtools(immer(storeAPI)))

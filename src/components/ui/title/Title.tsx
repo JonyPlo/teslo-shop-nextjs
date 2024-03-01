@@ -11,11 +11,11 @@ export const Title = ({ title, className, subtitle }: Props) => {
   return (
     <div className={`mt-3 ${className}`}>
       <h1
-        className={`${titleFont.className} antialiased text-xl font-semibold mt-8 mb-6`}
+        className={`${titleFont.className} mb-6 mt-8 text-xl font-semibold antialiased`}
       >
         {title}
       </h1>
-      {subtitle && <h3 className='text-xl mb-5 capitalize'>{subtitle}</h3>}
+      {subtitle && <h3 className='mb-5 text-xl capitalize'>{subtitle}</h3>}
     </div>
   )
 }

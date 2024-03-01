@@ -9,7 +9,7 @@ export const SideBarItem = ({ item }: Props) => {
   return (
     <Link
       href={item.path}
-      className='flex items-center mt-6 p-2 hover:bg-gray-100 rounded transition-all'
+      className='mt-6 flex items-center rounded p-2 transition-all hover:bg-gray-100'
     >
       {item.icon}
       <span className='ml-3 text-xl'>{item.text}</span>

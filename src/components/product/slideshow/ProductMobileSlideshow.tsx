@@ -23,7 +23,7 @@ export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
         style={{
           width: '85vw',
           height: '500px',
-          borderRadius: '5px'
+          borderRadius: '5px',
         }}
         pagination
         autoplay={{
@@ -39,7 +39,7 @@ export const ProductMobileSlideshow = ({ images, title, className }: Props) => {
               height={500}
               src={`/products/${image}`}
               alt={title}
-              className='object-cover rounded'
+              className='rounded object-cover'
               priority
             />
           </SwiperSlide>

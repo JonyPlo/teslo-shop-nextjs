@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: Props) {
   }
 
   return (
-    <div className='mt-5 mb-20 grid md:grid-cols-3 gap-3'>
+    <div className='mb-20 mt-5 grid gap-3 md:grid-cols-3'>
       {/* Slideshow */}
       <div className='md:col-span-2'>
         {/* Desktop Slideshow */}
@@ -87,10 +87,10 @@ export default async function ProductPage({ params }: Props) {
       {/* Details */}
       <div className='px-5'>
         <StockLabel slug={product.slug} />
-        <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
+        <h1 className={`${titleFont.className} text-xl font-bold antialiased`}>
           {product.title}
         </h1>
-        <p className='text-lg mb-5'>${product.price}</p>
+        <p className='mb-5 text-lg'>${product.price}</p>
         {/* Sizes selector */}
         <SizeSelector
           selectedSize={product.sizes[0]}
@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Button */}
         <AddToCartButton slug={product.slug} />
         {/* Description */}
-        <h3 className='font-bold text-sm'>Description</h3>
+        <h3 className='text-sm font-bold'>Description</h3>
         <p className='font-light'>{product.description}</p>
       </div>
     </div>

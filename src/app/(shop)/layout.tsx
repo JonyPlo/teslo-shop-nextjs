@@ -8,10 +8,10 @@ export default function ShopLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className='min-h-screen flex flex-col'>
+    <main className='flex min-h-screen flex-col'>
       <TopMenu />
       <SideBar />
-      <div className='md:container grow mx-5 sm:mx-10 md:mx-auto'>
+      <div className='mx-5 grow md:container sm:mx-10 md:mx-auto'>
         {children}
       </div>
       <Footer />

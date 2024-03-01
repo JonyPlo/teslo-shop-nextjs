@@ -26,10 +26,10 @@ export const AddToCartButton = ({ slug }: Props) => {
     <>
       {isLoading ? (
         // Spinner
-        <div className='flex my-5 ml-[3.8rem] '>
+        <div className='my-5 ml-[3.8rem] flex '>
           <svg
             aria-hidden='true'
-            className='w-10 h-10 text-gray-200 animate-spin dark:text-transparent fill-blue-600'
+            className='h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-transparent'
             viewBox='0 0 100 101'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -47,7 +47,7 @@ export const AddToCartButton = ({ slug }: Props) => {
       ) : (
         // Add to cart button
         <button
-          className='btn-primary text-center my-5 disabled:bg-gray-500'
+          className='btn-primary my-5 text-center disabled:bg-gray-500'
           disabled={stock === 0}
         >
           {stock === 0 ? 'Out of stock' : 'Add to cart'}

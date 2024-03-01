@@ -20,15 +20,15 @@ export default function CartPage({ params }: Props) {
   const { id } = params
 
   return (
-    <div className='flex justify-center items-center mb-72 px-10 sm:px-0'>
-      <div className='flex flex-col w-[1000px]'>
+    <div className='mb-72 flex items-center justify-center px-10 sm:px-0'>
+      <div className='flex w-[1000px] flex-col'>
         <Title title={`Order #${id}`} />
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
+        <div className='grid grid-cols-1 gap-10 sm:grid-cols-2'>
           {/* Cart */}
-          <div className='flex flex-col mt-5'>
+          <div className='mt-5 flex flex-col'>
             <div
               className={clsx(
-                'flex items-center rounded py-2 px-3.5 text-xs font-bold text-white mb-6',
+                'mb-6 flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
                 {
                   'bg-red-500': false,
                   'bg-green-700': true,
@@ -42,7 +42,7 @@ export default function CartPage({ params }: Props) {
 
             {/* Cart Items */}
             {productsInCart.map((product) => (
-              <div key={product.slug} className='flex mb-5'>
+              <div key={product.slug} className='mb-5 flex'>
                 <Image
                   src={`/products/${product.images[0]}`}
                   width={100}
@@ -64,8 +64,8 @@ export default function CartPage({ params }: Props) {
           </div>
 
           {/* Order Summary */}
-          <div className='bg-white rounded-xl shadow-xl p-7 h-min'>
-            <h2 className='text-2xl mb-2'>Delivery Address</h2>
+          <div className='h-min rounded-xl bg-white p-7 shadow-xl'>
+            <h2 className='mb-2 text-2xl'>Delivery Address</h2>
             <div className='mb-5'>
               <p>Jonathan Plodzien</p>
               <p className='font-bold'>Marcos Avellaneda 1571</p>
@@ -76,10 +76,10 @@ export default function CartPage({ params }: Props) {
             </div>
 
             {/* Divider */}
-            <div className='w-full h-0.5 rounded-none bg-gray-200 mb-5' />
+            <div className='mb-5 h-0.5 w-full rounded-none bg-gray-200' />
 
-            <h2 className='text-2xl mb-2'>Order Summary</h2>
-            <div className='grid grid-cols-2 mb-5'>
+            <h2 className='mb-2 text-2xl'>Order Summary</h2>
+            <div className='mb-5 grid grid-cols-2'>
               <span>Products number</span>
               <span className='text-right'>3 Items</span>
               <span>Subtotal</span>
@@ -87,14 +87,14 @@ export default function CartPage({ params }: Props) {
               <span>Taxes (15%)</span>
               <span className='text-right'>$ 100</span>
             </div>
-            <div className='grid grid-cols-2 mb-5'>
+            <div className='mb-5 grid grid-cols-2'>
               <span className='text-2xl'>Total</span>
-              <span className='text-2xl text-right'>$ 100</span>
+              <span className='text-right text-2xl'>$ 100</span>
             </div>
             <div className='w-full'>
               <div
                 className={clsx(
-                  'flex items-center rounded py-2 px-3.5 text-xs font-bold text-white',
+                  'flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
                   {
                     'bg-red-500': false,
                     'bg-green-700': true,
