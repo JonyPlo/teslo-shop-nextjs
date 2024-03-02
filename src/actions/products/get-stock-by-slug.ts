@@ -10,8 +10,9 @@ export const getStockBySlug = async (slug: string): Promise<number> => {
       where: { slug },
       select: { inStock: true },
     })
+
     return stock?.inStock ?? 0
   } catch (error) {
-    return 0
+    throw new Error('Product stock not found')
   }
 }

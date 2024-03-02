@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Quantity selector */}
         <QuantitySelector quantity={2} />
         {/* Button */}
-        <AddToCartButton slug={product.slug} />
+        <AddToCartButton />
         {/* Description */}
         <h3 className='text-sm font-bold'>Description</h3>
         <p className='font-light'>{product.description}</p>

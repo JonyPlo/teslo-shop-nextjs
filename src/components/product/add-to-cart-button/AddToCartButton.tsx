@@ -1,26 +1,9 @@
 'use client'
 
-import { getStockBySlug } from '@/actions'
-import { useEffect, useState } from 'react'
+import { useProductBoundStore } from '@/store'
 
-interface Props {
-  slug: string
-}
-
-export const AddToCartButton = ({ slug }: Props) => {
-  const [stock, setStock] = useState(0)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const getStock = async () => {
-      const inStock = await getStockBySlug(slug)
-
-      setStock(inStock)
-      setIsLoading(false)
-    }
-
-    getStock()
-  }, [slug])
+export const AddToCartButton = () => {
+  const { stock, isLoading } = useProductBoundStore((state) => state)
 
   return (
     <>
