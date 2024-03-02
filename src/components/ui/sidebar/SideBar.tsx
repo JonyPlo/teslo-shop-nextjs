@@ -2,13 +2,13 @@
 
 import { IoCloseOutline, IoSearchOutline } from 'react-icons/io5'
 import { SideBarItem } from './SideBarItem'
-import { useUiStore } from '@/store'
+import { useUiBoundStore } from '@/store'
 import clsx from 'clsx'
 import { administrationItems, userItems } from '@/constants'
 
 export const SideBar = () => {
-  const isSideMenuOpen = useUiStore((state) => state.isSideMenuOpen)
-  const closeMenu = useUiStore((state) => state.closeSideMenu)
+  const isSideMenuOpen = useUiBoundStore((state) => state.isSideMenuOpen)
+  const closeMenu = useUiBoundStore((state) => state.setIsSideMenuOpen)
 
   return (
     <div>

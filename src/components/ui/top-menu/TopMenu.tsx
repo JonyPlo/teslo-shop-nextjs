@@ -1,13 +1,13 @@
 'use client'
 
 import { titleFont } from '@/config/fonts'
-import { useUiStore } from '@/store'
+import { useUiBoundStore } from '@/store'
 import Link from 'next/link'
 import React from 'react'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 
 export const TopMenu = () => {
-  const openMenu = useUiStore((state) => state.openSideMenu)
+  const openMenu = useUiBoundStore((state) => state.setIsSideMenuOpen)
 
   return (
     <nav className='flex w-full items-center justify-between px-5'>
