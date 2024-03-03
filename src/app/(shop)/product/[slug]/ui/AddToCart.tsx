@@ -11,7 +11,9 @@ import {
   SizeSelector,
   Spinner,
 } from '@/components'
-import type { Product, Size } from '@/interfaces'
+import type { CartProduct, Product, Size } from '@/interfaces'
+import { IoCartOutline } from 'react-icons/io5'
+import { cn } from '@/utils'
 
 interface Props {
   product: Product
@@ -21,18 +23,18 @@ export const AddToCart = ({ product }: Props) => {
   const [size, setSize] = useState<Size | undefined>()
   const [quantity, setQuantity] = useState<number>(1)
   const [posted, setPosted] = useState(false)
+  const [showAlertDialog, setShowAlertDialog] = useState<boolean>(false)
 
-  const { stock, isLoading } = useProductBoundStore((state) => state)
+  const { stock, isLoading } = useProductBoundStore()
   const { setProductToCart } = useCartBoundStore()
 
   const addToCart = () => {
     setPosted(true)
-
     if (!size) return
 
     const { id, slug, title, price, images } = product
 
-    const productInCart = {
+    const cartProduct: CartProduct = {
       id,
       slug,
       title,
@@ -42,7 +44,18 @@ export const AddToCart = ({ product }: Props) => {
       size,
     }
 
-    setProductToCart(productInCart)
+    setProductToCart(cartProduct)
+    setPosted(false)
+    setQuantity(1)
+    setSize(undefined)
+    setShowAlertDialog(true)
+
+    if (!showAlertDialog) {
+      const alertTime = setInterval(() => {
+        setShowAlertDialog(false)
+        clearInterval(alertTime)
+      }, 1000 * 5)
+    }
   }
 
   return (
@@ -78,6 +91,21 @@ export const AddToCart = ({ product }: Props) => {
           {stock === 0 ? 'Out of stock' : 'Add to cart'}
         </button>
       )}
+      {/* Alert Dialog */}
+      <div
+        className={cn(
+          // Base Styles
+          'alert-dialog-position fixed bottom-3 z-10 flex w-full max-w-fit items-center rounded-lg bg-gray-100 p-3 text-gray-600 shadow',
+          // Fade in out animation
+          {
+            'opacity-100 duration-300': showAlertDialog,
+            'opacity-0 duration-300': !showAlertDialog,
+          }
+        )}
+      >
+        <IoCartOutline size={30} className='animate-wiggle text-blue-700' />
+        <span className='mx-3 text-sm font-normal'>Product added to cart.</span>
+      </div>
     </>
   )
 }
