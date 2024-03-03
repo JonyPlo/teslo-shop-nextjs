@@ -4,7 +4,7 @@
 
 import { useState } from 'react'
 
-import { useProductBoundStore } from '@/store'
+import { useCartBoundStore, useProductBoundStore } from '@/store'
 import {
   DangerAlertDialog,
   QuantitySelector,
@@ -23,11 +23,26 @@ export const AddToCart = ({ product }: Props) => {
   const [posted, setPosted] = useState(false)
 
   const { stock, isLoading } = useProductBoundStore((state) => state)
+  const { setProductToCart } = useCartBoundStore()
 
   const addToCart = () => {
     setPosted(true)
 
     if (!size) return
+
+    const { id, slug, title, price, images } = product
+
+    const productInCart = {
+      id,
+      slug,
+      title,
+      price,
+      image: images[0],
+      quantity,
+      size,
+    }
+
+    setProductToCart(productInCart)
   }
 
   return (
