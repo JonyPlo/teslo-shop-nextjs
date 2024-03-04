@@ -1,6 +1,4 @@
-import { AlertOptions } from '@/interfaces'
+import type { AlertMessage, AlertType } from '@/interfaces'
 
-export const PRODUCT_SIZE_DANGER_ALERT_OPTIONS: AlertOptions = {
-  alertMessage: 'You must select a size*',
-  alertType: 'danger',
-}
+export const DANGER_ALERT_MESSAGE: AlertMessage = 'You must select a size*'
+export const DANGER_ALERT_TYPE: AlertType = 'danger'

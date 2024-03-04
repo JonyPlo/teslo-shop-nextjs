@@ -1,4 +1,4 @@
-import { CartProduct } from '@/interfaces'
+import type { CartProduct } from '@/interfaces'
 import { StateCreator } from 'zustand'
 import { persist } from 'zustand/middleware'
 

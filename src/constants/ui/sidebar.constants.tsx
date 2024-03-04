@@ -1,4 +1,4 @@
-import { SideBarItems } from '@/interfaces'
+import type { SideBarItems } from '@/interfaces'
 import {
   IoLogInOutline,
   IoLogOutOutline,

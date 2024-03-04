@@ -3,7 +3,6 @@
 // Este client componente se crea en este path dentro de app y no en otra carpeta como por ejemplo Components porque es un componente que no se reutiliza en ningun lado, solamente sera llamado dentro de su archivo page.tsx correspondiente (./src/app/(shop)/product/[slug]/page.tsx), entonces como esta muy relacionado con esa pagina y no se reutiliza, entonces se lo crea en el mismo path para que esten juntos y el codigo sea mas mantenible
 
 import { useState } from 'react'
-
 import { useCartBoundStore, useProductBoundStore } from '@/store'
 import {
   Alert,
@@ -14,11 +13,14 @@ import {
 } from '@/components'
 import type { CartProduct, Product, Size } from '@/interfaces'
 import {
-  ADDED_TO_CART_TOAST_OPTIONS,
   ADD_TO_CART,
+  DANGER_ALERT_MESSAGE,
+  DANGER_ALERT_TYPE,
+  GET_ADDED_TO_CART_TOAST_MESSAGE,
   OUT_OF_STOCK,
-  PRODUCT_SIZE_DANGER_ALERT_OPTIONS,
 } from '@/constants'
+import { toggleShowToast } from '@/utils'
+import { createAdapterCartProduct } from '@/adapters'
 
 interface Props {
   product: Product
@@ -37,45 +39,32 @@ export const AddToCart = ({ product }: Props) => {
     setPosted(true)
     if (!size) return
 
-    const { id, slug, title, price, images } = product
-
-    const cartProduct: CartProduct = {
-      id,
-      slug,
-      title,
-      price,
-      image: images[0],
+    const cartProduct: CartProduct = createAdapterCartProduct({
+      product,
       quantity,
       size,
-    }
+    })
 
     setProductToCart(cartProduct)
     setPosted(false)
     setQuantity(1)
     setSize(undefined)
     setShowToastState(true)
-
-    if (!showToastState) {
-      const showToastTime = setInterval(() => {
-        setShowToastState(false)
-        clearInterval(showToastTime)
-      }, 1000 * 5)
-    }
+    toggleShowToast({ showToastState, setShowToastState })
   }
 
-  // Alert options
-  const { alertMessage, alertType } = PRODUCT_SIZE_DANGER_ALERT_OPTIONS
-
-  // Toast options
-  const { toastMessage, showToast } = ADDED_TO_CART_TOAST_OPTIONS({
-    toastMessage: product.title,
-    showToast: showToastState,
-  })
+  // Toast constants
+  const ADDED_TO_CART_TOAST_MESSAGE = GET_ADDED_TO_CART_TOAST_MESSAGE(
+    product.title
+  )
 
   return (
     <>
       {posted && !size && (
-        <Alert alertMessage={alertMessage} alertType={alertType} />
+        <Alert
+          alertMessage={DANGER_ALERT_MESSAGE}
+          alertType={DANGER_ALERT_TYPE}
+        />
       )}
       {/* Sizes selector */}
       <SizeSelector
@@ -106,7 +95,10 @@ export const AddToCart = ({ product }: Props) => {
         </button>
       )}
       {/* Toast Notification */}
-      <ToastNotification toastMessage={toastMessage} showToast={showToast} />
+      <ToastNotification
+        toastMessage={ADDED_TO_CART_TOAST_MESSAGE}
+        showToastState={showToastState}
+      />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { Title } from '@/components'
 import { initialData } from '@/seed/seed'
-import clsx from 'clsx'
+import { cn } from '@/utils'
 import Image from 'next/image'
 import { IoCardOutline } from 'react-icons/io5'
 
@@ -27,8 +27,10 @@ export default function CartPage({ params }: Props) {
           {/* Cart */}
           <div className='mt-5 flex flex-col'>
             <div
-              className={clsx(
+              className={cn(
+                // Base styles
                 'mb-6 flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
+                // Paid order styles
                 {
                   'bg-red-500': false,
                   'bg-green-700': true,

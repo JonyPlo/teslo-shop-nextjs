@@ -1,4 +1,4 @@
-import { AlertOptions } from '@/interfaces'
+import type { AlertOptions } from '@/interfaces'
 import { cn } from '@/utils'
 
 export const Alert = ({ alertMessage, alertType }: AlertOptions) => {

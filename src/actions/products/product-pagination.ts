@@ -1,6 +1,6 @@
 'use server'
 
-import { PaginatedProductsResult } from '@/interfaces'
+import { type PaginatedProductsResult } from '@/interfaces'
 import prisma from '@/lib/prisma'
 import { Gender } from '@prisma/client'
 

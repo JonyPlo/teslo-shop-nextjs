@@ -1,10 +1,5 @@
-import { ToastOptions } from '@/interfaces'
 import { getLastWordString } from '@/utils'
 
-export const ADDED_TO_CART_TOAST_OPTIONS = ({
-  toastMessage: productTitle,
-  showToast,
-}: ToastOptions): ToastOptions => ({
-  toastMessage: `${getLastWordString(productTitle)} added to cart`,
-  showToast: showToast,
-})
+export const GET_ADDED_TO_CART_TOAST_MESSAGE = (productTitle: string) => {
+  return `${getLastWordString(productTitle)} added to cart`
+}

@@ -1,11 +1,11 @@
-import { ToastOptions } from '@/interfaces'
+import type { ToastOptions } from '@/interfaces'
 import { cn } from '@/utils'
 import React from 'react'
 import { IoCartOutline } from 'react-icons/io5'
 
 export const ToastNotification = ({
-  showToast,
   toastMessage,
+  showToastState,
 }: ToastOptions) => {
   return (
     <div
@@ -14,8 +14,8 @@ export const ToastNotification = ({
         'alert-dialog-position fixed bottom-3 z-10 flex w-full max-w-fit items-center rounded-lg bg-gray-100 p-3 text-gray-600 shadow',
         // Fade in out animation
         {
-          'opacity-100 duration-300': showToast,
-          'opacity-0 duration-300': !showToast,
+          'opacity-100 duration-300': showToastState,
+          'opacity-0 duration-300': !showToastState,
         }
       )}
     >
