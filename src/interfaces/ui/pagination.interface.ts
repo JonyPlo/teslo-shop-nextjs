@@ -1,4 +1,4 @@
-import { Product } from '.'
+import { Product } from '..'
 
 export interface PaginatedProductsResult {
   currentPage: number

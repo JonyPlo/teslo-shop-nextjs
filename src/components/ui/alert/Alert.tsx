@@ -1,11 +1,18 @@
-interface Prop {
-  text: string
-}
+import { AlertOptions } from '@/interfaces'
+import { cn } from '@/utils'
 
-export const DangerAlertDialog = ({ text }: Prop) => {
+export const Alert = ({ alertMessage, alertType }: AlertOptions) => {
   return (
     <div
-      className='fade-in mb-4 flex rounded-lg bg-red-100 p-4 text-sm text-red-700'
+      className={cn(
+        // Base styles
+        'fade-in mb-4 flex rounded-lg  p-4 text-sm ',
+        // Alert type styles
+        {
+          'bg-red-100 text-red-700': alertType === 'danger',
+          'bg-green-100-100 text-green-700': alertType === 'success',
+        }
+      )}
       role='alert'
     >
       <svg
@@ -21,7 +28,7 @@ export const DangerAlertDialog = ({ text }: Prop) => {
         ></path>
       </svg>
       <div>
-        <span className='font-medium'>{text}</span>
+        <span className='font-medium'>{alertMessage}</span>
       </div>
     </div>
   )

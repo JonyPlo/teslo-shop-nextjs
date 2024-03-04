@@ -6,14 +6,19 @@ import { useState } from 'react'
 
 import { useCartBoundStore, useProductBoundStore } from '@/store'
 import {
-  DangerAlertDialog,
+  Alert,
   QuantitySelector,
   SizeSelector,
   Spinner,
+  ToastNotification,
 } from '@/components'
 import type { CartProduct, Product, Size } from '@/interfaces'
-import { IoCartOutline } from 'react-icons/io5'
-import { cn } from '@/utils'
+import {
+  ADDED_TO_CART_TOAST_OPTIONS,
+  ADD_TO_CART,
+  OUT_OF_STOCK,
+  PRODUCT_SIZE_DANGER_ALERT_OPTIONS,
+} from '@/constants'
 
 interface Props {
   product: Product
@@ -23,7 +28,7 @@ export const AddToCart = ({ product }: Props) => {
   const [size, setSize] = useState<Size | undefined>()
   const [quantity, setQuantity] = useState<number>(1)
   const [posted, setPosted] = useState(false)
-  const [showAlertDialog, setShowAlertDialog] = useState<boolean>(false)
+  const [showToastState, setShowToastState] = useState<boolean>(false)
 
   const { stock, isLoading } = useProductBoundStore()
   const { setProductToCart } = useCartBoundStore()
@@ -48,20 +53,29 @@ export const AddToCart = ({ product }: Props) => {
     setPosted(false)
     setQuantity(1)
     setSize(undefined)
-    setShowAlertDialog(true)
+    setShowToastState(true)
 
-    if (!showAlertDialog) {
-      const alertTime = setInterval(() => {
-        setShowAlertDialog(false)
-        clearInterval(alertTime)
+    if (!showToastState) {
+      const showToastTime = setInterval(() => {
+        setShowToastState(false)
+        clearInterval(showToastTime)
       }, 1000 * 5)
     }
   }
 
+  // Alert options
+  const { alertMessage, alertType } = PRODUCT_SIZE_DANGER_ALERT_OPTIONS
+
+  // Toast options
+  const { toastMessage, showToast } = ADDED_TO_CART_TOAST_OPTIONS({
+    toastMessage: product.title,
+    showToast: showToastState,
+  })
+
   return (
     <>
       {posted && !size && (
-        <DangerAlertDialog text={'You must select a size*'} />
+        <Alert alertMessage={alertMessage} alertType={alertType} />
       )}
       {/* Sizes selector */}
       <SizeSelector
@@ -88,24 +102,11 @@ export const AddToCart = ({ product }: Props) => {
           disabled={stock === 0}
           onClick={addToCart}
         >
-          {stock === 0 ? 'Out of stock' : 'Add to cart'}
+          {stock === 0 ? OUT_OF_STOCK : ADD_TO_CART}
         </button>
       )}
-      {/* Alert Dialog */}
-      <div
-        className={cn(
-          // Base Styles
-          'alert-dialog-position fixed bottom-3 z-10 flex w-full max-w-fit items-center rounded-lg bg-gray-100 p-3 text-gray-600 shadow',
-          // Fade in out animation
-          {
-            'opacity-100 duration-300': showAlertDialog,
-            'opacity-0 duration-300': !showAlertDialog,
-          }
-        )}
-      >
-        <IoCartOutline size={30} className='animate-wiggle text-blue-700' />
-        <span className='mx-3 text-sm font-normal'>Product added to cart.</span>
-      </div>
+      {/* Toast Notification */}
+      <ToastNotification toastMessage={toastMessage} showToast={showToast} />
     </>
   )
 }
