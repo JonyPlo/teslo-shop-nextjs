@@ -8,6 +8,7 @@ export interface CartSlice {
 
   // Actions
   setProductToCart: (product: CartProduct) => void
+  getTotalItems: () => number
 }
 
 // With persist middleware
@@ -48,6 +49,11 @@ export const createCartSlice: StateCreator<
           }
         })
       })
+    },
+
+    getTotalItems: () => {
+      const { cart } = get()
+      return cart.reduce((total, item) => total + item.quantity, 0)
     },
   }),
   {

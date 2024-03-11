@@ -1,20 +1,33 @@
 'use client'
 
 import { titleFont } from '@/config/fonts'
-import { useUiBoundStore } from '@/store'
+import { useCartBoundStore, useUiBoundStore } from '@/store'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 
 export const TopMenu = () => {
-  const openMenu = useUiBoundStore((state) => state.setIsSideMenuOpen)
+  const { setIsSideMenuOpen: openMenu } = useUiBoundStore()
+  const totalItemsInCart = useCartBoundStore((state) => state.getTotalItems())
+
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+
+  const cartBadge = loaded && totalItemsInCart > 0 && (
+    <span className='absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white'>
+      {totalItemsInCart}
+    </span>
+  )
 
   return (
     <nav className='flex w-full items-center justify-between px-5'>
       {/* Logo */}
       <div>
         <Link href={'/'}>
-          {/* De esta forma aplicamos una fuente diferente a una etiqueta, esta fuente aplica tambien para todas la etiquetas que esten dentro de ella */}
+          {/* De esta forma aplicamos una fuente diferente a una etiqueta, esta fuente aplica también para todas la etiquetas que estén dentro de ella */}
           <span className={`${titleFont.className} font-bold antialiased`}>
             Teslo
           </span>
@@ -51,9 +64,7 @@ export const TopMenu = () => {
         </Link>
         <Link href={'/cart'} className='mx-2'>
           <div className='relative'>
-            <span className='absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white'>
-              3
-            </span>
+            {cartBadge}
             <IoCartOutline className='h-5 w-5' />
           </div>
         </Link>
