@@ -12,6 +12,8 @@ interface Props {
 export const ProductGridItem = ({ product }: Props) => {
   const [displayImage, setDisplayImage] = useState(product.images[0])
 
+  const asd = 'sdfd'
+
   return (
     <div className='fade-in overflow-hidden'>
       <Link href={`/product/${product.slug}`}>

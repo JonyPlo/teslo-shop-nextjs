@@ -7,8 +7,10 @@ export interface CartSlice {
   cart: CartProduct[]
 
   // Actions
-  setProductToCart: (product: CartProduct) => void
   getTotalItems: () => number
+  setProductToCart: (product: CartProduct) => void
+  updateProductQuantity: (product: CartProduct, quantity: number) => void
+  removeProduct: (product: CartProduct) => void
 }
 
 // With persist middleware
@@ -22,6 +24,11 @@ export const createCartSlice: StateCreator<
     cart: [],
 
     // Actions
+    getTotalItems: () => {
+      const { cart } = get()
+      return cart.reduce((total, item) => total + item.quantity, 0)
+    },
+
     setProductToCart: (product: CartProduct) => {
       const { cart } = get()
 
@@ -51,9 +58,30 @@ export const createCartSlice: StateCreator<
       })
     },
 
-    getTotalItems: () => {
-      const { cart } = get()
-      return cart.reduce((total, item) => total + item.quantity, 0)
+    updateProductQuantity: (product: CartProduct, quantity: number) => {
+      set((state) => {
+        state.cart.forEach((productInCart, i) => {
+          if (
+            productInCart.id === product.id &&
+            productInCart.size === product.size
+          ) {
+            state.cart[i].quantity = quantity
+          }
+        })
+      })
+    },
+
+    removeProduct: (product: CartProduct) => {
+      set((state) => {
+        state.cart.forEach((productInCart, i) => {
+          if (
+            productInCart.id === product.id &&
+            productInCart.size === product.size
+          ) {
+            state.cart.splice(i, 1)
+          }
+        })
+      })
     },
   }),
   {

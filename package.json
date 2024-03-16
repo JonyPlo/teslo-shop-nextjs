@@ -11,6 +11,7 @@
     "commitlint": "commitlint --edit",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "seed": "ts-node src/seed/seed-database.ts",
+    "format:check": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {

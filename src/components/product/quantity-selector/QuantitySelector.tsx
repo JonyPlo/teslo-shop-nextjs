@@ -17,7 +17,7 @@ export const QuantitySelector = ({ quantity, stock, onSetQuantity }: Props) => {
   }
 
   return (
-    <div className='flex'>
+    <div className='mt-2 flex'>
       <button onClick={() => quantityChange(-1)}>
         <IoRemoveCircleOutline size={30} />
       </button>

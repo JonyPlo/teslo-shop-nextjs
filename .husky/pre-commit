@@ -1,2 +1,2 @@
-pnpm prettier --check --ignore-path .gitignore .
-pnpm lint-staged
+npx prettier --check --ignore-path .gitignore .
+npx lint-staged

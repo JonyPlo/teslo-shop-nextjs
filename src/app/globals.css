@@ -74,3 +74,12 @@ body {
 .btn-secondary {
   @apply rounded bg-gray-200 px-4 py-2 text-black transition-all hover:bg-gray-300;
 }
+
+.truncate-product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
