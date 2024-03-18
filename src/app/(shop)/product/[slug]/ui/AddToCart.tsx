@@ -1,6 +1,6 @@
 'use client'
 
-// Este client componente se crea en este path dentro de app y no en otra carpeta como por ejemplo Components porque es un componente que no se reutiliza en ningun lado, solamente sera llamado dentro de su archivo page.tsx correspondiente (./src/app/(shop)/product/[slug]/page.tsx), entonces como esta muy relacionado con esa pagina y no se reutiliza, entonces se lo crea en el mismo path para que esten juntos y el codigo sea mas mantenible
+// Este client componente se crea en este path dentro de app y no en otra carpeta
 
 import { useState } from 'react'
 import { useCartBoundStore, useProductBoundStore } from '@/store'

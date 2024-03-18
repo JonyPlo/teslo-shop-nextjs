@@ -2,12 +2,23 @@ import type { CartProduct } from '@/interfaces'
 import { StateCreator } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+// Summary Information
+interface SummaryInformation {
+  productsInCartQuantity: number | undefined
+  subTotalPrice: number
+  taxes: number
+  totalPriceWithTaxes: number
+}
+
+// Global states and Actions
 export interface CartSlice {
   // Properties
   cart: CartProduct[]
 
   // Actions
   getTotalItems: () => number
+  getSummaryInformation: () => SummaryInformation
+
   setProductToCart: (product: CartProduct) => void
   updateProductQuantity: (product: CartProduct, quantity: number) => void
   removeProduct: (product: CartProduct) => void
@@ -27,6 +38,24 @@ export const createCartSlice: StateCreator<
     getTotalItems: () => {
       const { cart } = get()
       return cart.reduce((total, item) => total + item.quantity, 0)
+    },
+
+    getSummaryInformation: () => {
+      const { cart, getTotalItems } = get()
+      const productsInCartQuantity = getTotalItems()
+      const subTotalPrice = cart.reduce(
+        (subTotal, product) => product.quantity * product.price + subTotal,
+        0
+      )
+      const taxes = subTotalPrice * 0.15
+      const totalPriceWithTaxes = subTotalPrice + taxes
+
+      return {
+        productsInCartQuantity,
+        subTotalPrice,
+        taxes,
+        totalPriceWithTaxes,
+      }
     },
 
     setProductToCart: (product: CartProduct) => {
