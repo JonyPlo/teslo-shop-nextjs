@@ -17,7 +17,7 @@ export const TopMenu = () => {
   }, [])
 
   const cartBadge = loaded && totalItemsInCart > 0 && (
-    <span className='absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white'>
+    <span className='fade-in absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white'>
       {totalItemsInCart}
     </span>
   )
@@ -62,10 +62,13 @@ export const TopMenu = () => {
         <Link href={'/search'} className='mx-2'>
           <IoSearchOutline className='h-5 w-5' />
         </Link>
-        <Link href={'/cart'} className='mx-2'>
+        <Link
+          href={loaded && totalItemsInCart === 0 ? '/empty' : '/cart'}
+          className='mx-2'
+        >
           <div className='relative'>
             {cartBadge}
-            <IoCartOutline className='h-5 w-5' />
+            <IoCartOutline className='h-5 w-5 ' />
           </div>
         </Link>
         <button
