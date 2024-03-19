@@ -3,6 +3,7 @@
 import { useCartBoundStore } from '@/store'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { currencyFormat } from '../../../../utils'
 
 export const OrderSummary = () => {
   const [loaded, setLoaded] = useState(false)
@@ -29,15 +30,19 @@ export const OrderSummary = () => {
               : `${productsInCartQuantity} Products`}
           </span>
           <span>Subtotal</span>
-          <span className='text-right'>$ {subTotalPrice}</span>
-          <span>Taxes (15%)</span>
-          <span className='text-right'>$ {taxes}</span>
+          <span className='text-right'>
+            {currencyFormat(subTotalPrice)} ARS
+          </span>
+          <span>Taxes (1000%)</span>
+          <span className='text-right'>{currencyFormat(taxes)} ARS</span>
         </div>
       </div>
       <div className='mt-5'>
         <div className='grid grid-cols-2'>
           <span className='text-2xl'>Total</span>
-          <span className='text-right text-2xl'>$ {totalPriceWithTaxes}</span>
+          <span className='text-right text-2xl'>
+            {currencyFormat(totalPriceWithTaxes)} ARS
+          </span>
         </div>
         <div className='mt-5 w-full'>
           <Link

@@ -47,7 +47,7 @@ export const createCartSlice: StateCreator<
         (subTotal, product) => product.quantity * product.price + subTotal,
         0
       )
-      const taxes = subTotalPrice * 0.15
+      const taxes = subTotalPrice * 1
       const totalPriceWithTaxes = subTotalPrice + taxes
 
       return {

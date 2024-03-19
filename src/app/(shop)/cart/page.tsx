@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Title } from '@/components'
 import { ProductsInCart } from './ui/ProductsInCart'
 import { OrderSummary } from './ui/OrderSummary'
@@ -17,7 +15,6 @@ export default function CartPage() {
             {/* Cart Items */}
             <ProductsInCart />
           </div>
-
           {/* Order Summary */}
           <div className='flex h-fit flex-col justify-between rounded-xl bg-white p-5 shadow-xl sm:p-7'>
             <OrderSummary />
