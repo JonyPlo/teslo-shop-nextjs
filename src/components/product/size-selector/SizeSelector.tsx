@@ -1,5 +1,5 @@
 import type { Size } from '@/interfaces'
-import clsx from 'clsx'
+import { cn } from '@/utils'
 
 interface Props {
   selectedSize?: Size
@@ -21,7 +21,7 @@ export const SizeSelector = ({
           <button
             key={size}
             onClick={() => onSetSize(size)}
-            className={clsx(
+            className={cn(
               'mx-2 text-lg decoration-2 underline-offset-4 hover:underline',
               {
                 underline: selectedSize === size,

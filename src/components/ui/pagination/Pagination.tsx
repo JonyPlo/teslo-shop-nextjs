@@ -1,11 +1,9 @@
 'use client'
 
-import { generatePaginationNumbers } from '@/utils'
-import clsx from 'clsx'
+import { cn, generatePaginationNumbers } from '@/utils'
 import Link from 'next/link'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5'
-import { twMerge } from 'tailwind-merge'
 
 interface Props {
   totalPages: number
@@ -62,7 +60,7 @@ export const Pagination = ({ totalPages }: Props) => {
           {allPages.map((page, index) => (
             <li key={page + '-' + index} className='page-item'>
               <Link
-                className={twMerge(
+                className={cn(
                   // Base styles
                   'page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800',
 
