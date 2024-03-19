@@ -1,6 +1,6 @@
 'use client'
 
-import { Product } from '@/interfaces'
+import type { Product } from '@/interfaces'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -11,6 +11,8 @@ interface Props {
 
 export const ProductGridItem = ({ product }: Props) => {
   const [displayImage, setDisplayImage] = useState(product.images[0])
+
+  const asd = 'sdfd'
 
   return (
     <div className='fade-in overflow-hidden'>

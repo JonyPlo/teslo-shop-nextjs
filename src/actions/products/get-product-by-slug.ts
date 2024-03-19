@@ -1,6 +1,6 @@
 'use server'
 
-import { Product } from '@/interfaces'
+import { type Product } from '@/interfaces'
 import prisma from '@/lib/prisma'
 
 export const getProductBySlug = async (

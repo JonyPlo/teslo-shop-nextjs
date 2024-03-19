@@ -1,4 +1,4 @@
-import { SideBarItems } from '@/interfaces'
+import type { SideBarItems } from '@/interfaces'
 import Link from 'next/link'
 
 interface Props {

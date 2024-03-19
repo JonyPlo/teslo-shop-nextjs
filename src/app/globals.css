@@ -55,10 +55,31 @@ body {
   animation-name: fadeIn;
 }
 
+.alert-dialog-position {
+  right: 0.75rem;
+}
+
+@media (width <= 640px) {
+  .alert-dialog-position {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
 .btn-primary {
   @apply rounded bg-blue-600 px-4 py-2 text-white transition-all hover:bg-blue-800;
 }
 
 .btn-secondary {
   @apply rounded bg-gray-200 px-4 py-2 text-black transition-all hover:bg-gray-300;
+}
+
+.truncate-product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }

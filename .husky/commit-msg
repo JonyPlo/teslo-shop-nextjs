@@ -1,1 +1,2 @@
-pnpm exec commitlint --edit $1
+eval "$(fnm env --use-on-cd)"
+npx --no -- commitlint --edit $1

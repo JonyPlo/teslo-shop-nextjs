@@ -2,7 +2,8 @@ export const revalidate = 60
 
 import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, ProductGrid, Title } from '@/components'
-import { Gender } from '@/interfaces'
+import { LABELS } from '@/constants'
+import type { Gender } from '@/interfaces'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -27,18 +28,10 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     redirect(`/gender/${gender}`)
   }
 
-  // Record es un tipo nativo de typescript, y en este caso usamos Record<ValidCategories, string> que es lo mismo que {[key: string]: string}, se suele usar el Record porque es mas fácil de leer
-  const labels: Record<Gender, string> = {
-    men: 'Men',
-    women: 'Women',
-    kid: 'Kids',
-    unisex: 'everyone',
-  }
-
   return (
     <div className='flex min-h-[calc(100vh-56px-56px)] flex-col'>
       <Title
-        title={`Products for ${labels[gender]}`}
+        title={`Products for ${LABELS[gender]}`}
         subtitle='All products'
         className='mb-2'
       />
