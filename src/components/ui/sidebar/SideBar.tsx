@@ -3,8 +3,8 @@
 import { IoCloseOutline, IoSearchOutline } from 'react-icons/io5'
 import { SideBarItem } from './SideBarItem'
 import { useUiBoundStore } from '@/store'
-import clsx from 'clsx'
 import { administrationItems, userItems } from '@/constants'
+import { cn } from '@/utils'
 
 export const SideBar = () => {
   const isSideMenuOpen = useUiBoundStore((state) => state.isSideMenuOpen)
@@ -25,17 +25,12 @@ export const SideBar = () => {
       )}
       {/* Side Menu */}
       <nav
-        className={
-          // Con la libreria 'clsx' podemos crear estilos condicionales
-          clsx(
-            // Ingresamos dentro de los parentesis las clases que se aplicaran siempre a la etiqueta
-            'fixed right-0 top-0 z-20 h-screen w-screen transform bg-white p-5 shadow-2xl transition-all duration-300 md:w-[500px]',
-            // Despues de las clases ponemos una coma y dentro de un objeto definimos la clase que se agregara si se cumple una cierta condicion, en este casi decimos que se agregara la clase 'translate-x-full' siempre y cuando el state 'isSideMenuOpen' sea true
-            {
-              'translate-x-full': !isSideMenuOpen,
-            }
-          )
-        }
+        className={cn(
+          'fixed right-0 top-0 z-20 h-screen w-screen transform bg-white p-5 shadow-2xl transition-all duration-300 md:w-[500px]',
+          {
+            'translate-x-full': isSideMenuOpen === true,
+          }
+        )}
       >
         <IoCloseOutline
           size={50}
