@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Size {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+  XXXL
+}
+
+enum Gender {
+  men
+  women
+  kid
+  unisex
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+
+  // Relacion entre el modelo Category y Product
+  Product Product[]
+}
+
+model Product {
+  // El @id que tiene la propiedad id se conoce como "clave primaria" en SQL, y se conoce como un indice para optimizar las busquedas, en este caso las busquedas por id.
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  inStock     Int
+  price       Float    @default(0)
+  sizes       Size[]   @default([])
+  slug        String   @unique
+  tags        String[] @default([])
+  gender      Gender
+
+  // Aqui establesco una relacion entre el modelo o la tabla Category con Product, y basicamente lo que hace es que en la parte que dice "references: [id]" esta tomando el id de del Category, y con "fields: [categoryId]" decimos que vamos a almacenar en categoryId ese valor del id que tomamos en la referencia, por lo tanto ahora categoryId tiene el mismo valor que el id de la categoria, y asi se crea la relacion
+  category   Category @relation(fields: [categoryId], references: [id])
+  // El campo categoryId, tambien es conocido como "clave foranea" en SQL. La clave foránea es un campo o columna de una tabla que hace referencia a la clave primaria de otra tabla, en este caso categoryId seria la clve foranea y hace referencia al id de la tabla Category que seria su clave primaria
+  categoryId String
+
+  // Relacion entre el modelo Product y ProductImage
+  ProductImage ProductImage[]
+
+  // En Prisma, @@index([gender]) se utiliza para crear un índice en la base de datos en función de la columna gender en la tabla Product.
+  // Un índice en una base de datos es como un directorio que ayuda a acelerar las búsquedas y consultas. En este caso, el índice se crea en el campo o columna "gender", lo que significa que la base de datos puede buscar y acceder más eficientemente a los registros de la tabla Product basándose en los valores de la columna gender.
+  // En términos sencillos, el índice facilita la búsqueda de productos según su género, mejorando el rendimiento de las consultas relacionadas con esa columna en particular.
+  // Tener en cuenta tambien se pueden crear mas indices para mas campos si asi lo quisieramos
+  @@index([gender])
+}
+
+model ProductImage {
+  // Clave Primaria
+  id  Int    @id @default(autoincrement())
+  url String
+
+  // Relacion
+  product   Product @relation(fields: [productId], references: [id])
+  // Clave Foranea
+  productId String
+}

@@ -1,12 +1,31 @@
-import { titleFont } from '@/config/fonts'
+// Con export const revalidate = 60 estoy diciendo que la pagina con los productos se revalidara cada 60 segundos, es decir, la información permanecerá en cache por 60 segundos y una vez pasado ese tiempo, si se vuelve a este componente se realizara la petición correspondiente para volver a cargar todo
+export const revalidate = 60
 
-export default function Home() {
+import { getPaginatedProductsWithImages } from '@/actions'
+import { Pagination, ProductGrid, Title } from '@/components'
+import { redirect } from 'next/navigation'
+
+interface Props {
+  searchParams: {
+    page?: string
+  }
+}
+
+export default async function Home({ searchParams }: Props) {
+  const page = searchParams.page ? parseInt(searchParams.page) : 1
+
+  const { products, currentPage, totalPages } =
+    await getPaginatedProductsWithImages({ page })
+
+  if (products.length === 0) {
+    redirect('/')
+  }
+
   return (
-    <main className=''>
-      <h1>Hola mundo</h1>
-      {/* De esta forma aplicamos una fuente diferente a una etiqueta, esta fuente aplica tambien para todas la etiquetas que esten dentro de ella */}
-      <h1 className={`${titleFont.className} font-bold`}>Hola mundo</h1>
-      <h1 className={titleFont.className}>Hola mundo</h1>
-    </main>
+    <>
+      <Title title='Shop' subtitle='All products' className='mb-2' />
+      <ProductGrid products={products} />
+      <Pagination totalPages={totalPages} />
+    </>
   )
 }
