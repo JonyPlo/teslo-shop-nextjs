@@ -28,7 +28,7 @@ export const SideBar = () => {
         className={cn(
           'fixed right-0 top-0 z-20 h-screen w-screen transform bg-white p-5 shadow-2xl transition-all duration-300 md:w-[500px]',
           {
-            'translate-x-full': isSideMenuOpen === true,
+            'translate-x-full': !isSideMenuOpen,
           }
         )}
       >

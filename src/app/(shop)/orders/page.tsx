@@ -7,7 +7,6 @@ export default function OrderPage() {
   return (
     <>
       <Title title='Orders' />
-
       <div className='mb-10'>
         <table className='min-w-full'>
           <thead className='border-b bg-gray-200'>
