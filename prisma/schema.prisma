@@ -24,6 +24,11 @@ enum Gender {
   unisex
 }
 
+enum Role {
+  admin
+  user
+}
+
 model Category {
   id   String @id @default(uuid())
   name String @unique
@@ -72,4 +77,17 @@ model ProductImage {
   product   Product @relation(fields: [productId], references: [id])
   // Clave Foranea
   productId String
+}
+
+model User {
+  id          String    @id @default(uuid())
+  name        String
+  // Por defecto el @unique crea un indice para la propiedad o columna email
+  email       String    @unique
+  // El simbolo ? al final indica que es un campo opcional
+  emailVerify DateTime?
+  password    String
+  // La enumeracion Role tiene como opciones 'admin' y 'user', en este caso con @default estamos diciendo que el usuario se creara por defecto con el role en 'user', solamente podemos elegir opciones que tena la enumeracion Role
+  role        Role      @default(user)
+  image       String?
 }
