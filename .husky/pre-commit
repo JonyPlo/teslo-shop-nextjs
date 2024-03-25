@@ -1,3 +1,3 @@
 eval "$(fnm env --use-on-cd)"
-pnpm prettier --check --ignore-path .gitignore .
+pnpm prettier --check .
 npx lint-staged
