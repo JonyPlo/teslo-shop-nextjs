@@ -48,13 +48,13 @@ export const SideBar = () => {
         </div>
         {/* User Menu */}
         {userItems.map((item) => (
-          <SideBarItem key={item.path} item={item} />
+          <SideBarItem key={item.path} item={item} closeMenu={closeMenu} />
         ))}
         {/* Line Separator */}
         <div className='my-10 h-px w-full rounded bg-gray-200' />
         {/* Administration Menu */}
         {administrationItems.map((item) => (
-          <SideBarItem key={item.path} item={item} />
+          <SideBarItem key={item.path} item={item} closeMenu={closeMenu} />
         ))}
       </nav>
     </div>
