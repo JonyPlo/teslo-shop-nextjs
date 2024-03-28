@@ -1,15 +1,29 @@
 'use client'
 
-import { authenticate } from '@/actions'
-import { cn } from '@/utils'
-import Link from 'next/link'
-import React from 'react'
+import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
+import Link from 'next/link'
+import { authenticate } from '@/actions'
+import { useRouter } from 'next/navigation'
 import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   // El hook useFormState() recibe 2 argumentos, el primero es la accion que realizara el login, y el segundo es el estado inicial
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined)
+  const [authenticationState, dispatch] = useFormState(authenticate, undefined)
+  const router = useRouter()
+
+  // Constants
+  const SESSION_TYPES = Object.freeze({
+    LOGGED: 'Success',
+    INVALID_CREDENTIALS: 'Invalid credentials',
+  })
+
+  useEffect(() => {
+    if (authenticationState === SESSION_TYPES.LOGGED) {
+      // Aqui hacemos un 'router.replace' para reemplazar la url del login por la nueva a la que vamos a redireccionar
+      router.replace('/')
+    }
+  }, [authenticationState, router, SESSION_TYPES.LOGGED])
 
   return (
     // En este caso, usaremos el atributo 'action' del form para enviar la data del formularion en el metodo 'dispatch', y ese dispatch es el metodo que enviara la data a la accion 'authenticate' para realizar el login
@@ -28,10 +42,10 @@ export const LoginForm = () => {
         name='password'
       />
       <div className='relative flex h-10 items-center justify-center'>
-        {errorMessage && (
+        {authenticationState === SESSION_TYPES.INVALID_CREDENTIALS && (
           <div className='absolute flex'>
             <IoInformationOutline className='h-5 w-5 text-red-500' />
-            <p className='text-sm text-red-500'>{errorMessage}</p>
+            <p className='text-sm text-red-500'>{authenticationState}</p>
           </div>
         )}
       </div>
