@@ -14,10 +14,10 @@ import {
 import type { CartProduct, Product, Size } from '@/interfaces'
 import {
   ADD_TO_CART,
-  DANGER_ALERT_MESSAGE,
   DANGER_ALERT_TYPE,
   GET_ADDED_TO_CART_TOAST_MESSAGE,
   OUT_OF_STOCK,
+  SIZE_EMPTY_MESSAGE,
 } from '@/constants'
 import { toggleShowToast } from '@/utils'
 import { createAdapterCartProduct } from '@/adapters'
@@ -62,7 +62,7 @@ export const AddToCart = ({ product }: Props) => {
     <>
       {posted && !size && (
         <Alert
-          alertMessage={DANGER_ALERT_MESSAGE}
+          alertMessage={SIZE_EMPTY_MESSAGE}
           alertType={DANGER_ALERT_TYPE}
         />
       )}

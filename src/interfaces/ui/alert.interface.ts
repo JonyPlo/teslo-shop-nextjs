@@ -1,7 +1,6 @@
 export interface AlertOptions {
-  alertMessage: AlertMessage
-  alertType: AlertType
+  readonly alertMessage: string
+  readonly alertType: AlertType
 }
 
-export type AlertMessage = string
-export type AlertType = 'danger' | 'success'
+export type AlertType = Readonly<'danger' | 'success'>

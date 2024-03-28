@@ -1,15 +1,15 @@
 'use client'
 
 import { authenticate } from '@/actions'
+import { cn } from '@/utils'
 import Link from 'next/link'
 import React from 'react'
-import { useFormState } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom'
+import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   // El hook useFormState() recibe 2 argumentos, el primero es la accion que realizara el login, y el segundo es el estado inicial
   const [errorMessage, dispatch] = useFormState(authenticate, undefined)
-
-  console.log({ errorMessage })
 
   return (
     // En este caso, usaremos el atributo 'action' del form para enviar la data del formularion en el metodo 'dispatch', y ese dispatch es el metodo que enviara la data a la accion 'authenticate' para realizar el login
@@ -23,13 +23,19 @@ export const LoginForm = () => {
       />
       <label htmlFor='email'>Password</label>
       <input
-        className='mb-5 rounded border bg-gray-200 px-5 py-2'
+        className='rounded border bg-gray-200 px-5 py-2'
         type='password'
         name='password'
       />
-      <button type='submit' className='btn-primary'>
-        Login
-      </button>
+      <div className='relative flex h-10 items-center justify-center'>
+        {errorMessage && (
+          <div className='absolute flex'>
+            <IoInformationOutline className='h-5 w-5 text-red-500' />
+            <p className='text-sm text-red-500'>{errorMessage}</p>
+          </div>
+        )}
+      </div>
+      <LoginButton />
       {/* Divider */}
       <div className='my-5 flex items-center'>
         <div className='flex-1 border-t border-gray-500'></div>
@@ -40,5 +46,19 @@ export const LoginForm = () => {
         Create new account
       </Link>
     </form>
+  )
+}
+
+export const LoginButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <button
+      type='submit'
+      className='btn-primary disabled:bg-gray-600'
+      disabled={pending}
+    >
+      Login
+    </button>
   )
 }
