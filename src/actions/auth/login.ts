@@ -1,7 +1,6 @@
 'use server'
 
 import { signIn } from '@/auth.config' // Tomo el 'signIn' que estoy exportando desde el archivo 'auth.config.ts' y lo ejecuto
-import { sleep } from '@/utils'
 import { AuthError } from 'next-auth'
 
 export async function authenticate(

@@ -24,11 +24,6 @@ export const userItems: SideBarItems[] = [
     text: 'Log In',
     icon: <IoLogInOutline size={30} />,
   },
-  {
-    path: '/logout',
-    text: 'Log Out',
-    icon: <IoLogOutOutline size={30} />,
-  },
 ]
 
 export const administrationItems: SideBarItems[] = [
