@@ -20,14 +20,9 @@ export const userItems: SideBarItems[] = [
     icon: <IoTicketOutline size={30} />,
   },
   {
-    path: '/login',
+    path: '/auth/login',
     text: 'Log In',
     icon: <IoLogInOutline size={30} />,
-  },
-  {
-    path: '/logout',
-    text: 'Log Out',
-    icon: <IoLogOutOutline size={30} />,
   },
 ]
 

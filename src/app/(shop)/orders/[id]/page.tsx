@@ -95,7 +95,7 @@ export default function CartPage({ params }: Props) {
             </div>
             <div className='w-full'>
               <div
-                className={clsx(
+                className={cn(
                   'flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
                   {
                     'bg-red-500': false,

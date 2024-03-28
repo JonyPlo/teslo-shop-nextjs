@@ -10,7 +10,9 @@ compiled/
 
 lerna.json
 test-timings.json
+package-lock.json
 pnpm-lock.yaml
+yarn.lock
 
 packages/next/src/bundles/webpack/packages/*.runtime.js
 packages/next/src/bundles/webpack/packages/lazy-compilation-*.js

@@ -8,11 +8,18 @@ import prisma from '../lib/prisma'
 // De esta forma creamos un seed para una base de datos SQL con Prisma
 const main = async () => {
   // Borrar registros previos
+  //! IMPORTANTE: Si una tabla tiene relacion con otra, por ejemplo, si usamos los users para crear productos, y estos productos tienen dentro suyo un campo que almacena el objeto o tabla del usuario que creo ese producto, entonces hay que mover la linea que elimina los productos arriba de los usuarios para que se eliminen primero, ya que si intentamos borrar primero los usuarios, la base de datos nos devolvera un error por la integridad referencial, y dira que no se pueden borrar los users porque estan siendo usador por otra tabla
+  await prisma.user.deleteMany()
   await prisma.productImage.deleteMany()
   await prisma.product.deleteMany()
   await prisma.category.deleteMany()
 
-  const { categories, products } = initialData
+  const { users, categories, products } = initialData
+
+  // Insertar Usuarios en la db
+  await prisma.user.createMany({
+    data: users,
+  })
 
   // Insertar Categorias en la db
   const categoriesData = categories.map((name) => ({
@@ -25,14 +32,22 @@ const main = async () => {
 
   const categoriesDB = await prisma.category.findMany()
 
-  const categoriesMap = categoriesDB.reduce(
-    (map, category) => {
-      map[category.name.toLowerCase()] = category.id
+  // const categoriesMap = categoriesDB.reduce(
+  //   (map, category) => {
+  //     map[category.name.toLowerCase()] = category.id
 
-      return map
-    },
-    {} as Record<string, string>
-  )
+  //     return map
+  //   },
+  //   {} as Record<string, string>
+  // )
+
+  // Creo un objeto Map
+  const categoriesMap = new Map()
+
+  // Transformo el arreglo de categorias a un objeto donde cada nombre de categoria es una propiedad y esa propiedad almacena su id
+  categoriesDB.forEach((category) => {
+    categoriesMap.set(category.name.toLowerCase(), category.id)
+  })
 
   products.forEach(async (product) => {
     const { type, images, ...rest } = product
@@ -41,7 +56,7 @@ const main = async () => {
     const dbProduct = await prisma.product.create({
       data: {
         ...rest,
-        categoryId: categoriesMap[type],
+        categoryId: categoriesMap.get(type),
       },
     })
 
@@ -62,6 +77,6 @@ const main = async () => {
 ;(() => {
   // Esta condicional es importante para que la funcion no se ejecute una vez que el proyecto ya esta en producción
   if (process.env.NODE_ENV === 'production') return
-
-  main()
 })()
+
+main()
