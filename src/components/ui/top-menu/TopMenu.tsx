@@ -59,12 +59,13 @@ export const TopMenu = () => {
 
       {/* Search, Cart and Menu icons */}
       <div className='flex items-center'>
-        <Link href={'/search'} className='mx-2'>
+        <Link href={'/search'} className='mx-2' aria-label='Search'>
           <IoSearchOutline className='h-5 w-5' />
         </Link>
         <Link
           href={loaded && totalItemsInCart === 0 ? '/empty' : '/cart'}
           className='mx-2'
+          aria-label='Cart'
         >
           <div className='relative'>
             {cartBadge}

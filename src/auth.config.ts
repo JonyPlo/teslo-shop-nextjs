@@ -13,6 +13,34 @@ export const authConfig: NextAuthConfig = {
     newUser: '/auth/new-account',
   },
 
+  // Los callbacks son funciones que se ejecutaran en un cierto punto del ciclo de vida de la autenticación de un usuario, en otras palabras, despues de que la autenticación pase por algún proveedor, se van a ejecutar los callbacks  antes de mostrar la informacion de la sesion en la pagina
+  callbacks: {
+    // Por defecto el parametro 'token' es un objeto que tiene informacion de la session, que es un objeton con las propiedades name, email, picture y sub, (sub seria el id del usuario), y esa es la informacion que se pasa a la sesion para poder usarla en la pagina, pero si queremos agrandar ese objeto con mas propiedades como por ejemplo el role, emailVerified, etc. tenemos que usar el parametro 'user'
+    //* El parametro 'user' tiene la misma informacion que el objeto 'rest' que se retorna al final de este archivo, recordar que el objeto rest tiene toda la informacion del usuario porque cuando se realiza la autenticacion, toda esa informacion del usuario que obtenemos de la base de datos se guarda en ese objeto rest, asi que solo tenemos que sacar esa informacion que nos falta del parametro 'user' y pasarsela al objeto 'token'
+    //* Tener en cuenta que el token que se obtiene es el que se almacena en las cookies del navegador
+    //* Este metodo se ejecuta antes del metodo session()
+    //* El metodo token siempre debe retornar un token
+    jwt({ token, user }) {
+      if (user) {
+        // Aqui estamos creando una propiedad llamada 'data' en el objeto del token, y almacenando el objeto 'user' con toda la informacion del usuario almacenado en la base de datos
+        token.data = user
+      }
+
+      return token
+    },
+
+    // El trabajo del metodo session() es obtener la informacion de la session modificada y retornarla
+    //* Este metodo se ejecuta despues del metodo jwt()
+    //* El metodo session siempre debe retornar un session
+    session({ session, token, user }) {
+      console.log({ session, token, user })
+
+      session.user = token.data as any
+
+      return session
+    },
+  },
+
   // En providers almacenamos los proveedores de inicio de sesion etc, en ese caso usaremos el metodo "credentials" porque vamos a realizar un login/register custom, no usaremos Google, GitHub, etc.
   providers: [
     // En el metodo credentials
@@ -45,8 +73,6 @@ export const authConfig: NextAuthConfig = {
         const { password: _, ...rest } = user
 
         // Por ultimo retornamos el objeto 'rest' que seria el objeto 'user' pero sin el password, y este objeto contiene la informacion necesaria que va a pasar a los diferentes callbacks de NextAuth para obtener la informacion de la persona autenticada en cualquier parte de la aplicacion
-        console.log({ rest })
-
         return rest
       },
     }),

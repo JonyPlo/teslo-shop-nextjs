@@ -15,7 +15,7 @@ export const Title = ({ title, className, subtitle }: Props) => {
       >
         {title}
       </h1>
-      {subtitle && <h3 className='mb-5 text-xl capitalize'>{subtitle}</h3>}
+      {subtitle && <h2 className='mb-5 text-xl capitalize'>{subtitle}</h2>}
     </div>
   )
 }
