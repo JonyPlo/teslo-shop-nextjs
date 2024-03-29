@@ -3,10 +3,14 @@ import Link from 'next/link'
 
 interface Props {
   item: SideBarItems
+  isAuthenticated: boolean
   closeMenu: () => void
 }
 
-export const SideBarItem = ({ item, closeMenu }: Props) => {
+export const SideBarItem = ({ item, isAuthenticated, closeMenu }: Props) => {
+  // Si el usuario esta autenticado, entonces convierto el isAuthenticated en false para que retorne null en lugar del boton 'Log In'
+  if (!isAuthenticated && item.text === 'Log In') return null
+
   return (
     <Link
       href={item.path}

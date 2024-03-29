@@ -53,4 +53,5 @@ export const authConfig: NextAuthConfig = {
   ],
 }
 
-export const { signIn, signOut, auth } = NextAuth(authConfig)
+//* Al metodo 'handlers' lo usaremos dentro de la ruta 'app/api/auth/[...nextauth]/route.ts' que es el que contiene los metodos GET y POST para realizar las peticiones http que el SessionProvider esta buscando, el SessionProvider es un proveedor de nextauth que estamos usando en el componente '<Provider />' en la ruta 'src/components/provider/Provider.tsx'
+export const { signIn, signOut, auth, handlers } = NextAuth(authConfig)
