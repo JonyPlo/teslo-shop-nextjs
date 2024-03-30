@@ -8,7 +8,7 @@ import {
 import { SideBarItem } from './SideBarItem'
 import { useUiBoundStore } from '@/store'
 import { useSession } from 'next-auth/react'
-import { administrationItems, userItems } from '@/constants'
+import { adminOptions, userOptions } from '@/constants'
 import { cn } from '@/utils'
 import { logout } from '@/actions'
 
@@ -16,10 +16,17 @@ export const SideBar = () => {
   const isSideMenuOpen = useUiBoundStore((state) => state.isSideMenuOpen)
   const closeMenu = useUiBoundStore((state) => state.setIsSideMenuOpen)
 
+  // Constants
+  const USER_ROLE = Object.freeze({
+    ADMIN: 'admin',
+    USER: 'user',
+  })
+
   // El hook useSession es un metodo que nos devuelve la informacion de la persona que esta autenticada actualmente, es un hook que se puede usar del 'lado del cliente' en vez de usar el metodo 'auth()' desde el archivo 'auth.config.ts' que se usa en los componentes del lado del servidor
   //! IMPORTANTE: Para que este hook funcione el componente debe estar envuelto por un HOC llamado '<SessionProvider />' de lo contrario nos dara error, asi que para eso vamos a crear un componente '<Provider />' que tendra el SessionProvider y usarlo en el punto mas alto de la aplicacion, en el componente Provider explico con mas detalles sobre como usarlo
   const { data: session } = useSession()
   const isAuthenticated = Boolean(session?.user)
+  const isAdmin = session?.user.role === USER_ROLE.ADMIN
 
   return (
     <div>
@@ -62,11 +69,11 @@ export const SideBar = () => {
         </div>
 
         {/* User Menu */}
-        {userItems.map((item) => (
+        {userOptions.map((item) => (
           <SideBarItem
             key={item.path}
             item={item}
-            isAuthenticated={!isAuthenticated}
+            isAuthenticated={isAuthenticated}
             closeMenu={closeMenu}
           />
         ))}
@@ -83,18 +90,23 @@ export const SideBar = () => {
           </button>
         )}
 
-        {/* Line Separator */}
-        <div className='my-10 h-px w-full rounded bg-gray-200' />
+        {/* If role is 'admin', show admin options */}
+        {isAdmin && (
+          <>
+            {/* Line Separator */}
+            <div className='my-10 h-px w-full rounded bg-gray-200' />
 
-        {/* Administration Menu */}
-        {administrationItems.map((item) => (
-          <SideBarItem
-            key={item.path}
-            item={item}
-            isAuthenticated={isAuthenticated}
-            closeMenu={closeMenu}
-          />
-        ))}
+            {/* Admin Menu */}
+            {adminOptions.map((item) => (
+              <SideBarItem
+                key={item.path}
+                item={item}
+                isAuthenticated={isAuthenticated}
+                closeMenu={closeMenu}
+              />
+            ))}
+          </>
+        )}
       </nav>
     </div>
   )

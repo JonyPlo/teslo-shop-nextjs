@@ -8,10 +8,7 @@ interface Props {
 }
 
 export const SideBarItem = ({ item, isAuthenticated, closeMenu }: Props) => {
-  // Si el usuario esta autenticado, entonces convierto el isAuthenticated en false para que retorne null en lugar del boton 'Log In'
-  if (!isAuthenticated && item.text === 'Log In') return null
-
-  return (
+  const menuOption = (
     <Link
       href={item.path}
       className='mt-6 flex items-center rounded p-2 transition-all hover:bg-gray-100'
@@ -21,4 +18,14 @@ export const SideBarItem = ({ item, isAuthenticated, closeMenu }: Props) => {
       <span className='ml-3 text-xl'>{item.text}</span>
     </Link>
   )
+
+  // Solo retorno la opcion 'Log In'
+  if (!isAuthenticated && item.text === 'Log In') {
+    return menuOption
+  }
+
+  // Retorno las demas opciones
+  if (isAuthenticated && item.text !== 'Log In') {
+    return menuOption
+  }
 }

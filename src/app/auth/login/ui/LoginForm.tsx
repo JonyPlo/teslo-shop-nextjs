@@ -4,13 +4,11 @@ import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import Link from 'next/link'
 import { authenticate } from '@/actions'
-import { useRouter } from 'next/navigation'
 import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   // El hook useFormState() recibe 2 argumentos, el primero es la accion que realizara el login, y el segundo es el estado inicial
   const [authenticationState, dispatch] = useFormState(authenticate, undefined)
-  const router = useRouter()
 
   // Constants
   const SESSION_TYPES = Object.freeze({
@@ -21,9 +19,12 @@ export const LoginForm = () => {
   useEffect(() => {
     if (authenticationState === SESSION_TYPES.LOGGED) {
       // Aqui hacemos un 'router.replace' para reemplazar la url del login por la nueva a la que vamos a redireccionar
-      router.replace('/')
+      // En este caso no lo usamos porque router.replace('/') redirecciona pero no actualiza la pagina por lo tanto los states de otros componentes no se actualizan, y necesito que las opciones del sidebar se actualicen cuando el usuario se loguea, asi que en su lugar usaremos window.location.replace('/') que es un metodo tradicional de javascript para redireccionar a una pagina y actualizarla, dejo el router replace para que quede el ejemplo
+      // router.replace('/')
+
+      window.location.replace('/')
     }
-  }, [authenticationState, router, SESSION_TYPES.LOGGED])
+  }, [authenticationState, SESSION_TYPES.LOGGED])
 
   return (
     // En este caso, usaremos el atributo 'action' del form para enviar la data del formularion en el metodo 'dispatch', y ese dispatch es el metodo que enviara la data a la accion 'authenticate' para realizar el login
@@ -35,7 +36,7 @@ export const LoginForm = () => {
         //! Importante agregar SIEMPRE el name a los inputs, ya que tanto el server action como el archivo 'auth.config.ts' usaran los names de los inputs para usarlos como nombre o key en el objeto del formulario, por ejemplo en este caso en name del email es 'email', entonces cuando mandemos el email los archivos recibiran esto { email: 'jony@gmail.com' }, esa propiedad 'email' del objeto es el valor del 'name' del input. Recordar que si no se agrega el name a los inputs la autenticacion NO FUNCIONARA porque no se podra parsear la informacion.
         name='email'
       />
-      <label htmlFor='email'>Password</label>
+      <label htmlFor='password'>Password</label>
       <input
         className='rounded border bg-gray-200 px-5 py-2'
         type='password'
