@@ -43,3 +43,8 @@ export const adminOptions: SideBarItems[] = [
     icon: <IoPeopleOutline size={30} />,
   },
 ]
+
+export const USER_ROLE = Object.freeze({
+  ADMIN: 'admin',
+  USER: 'user',
+})
