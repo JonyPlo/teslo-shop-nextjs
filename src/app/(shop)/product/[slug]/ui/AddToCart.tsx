@@ -12,15 +12,15 @@ import {
   ToastNotification,
 } from '@/components'
 import type { CartProduct, Product, Size } from '@/interfaces'
-import {
-  ADD_TO_CART,
-  DANGER_ALERT_TYPE,
-  GET_ADDED_TO_CART_TOAST_MESSAGE,
-  OUT_OF_STOCK,
-  SIZE_EMPTY_MESSAGE,
-} from '@/constants'
 import { toggleShowToast } from '@/utils'
 import { createAdapterCartProduct } from '@/adapters'
+import { GET_ADDED_TO_CART_TOAST_MESSAGE } from '@/components/ui/toast-notification/constants/toast.constants'
+import {
+  ADD_TO_CART,
+  OUT_OF_STOCK,
+  SIZE_EMPTY_MESSAGE,
+} from '@/app/(shop)/cart/constants/cart.constants'
+import { DANGER_ALERT_TYPE } from '@/components/ui/alert/constants/alert.constants'
 
 interface Props {
   product: Product
