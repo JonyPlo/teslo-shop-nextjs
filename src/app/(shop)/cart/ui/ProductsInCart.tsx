@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { useCartBoundStore } from '@/store'
 import { QuantitySelector } from '@/components'
 import { IoCartOutline } from 'react-icons/io5'
+import { titleFont } from '@/config/fonts'
+import { CartStockLabel } from './CartStockLabel'
 
 export const ProductsInCart = () => {
   const [loaded, setLoaded] = useState(false)
@@ -72,9 +74,10 @@ export const ProductsInCart = () => {
             </Link>
             <p className='mt-2 font-semibold'>${product.price}</p>
             <div className='text-center lg:absolute lg:bottom-0 lg:text-start'>
+              <CartStockLabel product={product} />
               <QuantitySelector
                 quantity={product.quantity}
-                stock={100}
+                stock={product.inStock}
                 onSetQuantity={(newQuantity) =>
                   updateProductQuantity(product, newQuantity)
                 }

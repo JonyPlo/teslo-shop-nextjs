@@ -12,7 +12,8 @@ interface Props {
 export const QuantitySelector = ({ quantity, stock, onSetQuantity }: Props) => {
   const quantityChange = (value: number) => {
     const newQuantity = quantity + value
-    if (newQuantity < 1 || newQuantity > stock) return
+    if (newQuantity > stock || newQuantity < 1) return
+    console.log('pase el if', newQuantity, stock)
     onSetQuantity(newQuantity)
   }
 
