@@ -17,7 +17,7 @@ export const TopMenu = () => {
   }, [])
 
   const cartBadge = loaded && totalItemsInCart > 0 && (
-    <span className='fade-in absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white'>
+    <span className='absolute -right-2 -top-2 rounded-full bg-blue-700 px-1 text-xs font-bold text-white fade-in'>
       {totalItemsInCart}
     </span>
   )

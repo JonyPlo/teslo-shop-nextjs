@@ -1,7 +1,10 @@
 'use server'
 
 import { signIn } from '@/auth.config' // Tomo el 'signIn' que estoy exportando desde el archivo 'auth.config.ts' y lo ejecuto
+import { logger } from '@/logs/winston.config'
 import { AuthError } from 'next-auth'
+
+// Esta es de la forma que recomienda hacerlo nextjs, trayendo la informacion que fue enviada por el dispatch en el atributo 'action' del formulario, mirar la pagina que contiene el formulario del login para verlo mejor
 
 export async function authenticate(
   prevState: string | undefined,
@@ -27,5 +30,23 @@ export async function authenticate(
       }
     }
     throw error
+  }
+}
+
+// Funcion que se ejecuta cuando se registra un usuario, para logearlo despues del registro
+export const login = async (email: string, password: string) => {
+  try {
+    await signIn('credentials', { email, password })
+
+    return {
+      ok: true,
+    }
+  } catch (error) {
+    logger.error('Login error', error)
+
+    return {
+      ok: false,
+      message: 'Login error',
+    }
   }
 }

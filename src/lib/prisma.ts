@@ -1,15 +1,23 @@
+// Configuracion sacada de https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices
+
 import { PrismaClient } from '@prisma/client'
 
-const prismaClientSingleton = () => {
-  return new PrismaClient()
+let prisma: PrismaClient
+
+// Hemos declarado explícitamente que 'global' tiene una propiedad opcional llamada prisma de tipo PrismaClient.
+// Esto le dice a TypeScript que global.prisma puede existir y que su tipo es PrismaClient.
+//* Esta opcion no viene en la configuracion de next, asi que la agregue yo para que funcione
+declare const global: {
+  prisma?: PrismaClient
 }
 
-declare global {
-  var prisma: undefined | ReturnType<typeof prismaClientSingleton>
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient()
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient()
+  }
+  prisma = global.prisma
 }
-
-const prisma = globalThis.prisma ?? prismaClientSingleton()
 
 export default prisma
-
-if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma

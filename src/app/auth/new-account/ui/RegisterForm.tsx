@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { cn } from '@/utils'
 import { REGEX } from '../constants/regex.constants'
+import { login, registerUser } from '@/actions'
 
 // Creacion del esquema del formulario con zod y las validaciones de cada campo
 const schema = z.object({
@@ -48,7 +49,7 @@ export const RegisterForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<FormFields>({
     // Para usar el metodo zodResolver() tenemos que instalar una dependencia extra de react hook form que es '@hookform/resolvers', y este contiene una diversidad de metodos para varios schema validators, uno de ellos es zod, y lo que hace practicamente es evaluar si lo que vamos escribiendo en los inputs coincide con el schema o no, y en base a eso nos ira mostrando los diferentes errores
     resolver: zodResolver(schema),
@@ -58,20 +59,32 @@ export const RegisterForm = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       const { name, email, password } = data
-      console.log({ name, email, password })
+
+      // Server actions
+      // Realizamos la peticion para registrar al usuario
+      const resp = await registerUser({ name, email, password })
+      console.log({ resp })
+      // Si tenemos un error al crear el user mostramos el mensaje en pantalla
+      if (!resp.ok) {
+        // Con setError() ingreso el string 'root' que significa que es un error general y no de algun input en particular, y como segundo argumento mandamos el objeto con el type, message, y lo que necesitemos para mostrar en pantalla despues
+        return setError('root', {
+          message: resp.message,
+        })
+      }
+
+      // Si el usuario fue creado, entonces lo logeamos y lo redireccionamos al home de la tienda
+      // Recordar pasar el email como argumento con el toLowercase()
+      await login(email.toLowerCase(), password)
+
+      // Redireccionamos al usuario y recargamos la pagina
+      window.location.replace('/')
     } catch (error) {
-      console.log(error)
+      console.error(error)
 
-      // setError(
-      //   'root',
-      //   {
-      //     message: 'El email ya existe',
-      //   },
-      //   { shouldFocus: true }
-      // )
+      setError('root', {
+        message: 'Internal server error, please try again later',
+      })
     }
-
-    // Server Action
   }
 
   const onSetShowPassword = () => {
@@ -176,6 +189,12 @@ export const RegisterForm = () => {
         <Link href='/auth/login' className='btn-secondary text-center'>
           Login
         </Link>
+        {/* Server error message */}
+        {errors.root && (
+          <span className='text-md mt-10 text-center text-red-500'>
+            {errors.root.message}
+          </span>
+        )}
       </div>
     </form>
   )
