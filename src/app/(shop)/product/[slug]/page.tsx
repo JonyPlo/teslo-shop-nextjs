@@ -33,6 +33,7 @@ export async function generateMetadata(
   // const previousImages = (await parent).openGraph?.images || []
 
   return {
+    metadataBase: new URL('http://localhost:3000/'),
     title: product?.title ?? 'Product not found',
     description: product?.description ?? '',
     openGraph: {

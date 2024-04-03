@@ -19,7 +19,12 @@ export const getPaginatedProductsWithImages = async ({
   if (page < 1) page = 1
 
   const findPaginatedProducts = {
-    // Con include estoy filtrando la búsqueda de productos
+    where: {
+      gender,
+    },
+    take,
+    skip: (page - 1) * take,
+    // Con include estoy diciendo que el objeto que me devuelve, incluya una propiedad con valores de otra tabla
     include: {
       // Y aquí pido que incluya el ProductImage, en otras palabras, buscar en la tabla de ProductImage, las imágenes que estén relacionadas con cada producto.
       // Esto hará que se cree una propiedad llamada ProductImage en el objeto de cada producto, y esta propiedad tendrá un arreglo con las imágenes de ese producto
@@ -31,11 +36,6 @@ export const getPaginatedProductsWithImages = async ({
           url: true,
         },
       },
-    },
-    take,
-    skip: (page - 1) * take,
-    where: {
-      gender,
     },
   }
 

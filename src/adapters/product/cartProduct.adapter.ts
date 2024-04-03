@@ -5,7 +5,7 @@ export const createAdapterCartProduct = ({
   quantity,
   size,
 }: AdapterCartProduct) => {
-  const { id, slug, title, price, images } = product
+  const { id, slug, title, price, images, inStock } = product
 
   const formattedCartProduct: CartProduct = {
     id,
@@ -13,6 +13,7 @@ export const createAdapterCartProduct = ({
     title,
     price,
     image: images[0],
+    inStock,
     quantity,
     size,
   }

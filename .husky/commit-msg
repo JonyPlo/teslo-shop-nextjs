@@ -1,2 +1,2 @@
 eval "$(fnm env --use-on-cd)"
-npx --no -- commitlint --edit $1
+bunx --no -- commitlint --edit $1

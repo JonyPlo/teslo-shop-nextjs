@@ -21,6 +21,7 @@ export interface CartSlice {
 
   setProductToCart: (product: CartProduct) => void
   updateProductQuantity: (product: CartProduct, quantity: number) => void
+  syncProductQuantityWithStock: (product: CartProduct, stock: number) => void
   removeProduct: (product: CartProduct) => void
 }
 
@@ -95,6 +96,22 @@ export const createCartSlice: StateCreator<
             productInCart.size === product.size
           ) {
             state.cart[i].quantity = quantity
+          }
+        })
+      })
+    },
+
+    syncProductQuantityWithStock: (product: CartProduct, stock: number) => {
+      set((state) => {
+        state.cart.forEach((productInCart, i) => {
+          if (productInCart.id === product.id) {
+            // Si la cantidad del producto en el carrito es mayor que el stock en la db, ajustamos la cantidad al stock
+            if (productInCart.quantity > stock) {
+              state.cart[i].quantity = stock
+            }
+
+            // Actualizamos el stock del producto en el carrito con el stock actualizado de la db
+            state.cart[i].inStock = stock
           }
         })
       })
