@@ -11,9 +11,9 @@ export default async function ShopLayout({
   const session = await auth()
 
   // Si la constante 'session' es un objeto y tiene la propiedad 'user' entonces el usuario esta logueado, por lo tanto el servidor lo redirecciona al home de la aplicacion, entonces cuando se quiera volver a la pagina de registro o login, nos devolvera al home de la pagina porque el componente 'layout' es el que esta encerrando las paginas de autenticacion, asi que este componente es el que tiene la logica para redireccionar
-  if (session?.user) {
-    redirect('/')
-  }
+  // if (session?.user) {
+  //   redirect('/')
+  // }
 
   return (
     <main className='flex justify-center'>

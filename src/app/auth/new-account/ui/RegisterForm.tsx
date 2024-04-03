@@ -39,7 +39,7 @@ const schema = z.object({
     }),
 })
 
-// La propiedad infer del objeto zod se encarga de extraer del schema que le pasemos como argumento el tipado, este tipado es de typescript por lo que podremos usarlo en el useForm de react hook form
+// La propiedad infer del objeto zod se encarga de extraer el tipado del schema, este tipado es de typescript por lo que podremos usarlo en el useForm de react hook form
 type FormFields = z.infer<typeof schema>
 
 export const RegisterForm = () => {
@@ -73,11 +73,13 @@ export const RegisterForm = () => {
       }
 
       // Si el usuario fue creado, entonces lo logeamos y lo redireccionamos al home de la tienda
-      // Recordar pasar el email como argumento con el toLowercase()
-      await login(email.toLowerCase(), password)
+      if (isSubmitSuccessful) {
+        // Recordar pasar el email como argumento con el toLowercase()
+        await login(email.toLowerCase(), password)
 
-      // Redireccionamos al usuario y recargamos la pagina
-      window.location.replace('/')
+        // Redireccionamos al usuario y recargamos la pagina
+        window.location.replace('/')
+      }
     } catch (error) {
       console.error(error)
 
