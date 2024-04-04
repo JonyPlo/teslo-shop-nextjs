@@ -6,7 +6,7 @@ export const Alert = ({ alertMessage, alertType }: AlertOptions) => {
     <div
       className={cn(
         // Base styles
-        'fade-in mb-4 flex rounded-lg  p-4 text-sm ',
+        'mb-4 flex rounded-lg p-4  text-sm fade-in ',
         // Alert type styles
         {
           'bg-red-100 text-red-700': alertType === 'danger',

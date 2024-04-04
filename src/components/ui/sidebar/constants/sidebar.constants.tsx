@@ -1,14 +1,13 @@
 import type { SideBarItems } from '@/interfaces'
 import {
   IoLogInOutline,
-  IoLogOutOutline,
   IoPeopleOutline,
   IoPersonOutline,
   IoShirtOutline,
   IoTicketOutline,
 } from 'react-icons/io5'
 
-export const userItems: SideBarItems[] = [
+export const userOptions: SideBarItems[] = [
   {
     path: '/profile',
     text: 'Profile',
@@ -20,18 +19,13 @@ export const userItems: SideBarItems[] = [
     icon: <IoTicketOutline size={30} />,
   },
   {
-    path: '/login',
+    path: '/auth/login',
     text: 'Log In',
     icon: <IoLogInOutline size={30} />,
   },
-  {
-    path: '/logout',
-    text: 'Log Out',
-    icon: <IoLogOutOutline size={30} />,
-  },
 ]
 
-export const administrationItems: SideBarItems[] = [
+export const adminOptions: SideBarItems[] = [
   {
     path: '/products',
     text: 'Products',
@@ -49,3 +43,8 @@ export const administrationItems: SideBarItems[] = [
     icon: <IoPeopleOutline size={30} />,
   },
 ]
+
+export const USER_ROLE = Object.freeze({
+  ADMIN: 'admin',
+  USER: 'user',
+})

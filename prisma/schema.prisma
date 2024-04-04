@@ -24,11 +24,17 @@ enum Gender {
   unisex
 }
 
+enum Role {
+  admin
+  user
+}
+
 model Category {
   id   String @id @default(uuid())
   name String @unique
 
   // Relacion entre el modelo Category y Product
+  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   Product Product[]
 }
 
@@ -45,11 +51,13 @@ model Product {
   gender      Gender
 
   // Aqui establesco una relacion entre el modelo o la tabla Category con Product, y basicamente lo que hace es que en la parte que dice "references: [id]" esta tomando el id de del Category, y con "fields: [categoryId]" decimos que vamos a almacenar en categoryId ese valor del id que tomamos en la referencia, por lo tanto ahora categoryId tiene el mismo valor que el id de la categoria, y asi se crea la relacion
+  //* Cabe aclarar que la propiedad 'category' no se crea como columna en la tabla, solo sirve para crear la relacion y tomar el id de la categoria para almacenarlo en la propiedad 'categoryId', y 'categoryId' si se crea como una columna en la tabla
   category   Category @relation(fields: [categoryId], references: [id])
-  // El campo categoryId, tambien es conocido como "clave foranea" en SQL. La clave foránea es un campo o columna de una tabla que hace referencia a la clave primaria de otra tabla, en este caso categoryId seria la clve foranea y hace referencia al id de la tabla Category que seria su clave primaria
+  // El campo categoryId, tambien es conocido como "clave foranea" en SQL. La clave foránea es un campo o columna de una tabla que hace referencia a la clave primaria de otra tabla, en este caso categoryId seria la clave foranea y hace referencia al id de la tabla Category que seria su clave primaria
   categoryId String
 
   // Relacion entre el modelo Product y ProductImage
+  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   ProductImage ProductImage[]
 
   // En Prisma, @@index([gender]) se utiliza para crear un índice en la base de datos en función de la columna gender en la tabla Product.
@@ -65,7 +73,21 @@ model ProductImage {
   url String
 
   // Relacion
+  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   product   Product @relation(fields: [productId], references: [id])
   // Clave Foranea
   productId String
+}
+
+model User {
+  id          String    @id @default(uuid())
+  name        String
+  // Por defecto el @unique crea un indice para la propiedad o columna email
+  email       String    @unique
+  // El simbolo ? al final indica que es un campo opcional
+  emailVerify DateTime?
+  password    String
+  // La enumeracion Role tiene como opciones 'admin' y 'user', en este caso con @default estamos diciendo que el usuario se creara por defecto con el role en 'user', solamente podemos elegir opciones que tena la enumeracion Role
+  role        Role      @default(user)
+  image       String?
 }

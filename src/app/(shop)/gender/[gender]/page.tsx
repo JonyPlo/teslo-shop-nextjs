@@ -2,9 +2,9 @@ export const revalidate = 60
 
 import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, ProductGrid, Title } from '@/components'
-import { LABELS } from '@/constants'
 import type { Gender } from '@/interfaces'
 import { redirect } from 'next/navigation'
+import { LABELS } from './constants/gender.constants'
 
 interface Props {
   params: {

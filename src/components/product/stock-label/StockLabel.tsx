@@ -11,9 +11,7 @@ interface Props {
 }
 
 export const StockLabel = ({ slug }: Props) => {
-  const { stock, isLoading, setStock, setIsLoading } = useProductBoundStore(
-    (state) => state
-  )
+  const { stock, isLoading, setStock, setIsLoading } = useProductBoundStore()
 
   useEffect(() => {
     const getStock = async () => {

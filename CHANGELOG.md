@@ -1,4 +1,34 @@
-## 0.3.0 (2024-03-19)
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.4.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.3.0...v0.4.0) (2024-04-04)
+
+
+### Features
+
+* :sparkles: add product stock label en cart page and sync db stock with local stock ([9d0f209](https://github.com/JonyPlo/teslo-shop-nextjs/commits/9d0f209f2430c2c29ee2b5a50302d62aa0accde8))
+* **atuh:** :passport_control: add authorized middleware to protect authorized routes ([c20f20d](https://github.com/JonyPlo/teslo-shop-nextjs/commits/c20f20d4d7a0c1cf12b8240ed955357c755d87da))
+* **auth:** :passport_control: add jwt and session callbacks in auth.config file to modify auth data ([168d350](https://github.com/JonyPlo/teslo-shop-nextjs/commits/168d350a4a47a26af34cc2d4ce8cc4b79b36fe15))
+* **auth:** :passport_control: add login invalid credential message in form ([93ea417](https://github.com/JonyPlo/teslo-shop-nextjs/commits/93ea41732123ee882942c39ec5753ebf04f62992))
+* **auth:** :passport_control: add logout action in logout button to close session ([d0ed91d](https://github.com/JonyPlo/teslo-shop-nextjs/commits/d0ed91dc8557e375c3fb933d8fe4786ad05826fb))
+* **auth:** :passport_control: add nextauth provider and show or hide log in button ([ab3dbf7](https://github.com/JonyPlo/teslo-shop-nextjs/commits/ab3dbf7769a1301f7064139179fdab571955929f))
+* **auth:** :passport_control: add react hook form validations with zod schema in register form ([06f3be3](https://github.com/JonyPlo/teslo-shop-nextjs/commits/06f3be37cc60e03883cf0876ce2e9594f5111d76))
+* **auth:** :passport_control: redirect the user to the home page after login ([418d81b](https://github.com/JonyPlo/teslo-shop-nextjs/commits/418d81b08745de69897871f3af14817b3a5cb305))
+* **auth:** :passport_control: register and login user ([1768ddd](https://github.com/JonyPlo/teslo-shop-nextjs/commits/1768ddd005b30c65920542d41d5bd2586e186c09))
+* **auth:** :passport_control: show login in server component ([4138a2a](https://github.com/JonyPlo/teslo-shop-nextjs/commits/4138a2aeeecb19ca9495906f51b3185a0584264c))
+* **auth:** :sparkles: add auth config file ([78f5fad](https://github.com/JonyPlo/teslo-shop-nextjs/commits/78f5fad7d47f55353d1e77a13022807149baa1b0))
+* **auth:** :sparkles: add users seed to introduce these data in database ([b8b5ed5](https://github.com/JonyPlo/teslo-shop-nextjs/commits/b8b5ed5469f5c09c1f366847711bb58c7a87b8b4))
+* **auth:** :sparkles: connect login form with login server action ([604ff58](https://github.com/JonyPlo/teslo-shop-nextjs/commits/604ff58f972fe0b9aec2f515b6a7258c6a365a4f))
+* **auth:** :sparkles: create prisma schema for users ([f9cfce7](https://github.com/JonyPlo/teslo-shop-nextjs/commits/f9cfce75f7664cc67cd226b8b27fc64c39a44a29))
+* **home-page:** :lipstick: add fade in-out animation in images of home page ([59d0b7a](https://github.com/JonyPlo/teslo-shop-nextjs/commits/59d0b7a2854917628cc7d9930e93b00aeee9a5d5))
+
+
+### Bug Fixes
+
+* change clsx for cn funcion ([86a95cb](https://github.com/JonyPlo/teslo-shop-nextjs/commits/86a95cba539e4b858b884109b4bd5c01f6e25af9))
+
+## [0.3.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.2.0...v0.3.0) (2024-03-19)
 
 - feat: :sparkles: add layout of login and register page ([a19204f](https://github.com/JonyPlo/teslo-shop-nextjs/commit/a19204f))
 - feat: :sparkles: show products in cart quantity in cart icon on top menu component ([6b7d75c](https://github.com/JonyPlo/teslo-shop-nextjs/commit/6b7d75c))
@@ -61,7 +91,7 @@
 - perf: :zap: add route segments to revalidate products each 60 seconds ([53231d4](https://github.com/JonyPlo/teslo-shop-nextjs/commit/53231d4))
 - style(pagination): :lipstick: correct some styles in products grid and pagination ([a1224fd](https://github.com/JonyPlo/teslo-shop-nextjs/commit/a1224fd))
 
-## 0.2.0 (2024-01-28)
+## [0.2.0](https://github.com/JonyPlo/teslo-shop-nextjs/releases/tag/v0.2.0) (2024-01-28)
 
 - 0.2.0 ([1fad2bd](https://github.com/JonyPlo/teslo-shop-nextjs/commit/1fad2bd))
 - Initial commit from Create Next App ([e7f41f2](https://github.com/JonyPlo/teslo-shop-nextjs/commit/e7f41f2))

@@ -1,0 +1,30 @@
+
+[04-01-2024 11:37:11.432 AM]
+error: 	hola soy un Erroooooooooooooor
+
+[04-01-2024 11:37:38.879 AM]
+info: 	hola soy un Infoooooooooo
+
+[04-01-2024 11:38:09.338 AM]
+error: 	hola soy un Erroooor 
+Invalid `prisma.user.create()` invocation:
+
+
+Unique constraint failed on the fields: (`email`)
+
+[04-01-2024 11:46:18.140 AM]
+error: 	Error creating user 
+Invalid `prisma.user.create()` invocation:
+
+
+Unique constraint failed on the fields: (`email`)
+
+[04-01-2024 02:03:14.514 PM]
+error: 	Error creating user 
+Invalid `prisma.user.create()` invocation:
+
+
+Unique constraint failed on the fields: (`email`)
+
+[04-01-2024 02:11:46.504 PM]
+error: 	Login error NEXT_REDIRECT
