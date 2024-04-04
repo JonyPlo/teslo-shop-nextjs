@@ -8,6 +8,8 @@ node_modules/
 target/
 compiled/
 src/logs/
+CHANGELOG.md
+package.json
 
 lerna.json
 test-timings.json
