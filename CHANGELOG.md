@@ -28,7 +28,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * change clsx for cn funcion ([86a95cb](https://github.com/JonyPlo/teslo-shop-nextjs/commits/86a95cba539e4b858b884109b4bd5c01f6e25af9))
 
-## 0.3.0 (2024-03-19)
+## [0.3.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.2.0...v0.3.0) (2024-03-19)
 
 - feat: :sparkles: add layout of login and register page ([a19204f](https://github.com/JonyPlo/teslo-shop-nextjs/commit/a19204f))
 - feat: :sparkles: show products in cart quantity in cart icon on top menu component ([6b7d75c](https://github.com/JonyPlo/teslo-shop-nextjs/commit/6b7d75c))
@@ -91,7 +91,7 @@ All notable changes to this project will be documented in this file. See [standa
 - perf: :zap: add route segments to revalidate products each 60 seconds ([53231d4](https://github.com/JonyPlo/teslo-shop-nextjs/commit/53231d4))
 - style(pagination): :lipstick: correct some styles in products grid and pagination ([a1224fd](https://github.com/JonyPlo/teslo-shop-nextjs/commit/a1224fd))
 
-## 0.2.0 (2024-01-28)
+## [0.2.0](https://github.com/JonyPlo/teslo-shop-nextjs/releases/tag/v0.2.0) (2024-01-28)
 
 - 0.2.0 ([1fad2bd](https://github.com/JonyPlo/teslo-shop-nextjs/commit/1fad2bd))
 - Initial commit from Create Next App ([e7f41f2](https://github.com/JonyPlo/teslo-shop-nextjs/commit/e7f41f2))
