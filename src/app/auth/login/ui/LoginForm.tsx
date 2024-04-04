@@ -14,8 +14,8 @@ export const LoginForm = () => {
 
   // Si llegamos a la pagina del login con algun query parameter, lo tomamos y lo guardamos en la constante param
   const param = useSearchParams()
-  // Verificamos si existe un query param llamado redirectTo
-  const hasParams = param.has('redirectTo')
+  // Obtenemos la ruta del query parameter
+  const path = param.get('redirectTo') || '/'
 
   useEffect(() => {
     if (authenticationState === SESSION_TYPES.LOGGED) {
@@ -23,13 +23,8 @@ export const LoginForm = () => {
       // En este caso no lo usamos porque router.replace('/') redirecciona pero no actualiza la pagina por lo tanto los states de otros componentes no se actualizan, y necesito que las opciones del sidebar se actualicen cuando el usuario se loguea, asi que en su lugar usaremos window.location.replace('/') que es un metodo tradicional de javascript para redireccionar a una pagina y actualizarla, dejo el router replace para que quede el ejemplo
       // router.replace('/')
 
-      // Si hasParams es true, quiere que el usuario quiso acceder a una ruta protegida pero no estaba autenticado, asi que fue redirigido a la pagina del login con un query parameter llamado 'redirectTo' que contiene la ruta protegida a la que quiere ingresar, asi que cuando el usuario autentique, desde aqui vamos a poder hacer que regrese a esa ruta protegida
-      if (hasParams) {
-        const path = param.get('redirectTo') || '/'
-        return window.location.replace(path)
-      }
-
-      window.location.replace('/')
+      // Si el query parameter 'redirectTo' tiene alguna ruta entonces redireccionamos al usuario a esa ruta cuando inicie sesion, de lo contrario lo redireccionamos al home '/'
+      window.location.replace(path)
     }
   }, [authenticationState, SESSION_TYPES.LOGGED])
 
@@ -64,7 +59,10 @@ export const LoginForm = () => {
         <div className='px-2 text-gray-800'>O</div>
         <div className='flex-1 border-t border-gray-500'></div>
       </div>
-      <Link href='/auth/new-account' className='btn-secondary text-center'>
+      <Link
+        href={`/auth/new-account?redirectTo=${path}`}
+        className='btn-secondary text-center'
+      >
         Create new account
       </Link>
     </form>
