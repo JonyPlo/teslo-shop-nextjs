@@ -143,6 +143,7 @@ export const RegisterForm = () => {
       {/* Buttons */}
       <div className='mt-8 flex flex-col'>
         <button
+          type='submit'
           className='btn-primary disabled:bg-gray-600'
           disabled={isSubmitting}
         >
