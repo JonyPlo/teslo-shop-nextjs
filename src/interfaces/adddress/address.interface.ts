@@ -7,5 +7,4 @@ export interface Address {
   city: string
   country: string
   telephone: string
-  rememberAddress: boolean
 }

@@ -4,7 +4,7 @@ import { type Address } from '@/interfaces'
 import prisma from '@/lib/prisma'
 import { logger } from '@/logs/winston.config'
 
-export const serUserAddress = async (address: Address, userId: string) => {
+export const setUserAddress = async (address: Address, userId: string) => {
   try {
     const newAddress = await createOrReplaceAddress(address, userId)
 
@@ -13,7 +13,7 @@ export const serUserAddress = async (address: Address, userId: string) => {
       address: newAddress,
     }
   } catch (error) {
-    logger.error(error)
+    logger.error('Error', error)
 
     return {
       ok: false,
@@ -57,7 +57,7 @@ const createOrReplaceAddress = async (address: Address, userId: string) => {
 
     return updatedAddress
   } catch (error) {
-    logger.error(error)
-    throw new Error('Error saving address')
+    logger.error('Error creating or updating address', error)
+    throw new Error('Error creating or updating address')
   }
 }

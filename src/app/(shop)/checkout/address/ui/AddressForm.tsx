@@ -2,21 +2,35 @@
 
 import React, { useEffect, useId } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { type Country } from '@/interfaces'
+import type { Address, Country } from '@/interfaces'
 import { cn } from '@/utils'
 import { type AddressFormFields, addressSchema } from '@/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAddressBoundStore } from '@/store'
+import { deleteUserAddress, setUserAddress } from '@/actions'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   countries: Country[]
+  // El tipo Partial en typescript hace que todas las propiedades que se manden en el generico sean opcionales, en este caso 'Address' es un interface con propiedades obligatorias, pero el Partial hace que todas las propiedades tengan el ? al final haciendo que ahora sean opcionales
+  userAddressDataBase?: Partial<Address> | null
 }
 
-export const AddressForm = ({ countries }: Props) => {
+export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
   const id = useId()
-
   const { address, setAddress } = useAddressBoundStore()
+  // El objeto que mandamos dentro del useSession, tiene una propiedad llamada 'required' que esta en true, y eso indica que es 'requerido' que el usuario este logueado para estar en esta pagina, asi que si el usuario no esta autenticado, entonces el useSession lo enviara a la pagina del 'login'
+  const { data: session } = useSession({
+    required: true,
+  })
 
+  useEffect(() => {
+    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
+    //* Con este if pregunto si los datos de la direccion del usuario no vienen de la base de datos, entonces ejecuto el metodo reset de react hook form que tomara el objeto 'address' que viene del local storage y usara esos valores para los campos
+    if (!userAddressDataBase) reset(address)
+  }, [address, userAddressDataBase])
+
+  // React hook form
   const {
     register,
     handleSubmit,
@@ -24,16 +38,23 @@ export const AddressForm = ({ countries }: Props) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<AddressFormFields>({
-    defaultValues: address,
+    // Si al cargar la pagina la direccion del usuario estaba guardada en la base de datos entonces usamos esa informacion para cargar los inputs, de lo contrario usamos el local storage de zustand que eso lo hacemos arriba en el useeffect
+    defaultValues: {
+      ...userAddressDataBase,
+      rememberAddress: false,
+    },
     resolver: zodResolver(addressSchema),
   })
 
-  useEffect(() => {
-    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
-    reset(address)
-  }, [address])
+  const obSubmit: SubmitHandler<AddressFormFields> = async (data) => {
+    const { rememberAddress, ...restAddress } = data
 
-  const obSubmit: SubmitHandler<AddressFormFields> = (data) => {
+    if (data.rememberAddress) {
+      await setUserAddress(restAddress, session!.user.id)
+    } else {
+      await deleteUserAddress(session!.user.id)
+    }
+
     setAddress(data)
   }
 
@@ -248,7 +269,6 @@ export const AddressForm = ({ countries }: Props) => {
               type='checkbox'
               className="before:content[''] border-blue-gray-200 before:bg-blue-gray-500 peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-500 transition-all before:absolute before:left-2/4 before:top-2/4 before:block before:h-12 before:w-12 before:-translate-x-2/4 before:-translate-y-2/4 before:rounded-full before:opacity-0 before:transition-opacity checked:border-blue-500 checked:bg-blue-500 checked:before:bg-blue-500 hover:before:opacity-10"
               id='checkbox'
-              // checked
             />
             <div className='pointer-events-none absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100'>
               <svg

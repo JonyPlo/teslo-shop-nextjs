@@ -108,6 +108,7 @@ model UserAddress {
   address    String
   address2   String?
   postalCode String
+  city       String
   telephone  String
 
   // Relaciones

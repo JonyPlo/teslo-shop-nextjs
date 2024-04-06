@@ -1,0 +1,162 @@
+
+[04-06-2024 06:26:27.255 PM]
+error: 	undefined
+
+[04-06-2024 06:26:27.256 PM]
+error: 	undefined
+
+[04-06-2024 06:29:44.512 PM]
+error: 	undefined
+
+[04-06-2024 06:29:44.513 PM]
+error: 	undefined
+
+[04-06-2024 06:30:14.647 PM]
+error: 	asdfasdfa 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:30:14.648 PM]
+error: 	undefined
+
+[04-06-2024 06:31:15.525 PM]
+error: 	Error saving address 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:31:15.525 PM]
+error: 	Error saving address Error saving address
+
+[04-06-2024 06:31:39.358 PM]
+error: 	Error saving address 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:31:39.359 PM]
+error: 	undefined
+
+[04-06-2024 06:32:25.233 PM]
+error: 	Error creating or updating address 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:32:25.234 PM]
+error: 	Error saving address Error saving address
+
+[04-06-2024 06:33:02.914 PM]
+error: 	Error creating or updating address 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:33:02.915 PM]
+error: 	Error saving address Error creating or updating address
+
+[04-06-2024 06:33:17.829 PM]
+error: 	Error creating or updating address 
+Invalid `prisma.userAddress.create()` invocation:
+
+{
+  data: {
+    firstName: "Jonathan",
+    lastName: "Plodzien",
+    address: "Marcos Avellaneda 1571",
+    address2: "",
+    postalCode: "4000",
+    city: "San Miguel De Tucuman",
+    ~~~~
+    telephone: "03816126830",
+    countryId: "AR",
+    userId: "16b9dee4-7b03-4212-b5a0-26c5b2ec8036",
+?   id?: String
+  }
+}
+
+Unknown argument `city`. Did you mean `id`? Available options are marked with ?.
+
+[04-06-2024 06:33:17.829 PM]
+error: 	Error Error creating or updating address

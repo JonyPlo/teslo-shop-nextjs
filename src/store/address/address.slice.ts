@@ -13,7 +13,6 @@ export interface AddressSlice {
     city: string
     country: string
     telephone: string
-    rememberAddress: boolean
   }
 
   // Methods
@@ -36,7 +35,6 @@ export const createAddressSlice: StateCreator<
       city: '',
       country: '',
       telephone: '',
-      rememberAddress: false,
     },
 
     // Methods
