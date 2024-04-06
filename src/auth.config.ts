@@ -21,7 +21,12 @@ export const authConfig: NextAuthConfig = {
       const isLoggedIn = !!auth?.user
 
       //* Definimos cuales son las rutas que necesitan que el usuario este autenticado para poder acceder a ellas
-      const authenticatedRoutes = ['/checkout', '/checkout/address']
+      const authenticatedRoutes = [
+        '/checkout',
+        '/checkout/address',
+        '/profile',
+        '/orders',
+      ]
 
       // Verificamos si la ruta en la qu estamos actualmente en la pagina coincide con alguna de las rutas protegidas, si coincide entonces isProtected es true, de lo contrario sera false
       const isProtected = authenticatedRoutes.some((path) =>

@@ -4,6 +4,7 @@
 
 import { initialData } from './seed'
 import prisma from '../lib/prisma'
+import { countries } from './seed-countries'
 
 // De esta forma creamos un seed para una base de datos SQL con Prisma
 const main = async () => {
@@ -13,6 +14,7 @@ const main = async () => {
   await prisma.productImage.deleteMany()
   await prisma.product.deleteMany()
   await prisma.category.deleteMany()
+  await prisma.country.deleteMany()
 
   const { users, categories, products } = initialData
 
@@ -31,15 +33,6 @@ const main = async () => {
   })
 
   const categoriesDB = await prisma.category.findMany()
-
-  // const categoriesMap = categoriesDB.reduce(
-  //   (map, category) => {
-  //     map[category.name.toLowerCase()] = category.id
-
-  //     return map
-  //   },
-  //   {} as Record<string, string>
-  // )
 
   // Creo un objeto Map
   const categoriesMap = new Map()
@@ -69,6 +62,11 @@ const main = async () => {
     await prisma.productImage.createMany({
       data: imagesData,
     })
+  })
+
+  //Insertar los paises en la db
+  await prisma.country.createMany({
+    data: countries,
   })
 
   console.log('Seed executed')
