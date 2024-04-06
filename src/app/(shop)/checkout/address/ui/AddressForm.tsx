@@ -1,12 +1,17 @@
 'use client'
 
+import React, { useId } from 'react'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import { type Country } from '@/interfaces'
 import { cn } from '@/utils'
 import { type AddressFormFields, addressSchema } from '@/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useId } from 'react'
-import { type SubmitHandler, useForm } from 'react-hook-form'
 
-export const AddressForm = () => {
+interface Props {
+  countries: Country[]
+}
+
+export const AddressForm = ({ countries }: Props) => {
   const id = useId()
 
   const {
@@ -184,7 +189,11 @@ export const AddressForm = () => {
           )}
         >
           <option value=''>[ Select ]</option>
-          <option value='CRI'>Costa Rica</option>
+          {countries.map(({ id, name }) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
         </select>
         {/* Country error message */}
         {errors.country && (
