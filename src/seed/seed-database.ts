@@ -4,15 +4,18 @@
 
 import { initialData } from './seed'
 import prisma from '../lib/prisma'
+import { countries } from './seed-countries'
 
 // De esta forma creamos un seed para una base de datos SQL con Prisma
 const main = async () => {
   // Borrar registros previos
-  //! IMPORTANTE: Si una tabla tiene relacion con otra, por ejemplo, si usamos los users para crear productos, y estos productos tienen dentro suyo un campo que almacena el objeto o tabla del usuario que creo ese producto, entonces hay que mover la linea que elimina los productos arriba de los usuarios para que se eliminen primero, ya que si intentamos borrar primero los usuarios, la base de datos nos devolvera un error por la integridad referencial, y dira que no se pueden borrar los users porque estan siendo usador por otra tabla
+  //! IMPORTANTE: Si una tabla tiene relacion con otra, por ejemplo, si usamos los users para crear productos, y estos productos tienen dentro suyo un campo que almacena el objeto o tabla del usuario que creo ese producto, entonces hay que mover la linea que elimina los productos arriba de los usuarios para que se eliminen primero, ya que si intentamos borrar primero los usuarios, la base de datos nos devolvera un error por la integridad referencial, y dira que no se pueden borrar los users porque estan siendo usador por otra tabla, por ejemplo si borramos primero los 'users' y despues 'userAddress' nos nos permitira, porque 'userAddress' almacena un 'userId' que es el usuario que creo ese 'userAddress', por lo tanto esa columna llamada 'userId' pasaria a tener ahora un valor que ya no existe y eso provocaria errores etc, por lo tanto, primero hay que eliminar la tabla 'userAddress' antes que 'user'
+  await prisma.userAddress.deleteMany()
   await prisma.user.deleteMany()
   await prisma.productImage.deleteMany()
   await prisma.product.deleteMany()
   await prisma.category.deleteMany()
+  await prisma.country.deleteMany()
 
   const { users, categories, products } = initialData
 
@@ -31,15 +34,6 @@ const main = async () => {
   })
 
   const categoriesDB = await prisma.category.findMany()
-
-  // const categoriesMap = categoriesDB.reduce(
-  //   (map, category) => {
-  //     map[category.name.toLowerCase()] = category.id
-
-  //     return map
-  //   },
-  //   {} as Record<string, string>
-  // )
 
   // Creo un objeto Map
   const categoriesMap = new Map()
@@ -69,6 +63,11 @@ const main = async () => {
     await prisma.productImage.createMany({
       data: imagesData,
     })
+  })
+
+  //Insertar los paises en la db
+  await prisma.country.createMany({
+    data: countries,
   })
 
   console.log('Seed executed')

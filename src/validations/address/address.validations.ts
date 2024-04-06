@@ -11,20 +11,21 @@ const REGEX = Object.freeze({
 
 //! Recordar que el metodo required() no funciona cuando se usa zod con react hook form, en su lugar hay que usar min(1)
 export const addressSchema = z.object({
-  name: z
+  firstName: z
     .string()
     .min(3, {
-      message: 'Name is required and must contain at least 3 character(s)',
+      message:
+        'First name is required and must contain at least 3 character(s)',
     })
-    .max(30, { message: 'Name must contain at most 30 character(s)' })
-    .regex(REGEX.NAME, { message: 'The name must be a string only' }),
-  surname: z
+    .max(30, { message: 'First name must contain at most 30 character(s)' })
+    .regex(REGEX.NAME, { message: 'First name must be a string only' }),
+  lastName: z
     .string()
     .min(3, {
-      message: 'Surname is required and must contain at least 3 character(s)',
+      message: 'Last name is required and must contain at least 3 character(s)',
     })
-    .max(30, { message: 'Surename must contain at most 30 character(s)' })
-    .regex(REGEX.NAME, { message: 'Surname must be a string only' }),
+    .max(30, { message: 'Last name must contain at most 30 character(s)' })
+    .regex(REGEX.NAME, { message: 'Last name must be a string only' }),
   address: z
     .string()
     .min(6, {
@@ -66,8 +67,8 @@ export const addressSchema = z.object({
     }),
   country: z
     .string()
-    .min(3, {
-      message: 'Country is required and must contain at least 3 character(s)',
+    .min(1, {
+      message: 'Country is required',
     })
     .max(20, { message: 'Country must contain at most 20 character(s)' })
     .regex(REGEX.COUNTRY, {

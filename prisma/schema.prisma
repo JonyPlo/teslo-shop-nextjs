@@ -90,4 +90,31 @@ model User {
   // La enumeracion Role tiene como opciones 'admin' y 'user', en este caso con @default estamos diciendo que el usuario se creara por defecto con el role en 'user', solamente podemos elegir opciones que tena la enumeracion Role
   role        Role      @default(user)
   image       String?
+
+  //* Aqui estoy entablando una relacion conocida como relacion de 1 a 1, donde creamos el campo en este caso 'address' y es de tipo 'UserAddress?' que es una tabla, pero en este caso el campo sera opcional porque esta es la direccion de entrega, y el usuario puede guardar o quitar su direccion de la base de datos
+  address UserAddress?
+}
+
+model Country {
+  id          String        @id
+  name        String        @unique
+  UserAddress UserAddress[]
+}
+
+model UserAddress {
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  address    String
+  address2   String?
+  postalCode String
+  city       String
+  telephone  String
+
+  // Relaciones
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
 }
