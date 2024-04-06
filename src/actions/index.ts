@@ -7,3 +7,5 @@ export * from './auth/logout'
 export * from './auth/registerUser'
 
 export * from './country/get-countries'
+
+export * from './address/set-user-address'

@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useId } from 'react'
+import React, { useEffect, useId } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { type Country } from '@/interfaces'
 import { cn } from '@/utils'
 import { type AddressFormFields, addressSchema } from '@/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAddressBoundStore } from '@/store'
 
 interface Props {
   countries: Country[]
@@ -14,20 +15,26 @@ interface Props {
 export const AddressForm = ({ countries }: Props) => {
   const id = useId()
 
+  const { address, setAddress } = useAddressBoundStore()
+
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isValid, isSubmitting, isValidating },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm<AddressFormFields>({
-    // defaultValues: {
-
-    // }
+    defaultValues: address,
     resolver: zodResolver(addressSchema),
   })
 
+  useEffect(() => {
+    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
+    reset(address)
+  }, [address])
+
   const obSubmit: SubmitHandler<AddressFormFields> = (data) => {
-    console.log(data)
+    setAddress(data)
   }
 
   return (
@@ -39,7 +46,7 @@ export const AddressForm = ({ countries }: Props) => {
       <div className='mb-2 flex flex-col'>
         <label htmlFor={`${id}-name`}>Name</label>
         <input
-          {...register('name')}
+          {...register('firstName')}
           id={`${id}-name`}
           type='text'
           placeholder='Eric Plodzien'
@@ -48,14 +55,16 @@ export const AddressForm = ({ countries }: Props) => {
             'rounded-md border bg-gray-200 p-2',
             // Border styles
             {
-              'border-red-500': errors.name,
+              'border-red-500': errors.firstName,
             }
           )}
           autoFocus
         />
         {/* Name error message */}
-        {errors.name && (
-          <span className='text-sm text-red-500'>{errors.name.message}</span>
+        {errors.firstName && (
+          <span className='text-sm text-red-500'>
+            {errors.firstName.message}
+          </span>
         )}
       </div>
 
@@ -63,7 +72,7 @@ export const AddressForm = ({ countries }: Props) => {
       <div className='mb-2 flex flex-col'>
         <label htmlFor={`${id}-surname`}>Surname</label>
         <input
-          {...register('surname')}
+          {...register('lastName')}
           id={`${id}-surname`}
           type='text'
           className={cn(
@@ -71,13 +80,15 @@ export const AddressForm = ({ countries }: Props) => {
             'rounded-md border bg-gray-200 p-2',
             // Border styles
             {
-              'border-red-500': errors.surname,
+              'border-red-500': errors.lastName,
             }
           )}
         />
         {/* Surname error message */}
-        {errors.surname && (
-          <span className='text-sm text-red-500'>{errors.surname.message}</span>
+        {errors.lastName && (
+          <span className='text-sm text-red-500'>
+            {errors.lastName.message}
+          </span>
         )}
       </div>
 
@@ -262,7 +273,7 @@ export const AddressForm = ({ countries }: Props) => {
         <button
           type='submit'
           className='btn-primary disabled:bg-gray-600'
-          disabled={isSubmitting || !isValid}
+          disabled={isSubmitting}
         >
           Next
         </button>
