@@ -69,6 +69,7 @@ export const LoginForm = () => {
   )
 }
 
+//! IMPORTANTE: Al hook useFormStatus hay que usarlo DENTRO del formulario, por eso se saca al boton submit en un componente aparte, para poder usar el useFormStatus y obtener la informacion de si esta pending o no, pero si usamos el useFormStatus fuera del formulario, por ejemplo al mismo nivel del useFormState que estamos usando en la linea 13, no funcionara, porque estariamos usando el hook fuera del formulario, por lo tanto el hook no tiene referencias para saber el status del formulario, asi que por esa razon separamos el boton submit del formulario en otro componente, para poder usar el hook useFormStatus y cuando usemos el componente del boton dentro del formulario, el hook useFormStatus ahora si tendra la referencia del formulario porque esta dentro del mismo.
 export const LoginButton = () => {
   const { pending } = useFormStatus()
 
