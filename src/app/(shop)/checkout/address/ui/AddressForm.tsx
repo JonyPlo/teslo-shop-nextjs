@@ -24,12 +24,6 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
     required: true,
   })
 
-  useEffect(() => {
-    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
-    //* Con este if pregunto si los datos de la direccion del usuario no vienen de la base de datos, entonces ejecuto el metodo reset de react hook form que tomara el objeto 'address' que viene del local storage y usara esos valores para los campos
-    if (!userAddressDataBase) reset(address)
-  }, [address, userAddressDataBase])
-
   // React hook form
   const {
     register,
@@ -45,6 +39,12 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
     },
     resolver: zodResolver(addressSchema),
   })
+
+  useEffect(() => {
+    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
+    //* Con este if pregunto si los datos de la direccion del usuario no vienen de la base de datos, entonces ejecuto el metodo reset de react hook form que tomara el objeto 'address' que viene del local storage y usara esos valores para los campos
+    if (!userAddressDataBase) reset(address)
+  }, [address, userAddressDataBase])
 
   const obSubmit: SubmitHandler<AddressFormFields> = async (data) => {
     const { rememberAddress, ...restAddress } = data
