@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAddressBoundStore } from '@/store'
 import { deleteUserAddress, setUserAddress } from '@/actions'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   countries: Country[]
@@ -19,10 +20,8 @@ interface Props {
 export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
   const id = useId()
   const { address, setAddress } = useAddressBoundStore()
-  // El objeto que mandamos dentro del useSession, tiene una propiedad llamada 'required' que esta en true, y eso indica que es 'requerido' que el usuario este logueado para estar en esta pagina, asi que si el usuario no esta autenticado, entonces el useSession lo enviara a la pagina del 'login'
-  const { data: session } = useSession({
-    required: true,
-  })
+  const { data: session } = useSession()
+  const router = useRouter()
 
   // React hook form
   const {
@@ -49,13 +48,22 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
   const obSubmit: SubmitHandler<AddressFormFields> = async (data) => {
     const { rememberAddress, ...restAddress } = data
 
-    if (data.rememberAddress) {
-      await setUserAddress(restAddress, session!.user.id)
-    } else {
-      await deleteUserAddress(session!.user.id)
-    }
+    try {
+      if (data.rememberAddress) {
+        await setUserAddress(restAddress, session!.user.id)
+      } else {
+        await deleteUserAddress(session!.user.id)
+      }
 
-    setAddress(data)
+      setAddress(data)
+      router.push('/checkout')
+    } catch (error) {
+      console.log(error)
+
+      setError('root', {
+        message: 'Internal server error, please try again later',
+      })
+    }
   }
 
   return (
