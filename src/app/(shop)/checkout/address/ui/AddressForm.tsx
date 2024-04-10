@@ -55,7 +55,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
         await deleteUserAddress(session!.user.id)
       }
 
-      setAddress(data)
+      setAddress(restAddress)
       router.push('/checkout')
     } catch (error) {
       console.log(error)

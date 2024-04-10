@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react'
 
 export const PlaceOrder = () => {
   const [loaded, setLoaded] = useState(false)
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false)
 
   const { productsInCartQuantity, subTotalPrice, taxes, totalPriceWithTaxes } =
     useCartBoundStore((state) => state.getSummaryInformation())
+  const { cart } = useCartBoundStore()
 
   const { address: addressStore } = useAddressBoundStore()
   const {
@@ -25,6 +27,20 @@ export const PlaceOrder = () => {
   useEffect(() => {
     setLoaded(true)
   }, [])
+
+  const onPlaceOrder = async () => {
+    setIsPlacingOrder(true)
+
+    const productsToOrder = cart.map((product) => {
+      return {
+        productId: product.id,
+        quantity: product.quantity,
+        size: product.size,
+      }
+    })
+
+    setIsPlacingOrder(false)
+  }
 
   if (!loaded) {
     return <div>Loading...</div>
@@ -73,9 +89,12 @@ export const PlaceOrder = () => {
         </span>
       </div>
       <div className='mt-5 w-full'>
+        {/* <p className='text-red-500 mb-2'>Error creating order</p> */}
         <button
           // href={`/orders/123`}
-          className='btn-primary mb-5 w-full'
+          className='btn-primary mb-5 w-full disabled:bg-gray-400'
+          onClick={onPlaceOrder}
+          disabled={isPlacingOrder}
         >
           Place order
         </button>
