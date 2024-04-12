@@ -98,9 +98,19 @@ export const placeOrder = async (
       })
 
       // 3. Crear la direccion de la orden
+      const { country, ...restAddress } = address
+
+      const orderAddress = await tx.orderAddress.create({
+        data: {
+          ...restAddress,
+          countryId: country,
+          orderId: order.id,
+        },
+      })
 
       return {
         order,
+        orderAddress,
       }
     })
   } catch (error) {
