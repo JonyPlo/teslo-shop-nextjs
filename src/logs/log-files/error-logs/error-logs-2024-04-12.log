@@ -1,0 +1,41 @@
+
+[04-12-2024 03:36:43.507 AM]
+error: 	Error to save Order 
+Invalid `prisma.order.create()` invocation:
+
+{
+  data: {
+    userId: "61b0b2ef-d2a2-4d9d-8636-8eccf3e0dcbe",
+    itemsInOrder: 6,
+    subTotal: 285,
+    tax: 285,
+    total: 570,
+    OrderItem: {
+      createMany: {
+        data: [
+          {
+            quantity: 4,
+            size: "XS",
+            productId: "09e44230-ccc2-4b3b-b33b-5a110da9904a",
+            price: 40
+          },
+          {
+            quantity: 1,
+            size: "S",
+            productId: "09e44230-ccc2-4b3b-b33b-5a110da9904a",
+            price: 40
+          },
+          {
+            quantity: 1,
+            size: "M",
+            productId: "20401ae6-821d-458d-b581-31e9e0637e5d",
+            price: 85
+          }
+        ]
+      }
+    },
++   isPaid: Boolean
+  }
+}
+
+Argument `isPaid` is missing.
