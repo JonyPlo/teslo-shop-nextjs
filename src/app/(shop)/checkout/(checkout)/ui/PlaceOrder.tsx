@@ -40,8 +40,8 @@ export const PlaceOrder = () => {
       }
     })
 
-   const resp = await placeOrder(productsToOrder, addressStore)
-console.log(resp);
+    const resp = await placeOrder(productsToOrder, addressStore)
+    console.log(resp)
 
     setIsPlacingOrder(false)
   }
