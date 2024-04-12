@@ -1,5 +1,6 @@
 'use client'
 
+import { placeOrder } from '@/actions'
 import { useAddressBoundStore, useCartBoundStore } from '@/store'
 import { currencyFormat } from '@/utils'
 import { useEffect, useState } from 'react'
@@ -38,6 +39,9 @@ export const PlaceOrder = () => {
         size: product.size,
       }
     })
+
+   const resp = await placeOrder(productsToOrder, addressStore)
+console.log(resp);
 
     setIsPlacingOrder(false)
   }
@@ -78,7 +82,7 @@ export const PlaceOrder = () => {
           <span className='text-right'>
             {currencyFormat(subTotalPrice)} ARS
           </span>
-          <span>Taxes (1000%)</span>
+          <span>Taxes (100%)</span>
           <span className='text-right'>{currencyFormat(taxes)} ARS</span>
         </div>
       </div>
