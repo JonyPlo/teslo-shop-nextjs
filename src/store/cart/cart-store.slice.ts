@@ -23,6 +23,8 @@ export interface CartSlice {
   updateProductQuantity: (product: CartProduct, quantity: number) => void
   syncProductQuantityWithStock: (product: CartProduct, stock: number) => void
   removeProduct: (product: CartProduct) => void
+
+  clearCart: () => void
 }
 
 // With persist middleware
@@ -128,6 +130,10 @@ export const createCartSlice: StateCreator<
           }
         })
       })
+    },
+
+    clearCart: () => {
+      set({ cart: [] })
     },
   }),
   {

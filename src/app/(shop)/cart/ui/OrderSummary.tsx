@@ -48,6 +48,7 @@ export const OrderSummary = () => {
           <Link
             href={'/checkout/address'}
             className='btn-primary flex justify-center'
+            onClick={() => console.log('hola')}
           >
             Checkout
           </Link>

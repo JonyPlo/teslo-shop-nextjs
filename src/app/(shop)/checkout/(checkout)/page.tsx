@@ -1,17 +1,19 @@
 import { Title } from '@/components'
-import { initialData } from '@/seed/seed'
-import Image from 'next/image'
-import Link from 'next/link'
 import { ProductsInCart } from './ui/ProductsInCart'
 import { PlaceOrder } from './ui/PlaceOrder'
-
-const productsInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-]
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export default function CartPage() {
+  const cookieStore = cookies()
+  const productsInCart = JSON.parse(
+    cookieStore.get('productsInCart')?.value ?? '[]'
+  )
+  const hasCookieCart = cookieStore.has('productsInCart')
+
+  // Redireccionamos al home si no existen productos en las cookies
+  if (!hasCookieCart || productsInCart.length === 0) redirect('/')
+
   return (
     <div className='mb-72 flex items-center justify-center px-10 sm:px-0'>
       <div className='flex w-[1000px] flex-col'>

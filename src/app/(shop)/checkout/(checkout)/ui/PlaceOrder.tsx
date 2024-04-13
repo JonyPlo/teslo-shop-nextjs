@@ -3,15 +3,18 @@
 import { placeOrder } from '@/actions'
 import { useAddressBoundStore, useCartBoundStore } from '@/store'
 import { currencyFormat } from '@/utils'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export const PlaceOrder = () => {
+  const router = useRouter()
   const [loaded, setLoaded] = useState(false)
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const { productsInCartQuantity, subTotalPrice, taxes, totalPriceWithTaxes } =
     useCartBoundStore((state) => state.getSummaryInformation())
-  const { cart } = useCartBoundStore()
+  const { cart, clearCart } = useCartBoundStore()
 
   const { address: addressStore } = useAddressBoundStore()
   const {
@@ -40,8 +43,19 @@ export const PlaceOrder = () => {
       }
     })
 
+    // Server action para crear la orden del producto y decrementar el stock de los productos en la base de datos
     const resp = await placeOrder(productsToOrder, addressStore)
-    console.log(resp)
+
+    // Si algo salio mal al guardar la orden en la db retornamos un error
+    if (!resp.ok) {
+      setIsPlacingOrder(false)
+      setErrorMessage(resp.message)
+      return
+    }
+
+    // Si todo salio bien y se guardo la orden entonces limpiamos el carrito y redireccionamos al usuario al resumen de la orden
+    clearCart()
+    router.replace(`/orders/${resp.order?.id}`)
 
     setIsPlacingOrder(false)
   }
@@ -93,7 +107,7 @@ export const PlaceOrder = () => {
         </span>
       </div>
       <div className='mt-5 w-full'>
-        {/* <p className='text-red-500 mb-2'>Error creating order</p> */}
+        <p className='mb-2 text-red-500'>{errorMessage}</p>
         <button
           // href={`/orders/123`}
           className='btn-primary mb-5 w-full disabled:bg-gray-400'

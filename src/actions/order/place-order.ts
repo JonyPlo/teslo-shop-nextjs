@@ -12,7 +12,7 @@ interface ProductToOrder {
 }
 
 export const placeOrder = async (
-  productIds: ProductToOrder[],
+  productsInCart: ProductToOrder[],
   address: Address
 ) => {
   const session = await auth()
@@ -33,19 +33,19 @@ export const placeOrder = async (
       where: {
         id: {
           // La propiedad 'in' necesita un arreglo de strings para poder relizar la busqueda de cada uno, por ejemplo aqui le estamos pasando un arreglo con los ids de los productos que estan en el carrito del local storage, por lo tanto buscara en la base de datos todos aquellos productos que tengan el mismo id
-          in: productIds.map((product) => product.productId),
+          in: productsInCart.map((product) => product.productId),
         },
       },
     })
 
     // Calcular la cantidad de items a comprar
-    const itemsInOrder = productIds.reduce(
+    const itemsInOrder = productsInCart.reduce(
       (acc, product) => acc + product.quantity,
       0
     )
 
     // Calcular el subtotal, taxes y total
-    const { subTotal, tax, total } = productIds.reduce(
+    const { subTotal, tax, total } = productsInCart.reduce(
       (totals, cartProduct) => {
         const productQuantity = cartProduct.quantity
         const product = dbProducts.find(
@@ -74,7 +74,7 @@ export const placeOrder = async (
       // La idea de realizar este arreglo es actualizar el stock de los productos en la db, ya que como estamos comprando items, el stock de cada producto deberia restarse
       const updateProductPromises = dbProducts.map((dbProduct) => {
         // Acumulamos o sumamos la cantidad de productos a ordenar
-        const cartProductQuantity = productIds
+        const cartProductQuantity = productsInCart
           .filter((cartProduct) => cartProduct.productId === dbProduct.id)
           .reduce((acc, item) => item.quantity + acc, 0)
 
@@ -122,7 +122,7 @@ export const placeOrder = async (
           // Un OrderItem requiere una propiedad llamada 'orderId', pero en este caso prisma se encargara de crear esa propiedad por nosotros, ya que primero crea la orden, y una vez creada toma el id que le creo la base de datos para esa orden y lo guarda dentro de la propiedad orderId en cada item de la tabla OrderItem
           OrderItem: {
             createMany: {
-              data: productIds.map((cartProd) => ({
+              data: productsInCart.map((cartProd) => ({
                 quantity: cartProd.quantity,
                 size: cartProd.size,
                 productId: cartProd.productId,
