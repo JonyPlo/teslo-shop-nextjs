@@ -33,7 +33,7 @@ export const OrderSummary = () => {
           <span className='text-right'>
             {currencyFormat(subTotalPrice)} ARS
           </span>
-          <span>Taxes (1000%)</span>
+          <span>Taxes (100%)</span>
           <span className='text-right'>{currencyFormat(taxes)} ARS</span>
         </div>
       </div>
@@ -48,6 +48,7 @@ export const OrderSummary = () => {
           <Link
             href={'/checkout/address'}
             className='btn-primary flex justify-center'
+            onClick={() => console.log('hola')}
           >
             Checkout
           </Link>
