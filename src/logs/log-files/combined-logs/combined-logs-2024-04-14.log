@@ -1,0 +1,1071 @@
+
+[04-14-2024 02:20:01.839 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-14-2024 03:55:50.127 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:50.784 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:51.565 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:52.384 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:53.140 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:53.917 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:54.686 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:55.461 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:56.235 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:57.001 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:57.871 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:58.659 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:55:59.415 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:00.178 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:01.002 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:01.759 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:02.535 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:03.342 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:04.100 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:04.935 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:05.759 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:06.532 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:07.342 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:08.197 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:09.024 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:09.819 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:10.626 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:11.438 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:12.305 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:13.060 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:13.835 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:14.598 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:15.417 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:16.177 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:16.937 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:17.699 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:18.485 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 03:56:19.331 AM]
+error: 	Error getting order summary 
+Invalid `prisma.orderItem.findMany()` invocation:
+
+{
+  where: {
+    orderId: "67b80f0b-1636-4331-ba71-c94e3d701226"
+  },
+  include: {
+    product: {
+      select: {
+      ~~~~~~
+        slug: true
+      },
+      include: {
+      ~~~~~~~
+        ProductImage: {
+          select: {
+            url: true
+          }
+        }
+      }
+    }
+  }
+}
+
+Please either use `include` or `select`, but not both at the same time.
