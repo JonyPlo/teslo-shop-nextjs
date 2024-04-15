@@ -19,12 +19,7 @@ export const placeOrder = async (
   const userId = session?.user.id
 
   // Verificar sesion de usuario
-  if (!userId) {
-    return {
-      ok: false,
-      message: 'User session not found',
-    }
-  }
+  if (!userId) throw new Error('User session not found')
 
   try {
     // Obtener la informacion de los productos en la db

@@ -1069,3 +1069,6 @@ Invalid `prisma.orderItem.findMany()` invocation:
 }
 
 Please either use `include` or `select`, but not both at the same time.
+
+[04-14-2024 11:01:43.844 PM]
+error: 	Error getting order summary Order not exist

@@ -1,16 +1,9 @@
 import { getOrderById } from '@/actions'
 import { Title } from '@/components'
-import { initialData } from '@/seed/seed'
 import { cn, currencyFormat } from '@/utils'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { IoCardOutline } from 'react-icons/io5'
-
-const productsInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-]
 
 interface Props {
   params: {
@@ -20,12 +13,9 @@ interface Props {
 
 export default async function CartPage({ params }: Props) {
   const { id } = params
-
   const { ok, orderAddress, orderItems, orderSummary } = await getOrderById(id)
 
-  if (!ok) {
-    redirect('/')
-  }
+  if (!ok) redirect('/')
 
   const address = orderAddress!
   const items = orderItems!
@@ -38,25 +28,6 @@ export default async function CartPage({ params }: Props) {
         <div className='grid grid-cols-1 gap-10 sm:grid-cols-2'>
           {/* Cart */}
           <div className='mt-5 flex flex-col'>
-            <div
-              className={cn(
-                // Base styles
-                'mb-6 flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
-                // Paid order styles
-                {
-                  'bg-red-500': !summary.isPaid,
-                  'bg-green-700': summary.isPaid,
-                }
-              )}
-            >
-              <IoCardOutline size={30} />
-              {!orderSummary?.isPaid ? (
-                <span className='mx-2'>Outstanding</span>
-              ) : (
-                <span className='mx-2'>Paid</span>
-              )}
-            </div>
-
             {/* Cart Items */}
             {items.map((product) => (
               <div
