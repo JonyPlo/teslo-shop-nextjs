@@ -52,21 +52,21 @@ export const logger = createLogger({
     fileRotateTransport(
       'src/logs/log-files/combined-logs/combined-logs-%DATE%.log',
       'YYYY-MM-DD',
-      '14d',
+      '2d',
       combineFilter()
     ),
     // Error log File
     fileRotateTransport(
       'src/logs/log-files/error-logs/error-logs-%DATE%.log',
       'YYYY-MM-DD',
-      '14d',
+      '2d',
       errorFilter()
     ),
     // Info log File
     fileRotateTransport(
       'src/logs/log-files/info-logs/info-logs-%DATE%.log',
       'YYYY-MM-DD',
-      '14d',
+      '2',
       infoFilter()
     ),
   ],

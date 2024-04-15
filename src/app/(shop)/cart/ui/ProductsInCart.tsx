@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useCartBoundStore } from '@/store'
 import { QuantitySelector } from '@/components'
 import { IoCartOutline } from 'react-icons/io5'
-import { titleFont } from '@/config/fonts'
 import { CartStockLabel } from './CartStockLabel'
+import { setCookie } from 'cookies-next'
 
 export const ProductsInCart = () => {
   const [loaded, setLoaded] = useState(false)
@@ -20,6 +20,8 @@ export const ProductsInCart = () => {
 
   useEffect(() => {
     setLoaded(true)
+    // Guardo el carrito en las cookies para poder hacer comprobaciones en el lado del servidor
+    setCookie('productsInCart', productsInCart)
   }, [])
 
   if (!loaded) {

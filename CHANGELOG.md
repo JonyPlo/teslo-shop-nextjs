@@ -1,6 +1,30 @@
 # Changelog
+## [0.5.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.4.0...v0.5.0) (2024-04-15)
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### Features
+
+* **address-page:** :sparkles: add address schema in prisma and create server action to manage it ([f11e74f](https://github.com/JonyPlo/teslo-shop-nextjs/commits/f11e74f8c01b1beb4d002d6f40f72c0290c8a67b))
+* **address-page:** :sparkles: add countries in address form ([ec48c23](https://github.com/JonyPlo/teslo-shop-nextjs/commits/ec48c230fc5d0cf99cdd4bf8c8233b75f3edcb4f))
+* **address-page:** :sparkles: add validations in address form ([90f9738](https://github.com/JonyPlo/teslo-shop-nextjs/commits/90f97386a6e476cf8730c99278d9af622b92ed62))
+* **address-page:** :sparkles: make the remember address checkbox functional ([9519852](https://github.com/JonyPlo/teslo-shop-nextjs/commits/9519852c3b82cbde1b468a94dcf3c9d5fe6a9972))
+* **checkout-page:** :seedling: add order in seed database file to delete them when seed is executed ([620a521](https://github.com/JonyPlo/teslo-shop-nextjs/commits/620a521f6922a76ecf5f8ac5fd39154d1cc74f72))
+* **checkout-page:** :sparkles: add order address in prisma transactions ([deccee1](https://github.com/JonyPlo/teslo-shop-nextjs/commits/deccee17c7b59fb0315ad1913ae52ebe6959c006))
+* **checkout-page:** :sparkles: create place order action to calculate product totals ([1508fb3](https://github.com/JonyPlo/teslo-shop-nextjs/commits/1508fb35d07c2d69cebe47a0a8b2055402fab99a))
+* **checkout-page:** :sparkles: create place order and redirect user to the order page ([d032206](https://github.com/JonyPlo/teslo-shop-nextjs/commits/d032206b5610475e3e13447d32382bd23e25bd37))
+* **checkout-page:** :sparkles: finish place order action in checkout page ([755caf6](https://github.com/JonyPlo/teslo-shop-nextjs/commits/755caf64f4b21a57c5dd5428ac397b364d8f982e))
+* **checkout-page:** :sparkles: prepare order data and create order schema in prisma to migrate them ([a2d7f39](https://github.com/JonyPlo/teslo-shop-nextjs/commits/a2d7f39c42201770b44fc707938a6ec721934c1b))
+* **checkout-page:** :sparkles: replace static html with dynamic user data and store cart ([e118222](https://github.com/JonyPlo/teslo-shop-nextjs/commits/e1182225e33bf46334126df59d5acce05e7c4684))
+* **checkout-page:** :sparkles: start creating order transactions with prisma ([97004a0](https://github.com/JonyPlo/teslo-shop-nextjs/commits/97004a031dd50293ccfac2ee6492fcf0ed753ce9))
+* **order-page:** :sparkles: add actual data in the table of orders page ([89b3367](https://github.com/JonyPlo/teslo-shop-nextjs/commits/89b3367e68afd76b47c167f024c99f1645953f74))
+* **order-page:** :sparkles: add pagination in orders page ([92137b1](https://github.com/JonyPlo/teslo-shop-nextjs/commits/92137b1fadcd36aec68d8544a4de5d917c5b155d))
+* **order-page:** :sparkles: add real data to the items on the order page ([724936a](https://github.com/JonyPlo/teslo-shop-nextjs/commits/724936a6739ab9baafb6b6afceba0e622ba73ee1))
+* **seed:** :seedling: add countries seed file ([efbe6ed](https://github.com/JonyPlo/teslo-shop-nextjs/commits/efbe6ed79051e79069bbcc40ce2898515d1cd159))
+
+
+### Bug Fixes
+
+* fix format ([81d2eae](https://github.com/JonyPlo/teslo-shop-nextjs/commits/81d2eae80d41471a48ae08a27b499fcb72a55b8e))
 
 ## [0.4.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.3.0...v0.4.0) (2024-04-04)
 

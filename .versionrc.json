@@ -1,4 +1,5 @@
 {
+  "header": "Changelog",
   "types": [
     { "type": "feat", "section": "Features" },
     { "type": "fix", "section": "Bug Fixes" },
@@ -10,5 +11,7 @@
     { "type": "test", "hidden": true }
   ],
   "commitUrlFormat": "https://github.com/JonyPlo/teslo-shop-nextjs/commits/{{hash}}",
-  "compareUrlFormat": "https://github.com/JonyPlo/teslo-shop-nextjs/compare/{{previousTag}}...{{currentTag}}"
+  "compareUrlFormat": "https://github.com/JonyPlo/teslo-shop-nextjs/compare/{{previousTag}}...{{currentTag}}",
+  "issuePrefixes": ["#"],
+  "issueUrlFormat": "https://github.com/JonyPlo/teslo-shop-nextjs/issues/{{id}}"
 }

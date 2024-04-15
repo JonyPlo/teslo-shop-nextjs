@@ -59,6 +59,7 @@ model Product {
   // Relacion entre el modelo Product y ProductImage
   //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   ProductImage ProductImage[]
+  OrderItem    OrderItem[]
 
   // En Prisma, @@index([gender]) se utiliza para crear un índice en la base de datos en función de la columna gender en la tabla Product.
   // Un índice en una base de datos es como un directorio que ayuda a acelerar las búsquedas y consultas. En este caso, el índice se crea en el campo o columna "gender", lo que significa que la base de datos puede buscar y acceder más eficientemente a los registros de la tabla Product basándose en los valores de la columna gender.
@@ -90,4 +91,90 @@ model User {
   // La enumeracion Role tiene como opciones 'admin' y 'user', en este caso con @default estamos diciendo que el usuario se creara por defecto con el role en 'user', solamente podemos elegir opciones que tena la enumeracion Role
   role        Role      @default(user)
   image       String?
+
+  //* Aqui estoy entablando una relacion conocida como relacion de 1 a 1, este campo no se crea como una columna en esta tabla, solamente entabla la relacion, y como es 1 a 1 en este caso quiere decir que cada usuario de esta tabla solo tendra UNA sola doreccion
+  address UserAddress?
+
+  // A diferencia de la relacion 1 a 1, aqui estamos indicando que un mismo usuario puede tener varias ordenes a la vez
+  Order Order[]
+}
+
+model Country {
+  id           String         @id
+  name         String         @unique
+  UserAddress  UserAddress[]
+  OrderAddress OrderAddress[]
+}
+
+model UserAddress {
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  address    String
+  address2   String?
+  postalCode String
+  city       String
+  telephone  String
+
+  // Relaciones
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  //* Cuando se entabla una relacion de 1 a 1, el campo que hace referencia a la relacion, en este caso es 'userId', debe ser unico, porque la direccion que se guarde en esta tabla solo le pertenecera a un solo usuario, asi que por eso agregamos el @unique
+  userId String @unique
+}
+
+// Order
+model Order {
+  id           String    @id @default(uuid())
+  subTotal     Float
+  tax          Float
+  total        Float
+  itemsInOrder Int
+  isPaid       Boolean   @default(false)
+  paidAt       DateTime?
+
+  createdAt DateTime @default(now())
+  // La opcion @updatedAt se encarga de actualizar la fecha del campo 'updateAt' cada vez que se actualice la orden
+  updateAt  DateTime @updatedAt
+
+  // Relaciones
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  OrderItem    OrderItem[]
+  OrderAddress OrderAddress?
+}
+
+model OrderItem {
+  id       String @id @default(uuid())
+  quantity Int
+  price    Float
+  size     Size
+
+  // Relaciones
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model OrderAddress {
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  address    String
+  address2   String?
+  city       String
+  postalCode String
+  telephone  String
+
+  // Relaciones
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @unique
 }

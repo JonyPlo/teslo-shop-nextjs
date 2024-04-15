@@ -31,6 +31,7 @@ export const Pagination = ({ totalPages }: Props) => {
     if (pageNumber === '...') {
       return `${pathName}?${params.toString()}`
     }
+
     // Si el numero es igual a 0 en este caso el url sera '/'
     if (+pageNumber <= 0) {
       return `${pathName}?${params.toString()}`
@@ -66,8 +67,10 @@ export const Pagination = ({ totalPages }: Props) => {
                   'page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800',
 
                   // Current page styles
-                  page === currentPage &&
-                    'bg-blue-600 text-white shadow-md hover:bg-blue-500 hover:text-white focus:shadow-md '
+                  {
+                    'bg-blue-600 text-white shadow-md hover:bg-blue-500 hover:text-white focus:shadow-md ':
+                      page === currentPage,
+                  }
                 )}
                 href={createPageUrl(page)}
               >
