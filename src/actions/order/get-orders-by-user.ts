@@ -24,7 +24,7 @@ export const getOrdersBySessionUser = async () => {
       userName: session.user.name,
     }
   } catch (error: any) {
-    logger.error('Error getting order')
+    logger.error('Error getting order', error)
 
     return {
       ok: false,
