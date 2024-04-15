@@ -1,4 +1,4 @@
-Changelog
+# Changelog
 ## [0.5.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.4.0...v0.5.0) (2024-04-15)
 
 
