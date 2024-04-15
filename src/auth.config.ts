@@ -28,6 +28,7 @@ export const authConfig: NextAuthConfig = {
         '/checkout/address',
         '/profile',
         '/orders',
+        '/orders/:id',
       ]
 
       // Verificamos si la ruta en la que estamos actualmente coincide con alguna de las rutas protegidas, si coincide entonces isProtected es true, de lo contrario sera false
