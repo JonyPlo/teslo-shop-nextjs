@@ -1,9 +1,8 @@
 import { getOrderById } from '@/actions'
-import { Title } from '@/components'
-import { cn, currencyFormat } from '@/utils'
+import { PayPalButton, PaymentStatusAlert, Title } from '@/components'
 import Image from 'next/image'
+import { currencyFormat } from '@/utils'
 import { redirect } from 'next/navigation'
-import { IoCardOutline } from 'react-icons/io5'
 
 interface Props {
   params: {
@@ -27,8 +26,11 @@ export default async function CartPage({ params }: Props) {
         <Title title={`Order #${id.split('-').at(-1)}`} />
         <div className='grid grid-cols-1 gap-10 sm:grid-cols-2'>
           {/* Cart */}
-          <div className='mt-5 flex flex-col'>
+          <div className='flex flex-col'>
             {/* Cart Items */}
+            <div className='mb-5'>
+              <PaymentStatusAlert summary={summary.isPaid} />
+            </div>
             {items.map((product) => (
               <div
                 key={`${product.slug}-${product.size}`}
@@ -108,22 +110,7 @@ export default async function CartPage({ params }: Props) {
                 </span>
               </div>
               <div className='mt-5 w-full'>
-                <div
-                  className={cn(
-                    'flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
-                    {
-                      'bg-red-500': !summary.isPaid,
-                      'bg-green-700': summary.isPaid,
-                    }
-                  )}
-                >
-                  <IoCardOutline size={30} />
-                  {!summary.isPaid ? (
-                    <span className='mx-2'>Outstanding</span>
-                  ) : (
-                    <span className='mx-2'>Paid</span>
-                  )}
-                </div>
+                <PayPalButton />
               </div>
             </div>
           </div>
