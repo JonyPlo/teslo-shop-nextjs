@@ -1,5 +1,10 @@
 import { getOrderById } from '@/actions'
-import { PayPalButton, PaymentStatusAlert, Title } from '@/components'
+import {
+  PayPalButton,
+  PaymentStatusAlert,
+  TAX_PERCENTAGE,
+  Title,
+} from '@/components'
 import Image from 'next/image'
 import { currencyFormat } from '@/utils'
 import { redirect } from 'next/navigation'
@@ -83,34 +88,36 @@ export default async function CartPage({ params }: Props) {
             <div className='mb-5 h-0.5 w-full rounded-none bg-gray-200' />
 
             {/* Order summary */}
-            <div>
-              <h2 className='mb-2 text-2xl'>Order Summary</h2>
-              <div className='grid grid-cols-2'>
-                <span>Products number</span>
-                <span className='text-right'>
-                  {summary.itemsInOrder === 1
-                    ? '1 Product'
-                    : `${summary.itemsInOrder} Products`}
-                </span>
-                <span>Subtotal</span>
-                <span className='text-right'>
-                  {currencyFormat(summary.subTotal)} ARS
-                </span>
-                <span>Taxes (100%)</span>
-                <span className='text-right'>
-                  {currencyFormat(summary.tax)} ARS
-                </span>
+            <div className='min-h-[20.5rem]'>
+              <div>
+                <h2 className='mb-2 text-2xl'>Order Summary</h2>
+                <div className='grid grid-cols-2'>
+                  <span>Products number</span>
+                  <span className='text-right'>
+                    {summary.itemsInOrder === 1
+                      ? '1 Product'
+                      : `${summary.itemsInOrder} Products`}
+                  </span>
+                  <span>Subtotal</span>
+                  <span className='text-right'>
+                    {currencyFormat(summary.subTotal)} USD
+                  </span>
+                  <span>Taxes ({TAX_PERCENTAGE}%)</span>
+                  <span className='text-right'>
+                    {currencyFormat(summary.tax)} USD
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className='mt-5'>
-              <div className='grid grid-cols-2'>
-                <span className='text-2xl'>Total</span>
-                <span className='text-right text-2xl'>
-                  {currencyFormat(summary.total)} ARS
-                </span>
-              </div>
-              <div className='mt-5 w-full'>
-                <PayPalButton />
+              <div className='mt-5'>
+                <div className='grid grid-cols-2'>
+                  <span className='text-2xl'>Total</span>
+                  <span className='text-right text-2xl'>
+                    {currencyFormat(summary.total)} USD
+                  </span>
+                </div>
+                <div className='mt-5 w-full'>
+                  <PayPalButton />
+                </div>
               </div>
             </div>
           </div>

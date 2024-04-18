@@ -1,6 +1,7 @@
 'use server'
 
 import { auth } from '@/auth.config'
+import { TAX_MOUNT, TAX_MOUNT_WITH_SUBTOTAL } from '@/components'
 import type { Address, Size } from '@/interfaces'
 import prisma from '@/lib/prisma'
 import { logger } from '@/logs/winston.config'
@@ -52,8 +53,8 @@ export const placeOrder = async (
         const subTotal = product.price * productQuantity
 
         totals.subTotal += subTotal
-        totals.tax += subTotal * 1
-        totals.total += subTotal * 2
+        totals.tax += subTotal * TAX_MOUNT
+        totals.total += subTotal * TAX_MOUNT_WITH_SUBTOTAL
 
         return totals
       },
