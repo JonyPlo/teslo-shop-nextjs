@@ -116,7 +116,10 @@ export default async function CartPage({ params }: Props) {
                   </span>
                 </div>
                 <div className='mt-5 w-full'>
-                  <PayPalButton />
+                  <PayPalButton
+                    orderId={orderSummary!.id}
+                    amount={orderSummary!.total}
+                  />
                 </div>
               </div>
             </div>
