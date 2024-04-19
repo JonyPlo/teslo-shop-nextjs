@@ -1,5 +1,6 @@
 'use server'
 
+import { PayPalOrderStatusResponse } from '@/interfaces'
 import { logger } from '@/logs/winston.config'
 
 export const paypalCheckPayment = async (paypalTransactionId: string) => {
@@ -8,7 +9,14 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
 
     if (!authToken) throw new Error('Error getting PayPal token')
 
-    console.log({ authToken })
+    const resp = await verifyPayPalPayment(paypalTransactionId, authToken)
+
+    if (!resp) throw new Error('Error verifying paypal payment')
+
+    const { status, purchase_units } = resp
+    // const { amount } = purchase_units[0].payments.captures[0]
+
+    if (status !== 'COMPLETED') throw new Error('Payment has not been made yet')
   } catch (error: any) {
     logger.error('Error checking payment', error)
 
@@ -59,6 +67,36 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
     return result.access_token
   } catch (error: any) {
     logger.error('Error getting bearer token', error)
+    return null
+  }
+}
+
+// Esta accion nos sirve para poder verificar un pago
+const verifyPayPalPayment = async (
+  paypalTransactionId: string,
+  bearerToken: string
+): Promise<PayPalOrderStatusResponse | null> => {
+  // Url para poder obtener datos de una orden de paypal
+  // Ejemplo de la url: https://api.sandbox.paypal.com/v2/checkout/orders/7WF00316YT5642909
+  const paypalOrderUrl = `${process.env.PAYPAL_ORDERS_URL}/${paypalTransactionId}`
+
+  const myHeaders = new Headers()
+  myHeaders.append('Authorization', `Bearer ${bearerToken}`)
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+  }
+
+  try {
+    const result = await fetch(paypalOrderUrl, requestOptions).then((resp) =>
+      resp.json()
+    )
+
+    return result
+  } catch (error: any) {
+    logger.error('Error verifying paypal payment', error)
+
     return null
   }
 }

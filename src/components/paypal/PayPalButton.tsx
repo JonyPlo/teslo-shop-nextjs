@@ -72,8 +72,6 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
     data: OnApproveData,
     actions: OnApproveActions
   ): Promise<void> => {
-    console.log('onApprove')
-
     // La promesa capture() nos retorna un objeto con informacion de una transaccion, y entre toda esa informacion podemos obtener el "id" de la transaccion que se creo anteriormente cuando ejecutamos el callback createOrder()
     const datails = await actions.order?.capture()
 
