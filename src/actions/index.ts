@@ -18,3 +18,4 @@ export * from './address/delete-user-address'
 export * from './address/get-user-address'
 
 export * from './payments/set-transaction-id'
+export * from './payments/paypal-payment'
