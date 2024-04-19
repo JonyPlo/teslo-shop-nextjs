@@ -1,3 +1,4 @@
+import { TAX_MOUNT } from '@/components'
 import type { CartProduct } from '@/interfaces'
 import { StateCreator } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -50,7 +51,7 @@ export const createCartSlice: StateCreator<
         (subTotal, product) => product.quantity * product.price + subTotal,
         0
       )
-      const taxes = subTotalPrice * 1
+      const taxes = subTotalPrice * TAX_MOUNT
       const totalPriceWithTaxes = subTotalPrice + taxes
 
       return {

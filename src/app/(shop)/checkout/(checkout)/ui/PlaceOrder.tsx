@@ -94,16 +94,16 @@ export const PlaceOrder = () => {
           </span>
           <span>Subtotal</span>
           <span className='text-right'>
-            {currencyFormat(subTotalPrice)} ARS
+            {currencyFormat(subTotalPrice)} USD
           </span>
           <span>Taxes (100%)</span>
-          <span className='text-right'>{currencyFormat(taxes)} ARS</span>
+          <span className='text-right'>{currencyFormat(taxes)} USD</span>
         </div>
       </div>
       <div className='mt-5 grid grid-cols-2'>
         <span className='text-2xl'>Total</span>
         <span className='text-right text-2xl'>
-          {currencyFormat(totalPriceWithTaxes)} ARS
+          {currencyFormat(totalPriceWithTaxes)} USD
         </span>
       </div>
       <div className='mt-5 w-full'>

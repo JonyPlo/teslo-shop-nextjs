@@ -1,0 +1,21 @@
+
+[04-17-2024 11:28:20.414 PM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-17-2024 11:28:59.138 PM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-17-2024 11:46:19.223 PM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
