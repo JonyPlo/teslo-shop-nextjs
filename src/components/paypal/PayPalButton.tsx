@@ -2,6 +2,7 @@
 
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { CreateOrderData, CreateOrderActions } from '@paypal/paypal-js'
+import { setTransactionaId } from '@/actions'
 
 interface Props {
   orderId: string
@@ -30,33 +31,44 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
     actions: CreateOrderActions
   ): Promise<string> => {
     //* Link con la documentacion de la API de paypal para generar ordenes: https://developer.paypal.com/docs/api/orders/v2/#orders-create-request-body
-    const transactionId = await actions.order.create({
-      // El intent en 'CAPTURE' indica que el comerciante captara el pago inmediatamente después de que el cliente realice un pago.
-      intent: 'CAPTURE',
-      purchase_units: [
-        {
-          // reference_id: 'order_id',
-          // invoice_id: orderId,
-          amount: {
-            value: roundedAmount,
-            currency_code: 'USD',
+    try {
+      const transactionId = await actions.order.create({
+        // El intent en 'CAPTURE' indica que el comerciante captara el pago inmediatamente después de que el cliente realice un pago.
+        intent: 'CAPTURE',
+        purchase_units: [
+          {
+            // reference_id: 'order_id',
+            // invoice_id: orderId,
+            amount: {
+              value: roundedAmount,
+              currency_code: 'USD',
+            },
           },
-        },
-      ],
-    })
+        ],
+      })
 
-    console.log(transactionId)
+      if (!transactionId) throw new Error('Error getting transaction id')
 
-    // Al presionar el boton de PayPal, antes de que aparezca el popup para iniciar sesion, esta funciona ya nos habra retornado el id de la transaccion
-    return transactionId
+      const { ok } = await setTransactionaId({ orderId, transactionId })
+
+      if (!ok) throw new Error('Error to set transaction id in order')
+
+      // Al presionar el boton de PayPal, antes de que aparezca el popup para iniciar sesion, esta funciona ya nos habra retornado el id de la transaccion
+      return transactionId
+    } catch (error: any) {
+      console.log(error)
+      return error.message
+    }
   }
 
   return (
-    // El boton de paypal requiere algunos callbacks para funcionar
-    <PayPalButtons
-      // El callback createOrder hace que cuando el comprador selecciona el botón de PayPal, se abra la ventana de pago de PayPal. El comprador debera iniciar sesión con PayPal y aprobar la transacción en el sitio Web paypal.com.
-      createOrder={createOrder}
-      // onApprove={}
-    />
+    <div className='relative -z-0'>
+      {/* El boton de paypal requiere algunos callbacks para funcionar */}
+      <PayPalButtons
+        // El callback createOrder hace que cuando el comprador selecciona el botón de PayPal, se abra la ventana de pago de PayPal. El comprador debera iniciar sesión con PayPal y aprobar la transacción en el sitio Web paypal.com.
+        createOrder={createOrder}
+        // onApprove={}
+      />
+    </div>
   )
 }

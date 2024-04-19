@@ -6,7 +6,7 @@ import {
   Title,
 } from '@/components'
 import Image from 'next/image'
-import { currencyFormat } from '@/utils'
+import { cn, currencyFormat } from '@/utils'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -88,7 +88,12 @@ export default async function CartPage({ params }: Props) {
             <div className='mb-5 h-0.5 w-full rounded-none bg-gray-200' />
 
             {/* Order summary */}
-            <div className='min-h-[20.5rem]'>
+            <div
+              className={cn({
+                'min-h-[20.5rem]': !summary.isPaid,
+                'h-fit': summary.isPaid,
+              })}
+            >
               <div>
                 <h2 className='mb-2 text-2xl'>Order Summary</h2>
                 <div className='grid grid-cols-2'>
@@ -115,11 +120,17 @@ export default async function CartPage({ params }: Props) {
                     {currencyFormat(summary.total)} USD
                   </span>
                 </div>
-                <div className='mt-5 w-full'>
-                  <PayPalButton
-                    orderId={orderSummary!.id}
-                    amount={orderSummary!.total}
-                  />
+                <div
+                  className={cn('w-full', {
+                    'mt-5': !summary.isPaid,
+                  })}
+                >
+                  {!summary.isPaid && (
+                    <PayPalButton
+                      orderId={orderSummary!.id}
+                      amount={orderSummary!.total}
+                    />
+                  )}
                 </div>
               </div>
             </div>
