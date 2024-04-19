@@ -3,26 +3,25 @@ import React from 'react'
 import { IoCardOutline } from 'react-icons/io5'
 
 interface Props {
-  summary: boolean
+  isPaid: boolean
 }
 
-export const PaymentStatusAlert = ({ summary }: Props) => {
+export const PaymentStatusAlert = ({ isPaid }: Props) => {
   return (
     <div
       className={cn(
+        // Base styles
         'flex items-center rounded px-3.5 py-2 text-xs font-bold text-white',
+
+        // Is pais styles
         {
-          'bg-red-500': !summary,
-          'bg-green-700': summary,
+          'bg-red-500': !isPaid,
+          'bg-green-700': isPaid,
         }
       )}
     >
       <IoCardOutline size={30} />
-      {!summary ? (
-        <span className='mx-2'>Outstanding</span>
-      ) : (
-        <span className='mx-2'>Paid</span>
-      )}
+      <span className='mx-2'>{isPaid ? 'Paid' : 'Outstanding'}</span>
     </div>
   )
 }

@@ -19,7 +19,7 @@ export default async function OrderPage({ searchParams }: Props) {
     orders = [],
     userName = '',
     totalPages = 0,
-  } = await getPaginatedOrders({ page, take: 2 })
+  } = await getPaginatedOrders({ page, take: 10 })
 
   if (!ok) redirect('/auth/login')
 

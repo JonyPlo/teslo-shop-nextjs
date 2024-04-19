@@ -34,7 +34,7 @@ export default async function CartPage({ params }: Props) {
           <div className='flex flex-col'>
             {/* Cart Items */}
             <div className='mb-5'>
-              <PaymentStatusAlert summary={summary.isPaid} />
+              <PaymentStatusAlert isPaid={summary.isPaid} />
             </div>
             {items.map((product) => (
               <div
@@ -120,16 +120,14 @@ export default async function CartPage({ params }: Props) {
                     {currencyFormat(summary.total)} USD
                   </span>
                 </div>
-                <div
-                  className={cn('w-full', {
-                    'mt-5': !summary.isPaid,
-                  })}
-                >
-                  {!summary.isPaid && (
+                <div className='mt-5 w-full'>
+                  {!summary.isPaid ? (
                     <PayPalButton
                       orderId={orderSummary!.id}
                       amount={orderSummary!.total}
                     />
+                  ) : (
+                    <PaymentStatusAlert isPaid={summary.isPaid} />
                   )}
                 </div>
               </div>

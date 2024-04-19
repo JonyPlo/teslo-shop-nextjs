@@ -43,8 +43,9 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
         intent: 'CAPTURE',
         purchase_units: [
           {
-            // reference_id: 'order_id',
-            // invoice_id: orderId,
+            // Con invoice_id podemos generar una relacion entre la orden de paypal y la orden de mi base de datos, y por eso es que en esta propiedad almacenamos el id de la orden que esta en la base de datos, luego cuando realicemos un pago, paypal nos retornara un objeto con informacion de la orden que se genero, y dentro de ese objeto tendremos una propiedad llamada "invoice_id" con el id de la orden que le pasamos aqui.
+            // Esta propiedad tambien nos sirve como una validacion extra ya que si el usuario quiere realizar otra transaccion a la misma orden, paypal no lo permitira, ya que una orden solo se puede comprar una sola vez
+            invoice_id: orderId,
             amount: {
               value: roundedAmount,
               currency_code: 'USD',

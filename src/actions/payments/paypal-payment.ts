@@ -1,22 +1,41 @@
 'use server'
 
 import { PayPalOrderStatusResponse } from '@/interfaces'
+import prisma from '@/lib/prisma'
 import { logger } from '@/logs/winston.config'
+import { revalidatePath } from 'next/cache'
 
 export const paypalCheckPayment = async (paypalTransactionId: string) => {
   try {
     const authToken = await getPayPalBearerToken()
-
     if (!authToken) throw new Error('Error getting PayPal token')
 
     const resp = await verifyPayPalPayment(paypalTransactionId, authToken)
-
     if (!resp) throw new Error('Error verifying paypal payment')
 
     const { status, purchase_units } = resp
-    // const { amount } = purchase_units[0].payments.captures[0]
-
     if (status !== 'COMPLETED') throw new Error('Payment has not been made yet')
+
+    // Obtenemos el id de la orden que esta en nuestra base de datos
+    const { invoice_id: orderId } = purchase_units[0]
+
+    // Realizamos la actualizacion en la orden en la base de datos
+    await prisma.order.update({
+      where: {
+        id: orderId,
+      },
+      data: {
+        isPaid: true,
+        paidAt: new Date(),
+      },
+    })
+
+    // Por ultimo revalidamos el path para que next actualice en la pagina del cliente los datos que fueron actualizados, en otras palabras, en lugar de hacer un refresh en la pagina, next actualizara en la pagina solo los datos que hayan sido afectados en todo este proceso sin necesidad de un refresh
+    revalidatePath(`/orders/${orderId}`)
+
+    return {
+      ok: true,
+    }
   } catch (error: any) {
     logger.error('Error checking payment', error)
 
@@ -60,9 +79,11 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
   }
 
   try {
-    const result = await fetch(oauth2Url, requestOptions).then((resp) =>
-      resp.json()
-    )
+    const result = await fetch(oauth2Url, {
+      ...requestOptions,
+      // cache: 'no-store' es para que next no mantenga en cache la respuesta, en este caso es util ya que el token de paypal se guardaria en cache, pero el token tiene vencimiento, por lo tanto a la hora de intentar hacer un pago no podremos porque paypal intentara usar ese token que ya vencio en lugar de generar uno nuevo, asi que para evitar esto no guardamos la respuesta en la cache y que se tenga que volver a realizar la peticion en cada fetch
+      cache: 'no-store',
+    }).then((resp) => resp.json())
 
     return result.access_token
   } catch (error: any) {
@@ -89,9 +110,10 @@ const verifyPayPalPayment = async (
   }
 
   try {
-    const result = await fetch(paypalOrderUrl, requestOptions).then((resp) =>
-      resp.json()
-    )
+    const result = await fetch(paypalOrderUrl, {
+      ...requestOptions,
+      cache: 'no-store',
+    }).then((resp) => resp.json())
 
     return result
   } catch (error: any) {

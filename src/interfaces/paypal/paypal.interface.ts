@@ -50,6 +50,7 @@ export interface PurchaseUnit {
   payee: Payee
   shipping: Shipping
   payments: Payments
+  invoice_id: string
 }
 
 export interface Amount {
