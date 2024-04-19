@@ -145,6 +145,10 @@ model Order {
 
   OrderItem    OrderItem[]
   OrderAddress OrderAddress?
+
+  // En este campo llamado 'transactionId'  vamos a guardar el id de la transaccion, que seria el id de ese proveedor de terceros de pagos, en este caso usaremos Paypal, asi que este seria el id de la transaccion de Paypal, en otras palabras, Paypal, mercado pago, o la empresa de pago de terceros que usemos para los pagos, nos entregara un id de la transaccion o de pago, y ese id es el que tenemos que guardar en este campo
+  // De esta forma tambien se conoce como crear una 'relacion' entre esta tabla y la transaccion que me genero mi proveedor de terceros de pago
+  transactionId String?
 }
 
 model OrderItem {
