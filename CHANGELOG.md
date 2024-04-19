@@ -1,4 +1,20 @@
-# Changelog
+Changelog
+## [0.6.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.5.0...v0.6.0) (2024-04-19)
+
+
+### Features
+
+* **payments:** :closed_lock_with_key: add environment variables to get transaction information ([954a097](https://github.com/JonyPlo/teslo-shop-nextjs/commits/954a097a87eaac9550179c2397761118393ca5a2))
+* **payments:** :necktie: update order model in prisma to save transaction id ([ae9c0f9](https://github.com/JonyPlo/teslo-shop-nextjs/commits/ae9c0f99b97e579987ead8882867af81ee32a7d6))
+* **payments:** :sparkles: add action to verify payment in paypal ([363b5f6](https://github.com/JonyPlo/teslo-shop-nextjs/commits/363b5f63a2bbcf7a1663e4ab6a6b67754b1c1e5c))
+* **payments:** :sparkles: add an action to set paypal transaction id in the related order ([fe3f16c](https://github.com/JonyPlo/teslo-shop-nextjs/commits/fe3f16c1f817db6ab144b1687808ff730a237880))
+* **payments:** :sparkles: add paypal provider and button pay in order pages ([dfbeb26](https://github.com/JonyPlo/teslo-shop-nextjs/commits/dfbeb2643550eea7946ff343125058a1073a760e))
+* **payments:** :sparkles: add skeleton loader to show in order page while paypal button is pending ([7b86b3b](https://github.com/JonyPlo/teslo-shop-nextjs/commits/7b86b3b1dae16b309e320ff4ba322e43cbab3d78))
+* **payments:** :sparkles: create papal check payment action to verify order payment ([f82e290](https://github.com/JonyPlo/teslo-shop-nextjs/commits/f82e290485778e4d0d25b71e5917703a9b06abae))
+* **payments:** :sparkles: finish server action to get access token in paypal ([a1147ee](https://github.com/JonyPlo/teslo-shop-nextjs/commits/a1147ee6bd994be93f10a0b6af42fc974d1d1763))
+* **payments:** :sparkles: finish the implementation of paypal to pay for orders ([1b2b86c](https://github.com/JonyPlo/teslo-shop-nextjs/commits/1b2b86cdc3bc630537e210d8c1587051062a7bcc))
+* **payments:** :sparkles: get PayPal transaction id ([808deab](https://github.com/JonyPlo/teslo-shop-nextjs/commits/808deab90550851a53cb4499e3643be92470fa89))
+
 ## [0.5.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.4.0...v0.5.0) (2024-04-15)
 
 
