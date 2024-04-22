@@ -23,6 +23,15 @@ export const getPaginatedOrders = async ({
         userId: session.user.id,
       },
 
+      include: {
+        OrderAddress: {
+          select: {
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
+
       take,
       skip: (page - 1) * take,
     })
@@ -49,7 +58,6 @@ export const getPaginatedOrders = async ({
       limit: take,
       totalPages,
       orders,
-      userName: session.user.name,
     }
   } catch (error: any) {
     logger.error('Error getting pagination', error)

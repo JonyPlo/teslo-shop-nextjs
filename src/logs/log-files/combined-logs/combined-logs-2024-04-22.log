@@ -1,0 +1,63 @@
+
+[04-22-2024 12:35:05.095 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 12:58:10.094 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 01:01:27.421 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 01:02:44.032 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 01:05:44.416 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 01:06:34.233 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 01:06:53.555 AM]
+error: 	Error deleting address 
+Invalid `prisma.userAddress.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
+
+[04-22-2024 05:13:23.564 AM]
+error: 	Error 
+Invalid `prisma.user.findMany()` invocation:
+
+{
+  orderBy: {
+    name: "desc"
+  },
+  take: 2,
++ skip: Int
+}
+
+Argument `skip` is missing.

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getPaginatedOrders } from '@/actions'
+import { getPaginatedOrdersAdmin } from '@/actions'
 import { Pagination, Title } from '@/components'
 
 import { redirect } from 'next/navigation'
@@ -18,13 +18,13 @@ export default async function OrderPage({ searchParams }: Props) {
     ok,
     orders = [],
     totalPages = 0,
-  } = await getPaginatedOrders({ page, take: 10 })
+  } = await getPaginatedOrdersAdmin({ page, take: 12 })
 
   if (!ok) redirect('/auth/login')
 
   return (
     <section className='flex min-h-[calc(100vh-56px-56px)] flex-col'>
-      <Title title='Orders' />
+      <Title title='All orders' />
       <div className='mb-10 grid grow'>
         <article className='overflow-x-auto'>
           <table className='min-w-full overflow-x-auto'>
