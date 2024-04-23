@@ -31,7 +31,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<AddressFormFields>({
-    // Si al cargar la pagina la direccion del usuario estaba guardada en la base de datos entonces usamos esa informacion para cargar los inputs, de lo contrario usamos el local storage de zustand que eso lo hacemos arriba en el useeffect
+    // Si al cargar la pagina la direccion del usuario estaba guardada en la base de datos entonces usamos esa informacion para cargar los inputs, de lo contrario usamos el local storage de zustand que eso lo hacemos en el useeffect
     defaultValues: {
       ...userAddressDataBase,
       rememberAddress: false,
@@ -78,7 +78,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('firstName')}
           id={`${id}-name`}
           type='text'
-          placeholder='Eric Plodzien'
+          placeholder='Juan'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -97,13 +97,14 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
         )}
       </div>
 
-      {/* Surname */}
+      {/* Lastname */}
       <div className='mb-2 flex flex-col'>
         <label htmlFor={`${id}-surname`}>Surname</label>
         <input
           {...register('lastName')}
           id={`${id}-surname`}
           type='text'
+          placeholder='Gomez'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -113,7 +114,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
             }
           )}
         />
-        {/* Surname error message */}
+        {/* Lastname error message */}
         {errors.lastName && (
           <span className='text-sm text-red-500'>
             {errors.lastName.message}
@@ -128,6 +129,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('address')}
           id={`${id}-address`}
           type='text'
+          placeholder='Juan B Justo 123'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -150,6 +152,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('address2')}
           id={`${id}-address2`}
           type='text'
+          placeholder='Juan B Justo 456'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -174,6 +177,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('postalCode')}
           id={`${id}-postalCode`}
           type='text'
+          placeholder='0000'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -198,6 +202,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('city')}
           id={`${id}-city`}
           type='text'
+          placeholder='San Miguel de Tucuman'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',
@@ -248,6 +253,7 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
           {...register('telephone')}
           id={`${id}-telephone`}
           type='text'
+          placeholder='1234567890'
           className={cn(
             // Base styles
             'rounded-md border bg-gray-200 p-2',

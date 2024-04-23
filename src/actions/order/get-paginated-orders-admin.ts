@@ -3,6 +3,7 @@
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
 import { logger } from '@/logs/winston.config'
+import { revalidatePath } from 'next/cache'
 
 interface PaginationProps {
   page?: number
@@ -49,6 +50,8 @@ export const getPaginatedOrdersAdmin = async ({
 
     const [orders, totalOrders] = paginationPromises
     const totalPages = Math.ceil(totalOrders / take)
+
+    revalidatePath('/admin/orders')
 
     return {
       ok: true,
