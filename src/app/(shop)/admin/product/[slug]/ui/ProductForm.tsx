@@ -1,20 +1,21 @@
 'use client'
 
-import { Product } from '@/interfaces'
+import { Category, Product } from '@/interfaces'
 
 interface Props {
   product: Product
+  categories: Category[]
 }
 
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
-export const ProductForm = ({ product }: Props) => {
+export const ProductForm = ({ product, categories }: Props) => {
   return (
     <form className='mb-16 grid grid-cols-1 gap-3 px-5 sm:grid-cols-2 sm:px-0'>
       {/* Textos */}
       <div className='w-full'>
         <div className='mb-2 flex flex-col'>
-          <span>Título</span>
+          <span>Title</span>
           <input type='text' className='rounded-md border bg-gray-200 p-2' />
         </div>
 
@@ -24,7 +25,7 @@ export const ProductForm = ({ product }: Props) => {
         </div>
 
         <div className='mb-2 flex flex-col'>
-          <span>Descripción</span>
+          <span>Description</span>
           <textarea
             rows={5}
             className='rounded-md border bg-gray-200 p-2'
@@ -44,7 +45,7 @@ export const ProductForm = ({ product }: Props) => {
         <div className='mb-2 flex flex-col'>
           <span>Gender</span>
           <select className='rounded-md border bg-gray-200 p-2'>
-            <option value=''>[Seleccione]</option>
+            <option value=''>[Select]</option>
             <option value='men'>Men</option>
             <option value='women'>Women</option>
             <option value='kid'>Kid</option>
@@ -53,20 +54,25 @@ export const ProductForm = ({ product }: Props) => {
         </div>
 
         <div className='mb-2 flex flex-col'>
-          <span>Categoria</span>
+          <span>Category</span>
           <select className='rounded-md border bg-gray-200 p-2'>
-            <option value=''>[Seleccione]</option>
+            <option value=''>[Select]</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
 
-        <button className='btn-primary w-full'>Guardar</button>
+        <button className='btn-primary w-full'>Save</button>
       </div>
 
       {/* Selector de tallas y fotos */}
       <div className='w-full'>
         {/* As checkboxes */}
         <div className='flex flex-col'>
-          <span>Tallas</span>
+          <span>Sizes</span>
           <div className='flex flex-wrap'>
             {sizes.map((size) => (
               // bg-blue-500 text-white <--- si está seleccionado
@@ -80,7 +86,7 @@ export const ProductForm = ({ product }: Props) => {
           </div>
 
           <div className='mb-2 flex flex-col'>
-            <span>Fotos</span>
+            <span>Pictures</span>
             <input
               type='file'
               multiple

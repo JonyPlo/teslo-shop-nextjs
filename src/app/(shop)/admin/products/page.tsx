@@ -1,14 +1,8 @@
 export const revalidate = 0
 
 import Link from 'next/link'
-import {
-  getPaginatedOrdersAdmin,
-  getPaginatedProductsWithImages,
-} from '@/actions'
+import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, Title } from '@/components'
-
-import { redirect } from 'next/navigation'
-import { IoCardOutline } from 'react-icons/io5'
 import Image from 'next/image'
 import { currencyFormat } from '@/utils'
 
@@ -21,8 +15,9 @@ interface Props {
 export default async function OrderPage({ searchParams }: Props) {
   const page = searchParams.page ? parseInt(searchParams.page) : 1
 
-  const { products, currentPage, totalPages } =
-    await getPaginatedProductsWithImages({ page })
+  const { products, totalPages } = await getPaginatedProductsWithImages({
+    page,
+  })
 
   return (
     <section className='flex min-h-[calc(100vh-56px-56px)] flex-col'>
