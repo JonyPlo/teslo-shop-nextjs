@@ -1,3 +1,5 @@
+export const revalidate = 0
+
 import Link from 'next/link'
 import { getPaginatedOrdersAdmin } from '@/actions'
 import { Pagination, Title } from '@/components'
