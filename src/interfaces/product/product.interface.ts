@@ -37,3 +37,10 @@ export interface AdapterCartProduct {
   quantity: number
   size: Size
 }
+
+export enum GenderEnum {
+  men = 'men',
+  women = 'women',
+  kid = 'kid',
+  unisex = 'unisex',
+}
