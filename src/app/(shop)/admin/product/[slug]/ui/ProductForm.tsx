@@ -1,6 +1,7 @@
 'use client'
 
 import { Category, Product, ProductImage } from '@/interfaces'
+import { cn } from '@/utils'
 import { ProductFormFields, productSchema } from '@/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
@@ -22,6 +23,11 @@ export const ProductForm = ({ product, categories }: Props) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    // El metodo 'getValues' nos devuelve es valor de un campo del formulario en ese momento actual, y nos devolvera el valor cada vez que ese campo sea modificado, en otras palabras se ejecutara una re renderizacion para actualizar ese valor que estamos mostrando en pantalla
+    getValues,
+    // El metodo 'setValue' nos permite modificar el valor de un campo, solo necesitamos pasar 2 argumentos, el primero es el nombre del campo, y el segundo es el nuevo valor
+    setValue,
+    watch,
   } = useForm<ProductFormFields>({
     defaultValues: {
       ...product,
@@ -31,6 +37,15 @@ export const ProductForm = ({ product, categories }: Props) => {
 
     // resolver: zodResolver(productSchema),
   })
+
+  // Con el watch estamos diciendo que si el campo 'sizes' cambia, entonces re dibujamos o re renderizamos nuevamente el formulario
+  watch('sizes')
+
+  const onSizeChange = (size: string) => {
+    const sizes = new Set(getValues('sizes'))
+    sizes.has(size) ? sizes.delete(size) : sizes.add(size)
+    setValue('sizes', Array.from(sizes))
+  }
 
   const onSubmit: SubmitHandler<ProductFormFields> = async (data) => {
     console.log(data)
@@ -161,10 +176,17 @@ export const ProductForm = ({ product, categories }: Props) => {
           <label>Sizes</label>
           <div className='flex flex-wrap'>
             {sizes.map((size) => (
-              // bg-blue-500 text-white <--- si está seleccionado
               <div
                 key={size}
-                className='mr-2  flex h-10 w-10 items-center justify-center rounded-md border'
+                onClick={() => onSizeChange(size)}
+                className={cn(
+                  // Base styles
+                  'mb-2 mr-2 w-14 cursor-pointer rounded-md border p-2 text-center transition-all',
+                  {
+                    // Active styles
+                    'bg-blue-500 text-white': getValues('sizes').includes(size),
+                  }
+                )}
               >
                 <span>{size}</span>
               </div>
@@ -193,6 +215,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                   width={300}
                   height={300}
                   className='rounded-t shadow-md'
+                  priority
                 />
                 <button
                   type='button'
