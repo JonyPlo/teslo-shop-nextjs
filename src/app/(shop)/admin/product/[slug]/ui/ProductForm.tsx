@@ -1,13 +1,15 @@
 'use client'
 
-import { Category, Product } from '@/interfaces'
+import { Category, Product, ProductImage } from '@/interfaces'
 import { ProductFormFields, productSchema } from '@/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import { useId } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface Props {
-  product: Product
+  // En este con la propiedad product, estamos usando el operador '&' para realizar una interseccion de tipos o concatenando tipos, en este caso Product es un interface que tiene diferentes propiedades como por ejemplo { id: string, name: string }, y al interface Product le estamos agregando una propiedad mas llamada 'ProductImage' que es de tipo ProductImage[] quedando la interfaz Product de la siguiente manera: { id: string, name: string, ProductImage: ProductImage[] }
+  product: Product & { ProductImage?: ProductImage[] }
   categories: Category[]
 }
 
@@ -27,7 +29,7 @@ export const ProductForm = ({ product, categories }: Props) => {
       sizes: product.sizes ?? [],
     },
 
-    resolver: zodResolver(productSchema),
+    // resolver: zodResolver(productSchema),
   })
 
   const onSubmit: SubmitHandler<ProductFormFields> = async (data) => {
@@ -181,6 +183,26 @@ export const ProductForm = ({ product, categories }: Props) => {
               className='rounded-md border bg-gray-200 p-2'
               accept='image/png, image/jpeg'
             />
+          </div>
+          <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
+            {product.ProductImage?.map((image) => (
+              <div key={image.id}>
+                <Image
+                  alt={product.title ?? ''}
+                  src={`/products/${image.url}`}
+                  width={300}
+                  height={300}
+                  className='rounded-t shadow-md'
+                />
+                <button
+                  type='button'
+                  className='btn-danger w-full rounded-b-xl'
+                  onClick={() => console.log(image.id, image.url)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
           </div>
           {/* {errors.image && (
             <span className='text-sm text-red-500'>{errors.title.message}</span>

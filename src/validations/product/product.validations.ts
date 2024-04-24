@@ -16,17 +16,17 @@ export const productSchema = z.object({
   title: z
     .string()
     .min(3, { message: 'Title must contain at least 3 character(s)' })
-    .max(100, { message: 'Title must contain at most 30 character(s)' })
+    .max(100, { message: 'Title must contain at most 100 character(s)' })
     .regex(REGEX.TITLE, { message: 'Title must be a string only' }),
   slug: z
     .string()
     .min(3, { message: 'Slug must contain at least 3 character(s)' })
-    .max(150, { message: 'Slug must contain at most 30 character(s)' })
+    .max(50, { message: 'Slug must contain at most 50 character(s)' })
     .regex(REGEX.SLUG, { message: 'Slug must be a string only' }),
   description: z
     .string()
     .min(3, { message: 'Description must contain at least 3 character(s)' })
-    .max(500, { message: 'Description must contain at most 100 character(s)' })
+    .max(500, { message: 'Description must contain at most 500 character(s)' })
     .regex(REGEX.DESCRIPTION, { message: 'Description must be a string only' }),
   price: z
     .number()
