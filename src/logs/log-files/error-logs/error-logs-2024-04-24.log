@@ -1,0 +1,28 @@
+
+[04-24-2024 06:54:11.047 AM]
+error: 	Error 
+Invalid `prisma.product.create()` invocation:
+
+
+Unique constraint failed on the fields: (`slug`)
+
+[04-24-2024 06:54:17.792 AM]
+error: 	Error 
+Invalid `prisma.product.create()` invocation:
+
+
+Unique constraint failed on the fields: (`slug`)
+
+[04-24-2024 06:54:19.297 AM]
+error: 	Error 
+Invalid `prisma.product.create()` invocation:
+
+
+Unique constraint failed on the fields: (`slug`)
+
+[04-24-2024 06:54:21.414 AM]
+error: 	Error 
+Invalid `prisma.product.create()` invocation:
+
+
+Unique constraint failed on the fields: (`slug`)

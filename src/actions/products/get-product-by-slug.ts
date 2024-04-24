@@ -2,6 +2,7 @@
 
 import { type Product } from '@/interfaces'
 import prisma from '@/lib/prisma'
+import { logger } from '@/logs/winston.config'
 
 export const getProductBySlug = async (
   slug: string
@@ -9,12 +10,7 @@ export const getProductBySlug = async (
   try {
     const product = await prisma.product.findFirst({
       include: {
-        ProductImage: {
-          select: {
-            id: true,
-            url: true,
-          },
-        },
+        ProductImage: true,
       },
       where: {
         slug,
@@ -27,7 +23,9 @@ export const getProductBySlug = async (
       ...product,
       images: product.ProductImage.map((image) => image.url),
     }
-  } catch (error) {
+  } catch (error: any) {
+    logger.error('Error', error)
+
     throw new Error('Error to get product by slug')
   }
 }

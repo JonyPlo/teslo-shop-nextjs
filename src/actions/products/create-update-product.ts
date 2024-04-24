@@ -41,6 +41,8 @@ export const createUpdateProduct = async (formData: FormData) => {
   const data = Object.fromEntries(formData)
   const productParsed = productSchema.safeParse(data)
 
+  console.log(productParsed)
+
   if (!productParsed.success) {
     return {
       ok: false,
@@ -73,13 +75,21 @@ export const createUpdateProduct = async (formData: FormData) => {
             tags: { set: tagsArray },
           },
         })
-
-        console.log({ updatedProduct: product })
       } else {
+        product = await prisma.product.create({
+          data: {
+            ...rest,
+            sizes: {
+              set: rest.sizes as Size[],
+            },
+            tags: { set: tagsArray },
+          },
+        })
+        console.log({ product })
       }
 
       return {
-        // product
+        product,
       }
     })
 

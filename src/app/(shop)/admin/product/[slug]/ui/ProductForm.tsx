@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface Props {
   // En este con la propiedad product, estamos usando el operador '&' para realizar una interseccion de tipos o concatenando tipos, en este caso Product es un interface que tiene diferentes propiedades como por ejemplo { id: string, name: string }, y al interface Product le estamos agregando una propiedad mas llamada 'ProductImage' que es de tipo ProductImage[] quedando la interfaz Product de la siguiente manera: { id: string, name: string, ProductImage: ProductImage[] }
-  product: Product & { ProductImage?: ProductImage[] }
+  product: Partial<Product> & { ProductImage?: ProductImage[] }
   categories: Category[]
 }
 
@@ -42,7 +42,7 @@ export const ProductForm = ({ product, categories }: Props) => {
   } = useForm<FormInputs>({
     defaultValues: {
       ...product,
-      tags: product.tags.join(', '),
+      tags: product.tags?.join(', '),
       sizes: product.sizes ?? [],
     },
   })
@@ -63,7 +63,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
     const { ...productToSave } = data
 
-    formData.append('id', product.id ?? '')
+    if (product.id) formData.append('id', product.id ?? '')
     formData.append('title', productToSave.title)
     formData.append('slug', productToSave.slug)
     formData.append('description', productToSave.description)
@@ -199,6 +199,19 @@ export const ProductForm = ({ product, categories }: Props) => {
 
       {/* Selector de tallas y fotos */}
       <div className='w-full'>
+        <div className='mb-2 flex flex-col'>
+          <label htmlFor={`${id}-inStock`}>Inventory</label>
+          <input
+            {...register('inStock')}
+            id={`${id}-inStock`}
+            type='number'
+            className='rounded-md border bg-gray-200 p-2'
+          />
+        </div>
+        {/* {errors.price && (
+          <span className='text-sm text-red-500'>{errors.price.message}</span>
+        )} */}
+
         {/* As checkboxes */}
         <div className='flex flex-col'>
           <label>Sizes</label>
@@ -227,7 +240,7 @@ export const ProductForm = ({ product, categories }: Props) => {
           <div className='mb-2 flex flex-col'>
             <label htmlFor={`${id}-pictures`}>Pictures</label>
             <input
-              {...register('ProductImage')}
+              // {...register('ProductImage')}
               id={`${id}-pictures`}
               type='file'
               multiple
