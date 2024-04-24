@@ -2,6 +2,9 @@
 
 import z from 'zod'
 import { GenderEnum } from '../../interfaces/product/product.interface'
+import prisma from '@/lib/prisma'
+import { Product, Size } from '@prisma/client'
+import { logger } from '@/logs/winston.config'
 
 const productSchema = z.object({
   id: z.string().uuid().optional().nullable(),
@@ -35,21 +38,60 @@ const productSchema = z.object({
 })
 
 export const createUpdateProduct = async (formData: FormData) => {
-  console.log(formData)
-
   const data = Object.fromEntries(formData)
   const productParsed = productSchema.safeParse(data)
 
   if (!productParsed.success) {
-    console.log(productParsed.error)
     return {
       ok: false,
       message: productParsed.error.message,
     }
   }
-  console.log(productParsed.data)
 
-  return {
-    ok: true,
+  const product = productParsed.data
+  product.slug = product.slug.toLowerCase().replace(/ /g, '-').trim()
+  const { id, ...rest } = product
+
+  try {
+    // En este caso usamos una transaccion de prisma porque tenemos que dar de alta el producto en la base de datos pero tambien las imagenes en cloudinary, asi que como son 2 bases de datos diferentes usamos la transaccion por si el alta de una de las 2 cosas falla entonces se realice el rollback para cancelar todo
+    const prismaTx = await prisma.$transaction(async (tx) => {
+      let product: Product
+      const tagsArray = rest.tags
+        .split(',')
+        .map((tag) => tag.trim().toLowerCase())
+
+      // Si el producto tiene un 'id' quiere decir que el producto ya existe en la base de datos y tenemos que actualizarlo, pero si no tiene un id, entonces tenemos que crear el producto
+      if (id) {
+        product = await prisma.product.update({
+          where: { id },
+          data: {
+            ...rest,
+            sizes: {
+              // Con la propiedad 'set' estamos indicando que lo que guardamos en el campo sizes tiene que ser un set de datos, entonces originalmente 'sizes' es un array de strings, pero lo convertira en un set de datos para poder guardarlo y en la db se vera de la siguiente forma: {XS,S,XL,XXL,L,M}
+              set: rest.sizes as Size[],
+            },
+            tags: { set: tagsArray },
+          },
+        })
+
+        console.log({ updatedProduct: product })
+      } else {
+      }
+
+      return {
+        // product
+      }
+    })
+
+    return {
+      ok: true,
+    }
+  } catch (error: any) {
+    logger.error('Error', error)
+
+    return {
+      ok: false,
+      message: error.message,
+    }
   }
 }
