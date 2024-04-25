@@ -2,6 +2,7 @@ import { getOrderById } from '@/actions'
 import {
   PayPalButton,
   PaymentStatusAlert,
+  ProductImage,
   TAX_PERCENTAGE,
   Title,
 } from '@/components'
@@ -41,8 +42,8 @@ export default async function CartPage({ params }: Props) {
                 key={`${product.slug}-${product.size}`}
                 className='mb-5 flex'
               >
-                <Image
-                  src={`/products/${product.image}`}
+                <ProductImage
+                  src={product.image}
                   width={100}
                   height={100}
                   alt={product.title}
@@ -51,7 +52,6 @@ export default async function CartPage({ params }: Props) {
                     width: '100px',
                     height: '100px',
                   }}
-                  priority
                 />
                 <div>
                   <p>

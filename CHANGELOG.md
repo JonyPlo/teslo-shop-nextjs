@@ -1,4 +1,29 @@
 # Changelog
+## [0.7.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.6.0...v0.7.0) (2024-04-25)
+
+
+### Features
+
+* **admin-products:** :sparkles: create page to show all products and manage them ([2ea63c3](https://github.com/JonyPlo/teslo-shop-nextjs/commits/2ea63c361532c663c87aa35734c163a6c1bab7b9))
+* **product-admin:** :sparkles: add react hook form in to admin product form ([90c8059](https://github.com/JonyPlo/teslo-shop-nextjs/commits/90c80593a62c72aa79ee19d60282331d985d7422))
+* **product-admin:** :sparkles: create product page and form to manage them ([51c6143](https://github.com/JonyPlo/teslo-shop-nextjs/commits/51c61431151db28e32ddcc4214f36948a6f47917))
+* **product-admin:** :sparkles: prepare form data to save product in data base ([f556aa6](https://github.com/JonyPlo/teslo-shop-nextjs/commits/f556aa6e3421e64c671b712740803e1556249036))
+* **product-admin:** :sparkles: show db categories in admin product form ([a0ef8ea](https://github.com/JonyPlo/teslo-shop-nextjs/commits/a0ef8ea9e867d91916315396d7b971850801fb0c))
+* **product-admin:** :sparkles: update product ([f88d0e0](https://github.com/JonyPlo/teslo-shop-nextjs/commits/f88d0e0828c63689ee14e2938fab925ea771d7f7))
+* **product-admin:** :sparkles: upload images in cloudinary ([7c973cc](https://github.com/JonyPlo/teslo-shop-nextjs/commits/7c973cc63b69ce65e6d6b0564002ae9a395a2af4))
+* **products-admin:** :sparkles: adapt the image component to accept images from different databases ([ee9fee7](https://github.com/JonyPlo/teslo-shop-nextjs/commits/ee9fee70a095b2ec90789f8d10826c921651eacb))
+* **products-admin:** :sparkles: add product image mockup in the product admin form ([5f76ea6](https://github.com/JonyPlo/teslo-shop-nextjs/commits/5f76ea6799cd6e12cbc329373c540683d2446ad5))
+* **products-admin:** :sparkles: add sizes validations ([6702d91](https://github.com/JonyPlo/teslo-shop-nextjs/commits/6702d91cb69d2c6aabd2bf56993a8280721707b0))
+* **products-admin:** :sparkles: create and save products ([5ce02e1](https://github.com/JonyPlo/teslo-shop-nextjs/commits/5ce02e141def9758504f82b2a494bd0de04beae5))
+* **products-admin:** :sparkles: delete images in database and cloudinary ([516f5d7](https://github.com/JonyPlo/teslo-shop-nextjs/commits/516f5d796157ef0b51b6069d23fbe34b7a839fa1))
+* **users-maintenance:** :sparkles: create users maintenance page and add pagination ([47a9c3a](https://github.com/JonyPlo/teslo-shop-nextjs/commits/47a9c3a8722d65554deb806e90c1ed8b1ae2a827))
+* **users:** :sparkles: add functionality to change users role in admin panel ([71995f9](https://github.com/JonyPlo/teslo-shop-nextjs/commits/71995f99913cbe81835458f4ed5ecbb41cba44f1))
+
+
+### Bug Fixes
+
+* :bug: fix some bugs that did not allow images to be displayed on some pages ([55a7489](https://github.com/JonyPlo/teslo-shop-nextjs/commits/55a74899c350c81dff85d96dc0729572ccef635d))
+
 ## [0.6.0](https://github.com/JonyPlo/teslo-shop-nextjs/compare/v0.5.0...v0.6.0) (2024-04-19)
 
 
