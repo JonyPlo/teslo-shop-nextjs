@@ -38,3 +38,6 @@ Invalid `prisma.productImage.updateMany()` invocation:
 }
 
 Argument `data`: Invalid value provided. Expected ProductImageUpdateManyMutationInput or ProductImageUncheckedUpdateManyInput, provided (Object, Object).
+
+[04-25-2024 07:07:31.889 AM]
+error: 	Error Unauthorized
