@@ -26,6 +26,14 @@ export const SideBar = () => {
   const isAuthenticated = Boolean(session?.user)
   const isAdmin = session?.user.role === USER_ROLE.ADMIN
 
+  const onLogout = async () => {
+    // Limpiamos el local storage por si se loguea otra persona en el mismo PC, no le aparezca el carrito de compras ni la direccion del usuario anterior
+    localStorage.clear()
+
+    // Server Action
+    await logout()
+  }
+
   return (
     <div>
       {/* Background black */}
@@ -80,8 +88,7 @@ export const SideBar = () => {
         {isAuthenticated && (
           <button
             className='mt-6 flex w-full items-center rounded p-2 transition-all hover:bg-gray-100'
-            //* NOTA: Al escribir el logout en el onclick no lo hacemos de la forma implicita "onclick={logout}" porque de esa forma estariamos mandando en objeto 'event' como parametro al logout, y un server action no puede recibir objetos como parametros, por lo tanto daria error, asi que para solucionarlo agregamos el logout de la manera explicita 'onClick={() => logout()}' y de esta forma nos aseguramos que al server action 'logout' no le llega ningun argumento como parametro
-            onClick={() => logout()}
+            onClick={onLogout}
           >
             <IoLogOutOutline size={30} />
             <span className='ml-3 text-xl'>Log Out</span>

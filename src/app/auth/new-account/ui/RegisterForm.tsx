@@ -27,7 +27,6 @@ export const RegisterForm = () => {
     resolver: zodResolver(newAccountSchema),
   })
 
-  // El onSubmit puede ser asincrono porque dentro de el vamos a ejecutar un server action, y necesitamos esperar la respuesta del lado del servidor
   const onSubmit: SubmitHandler<NewAccountFormFields> = async (data) => {
     try {
       const { name, email, password } = data
@@ -35,7 +34,6 @@ export const RegisterForm = () => {
       // Server actions
       // Realizamos la peticion para registrar al usuario
       const resp = await registerUser({ name, email, password })
-      console.log({ resp })
       // Si tenemos un error al crear el user mostramos el mensaje en pantalla
       if (!resp.ok) {
         // Con setError() ingreso el string 'root' que significa que es un error general y no de algun input en particular, y como segundo argumento mandamos el objeto con el type, message, y lo que necesitemos para mostrar en pantalla despues

@@ -1,6 +1,6 @@
 'use server'
 
-import { signIn } from '@/auth.config' // Tomo el 'signIn' que estoy exportando desde el archivo 'auth.config.ts' y lo ejecuto
+import { signIn } from '@/auth.config'
 import { logger } from '@/logs/winston.config'
 import { AuthError } from 'next-auth'
 
@@ -36,6 +36,7 @@ export async function authenticate(
 // Funcion que se ejecuta cuando se registra un usuario, para logearlo despues del registro
 export const login = async (email: string, password: string) => {
   try {
+    // Tomo el 'signIn' que estoy exportando desde el archivo 'auth.config.ts' y lo ejecuto
     await signIn('credentials', { email, password })
 
     return {

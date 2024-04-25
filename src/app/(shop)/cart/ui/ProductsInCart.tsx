@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useCartBoundStore } from '@/store'
-import { QuantitySelector } from '@/components'
+import { ProductImage, QuantitySelector } from '@/components'
 import { IoCartOutline } from 'react-icons/io5'
 import { CartStockLabel } from './CartStockLabel'
 import { setCookie } from 'cookies-next'
@@ -57,13 +57,12 @@ export const ProductsInCart = () => {
           key={`${product.slug}-${product.size}`}
           className='mb-10 flex flex-col items-center lg:relative lg:flex-row lg:items-start'
         >
-          <Image
-            src={`/products/${product.image}`}
+          <ProductImage
+            src={product.image}
             width={150}
             height={150}
             alt={product.title}
             className='w-40 rounded md:mr-5'
-            priority
           />
           <div className='flex flex-col items-center lg:items-start '>
             <Link
