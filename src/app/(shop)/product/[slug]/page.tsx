@@ -45,7 +45,9 @@ export async function generateMetadata(
       // Tener en cuenta que normalmente en esta propiedad se agrega la url de la imagen subida en la nube, y no desde mi proyecto ya que se recomienda que las imágenes estén subidas en otro lado aparte al proyecto
       images: [
         {
-          url: `/products/${product?.images[1]}`, // Tiene que ser una ruta absoluta
+          url: product?.images[1].startsWith('https')
+            ? product?.images[1] // Ruta absoluta para las imagenes subidas en cloudinary
+            : `/products/${product?.images[1]}`, // Ruta absoluta para las imagenes que estan localmente en el proyecto
           width: 800, // Opcional
           height: 600, // Opcional
           alt: product?.title, // Opcional
