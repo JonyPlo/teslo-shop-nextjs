@@ -16,63 +16,63 @@ export const authConfig: NextAuthConfig = {
   // Los callbacks son middlewares que se ejecutaran en un cierto punto del ciclo de vida de la autenticación de un usuario, en otras palabras, despues de que la autenticación pase por algún proveedor, se van a ejecutar los callbacks  antes de mostrar la informacion de la sesion en la pagina
   callbacks: {
     // El middleware authorized se invoca cuando un usuario necesita autorización, utilizando, en otras palabras, se ejecuta siempre que el usuario ingresa a una ruta, y ejecuta una accion dependiendo si el usuario esta autenticado o no, este middleware recibira 2 parametros, el primero es el 'auth' que es un objeto con los datos del usuario autenticado, y si no esta autenticado entonces null, y el segundo argumento es 'request' que es un objeto con varias propiedades pero la que necesitamos es la propiedad 'nextUrl' que es un objeto URL con todas las propiedades de una url, con este nextUrl podemos obtener datos de la url mientras el user navega por las paginas
-    // authorized({ auth, request: { nextUrl } }) {
-    //   // Verificamos si el usuario esta autenticado o no
-    //   const isLoggedIn = Boolean(auth?.user)
+    authorized({ auth, request: { nextUrl } }) {
+      // Verificamos si el usuario esta autenticado o no
+      const isLoggedIn = Boolean(auth?.user)
 
-    //   // Rutas protegidas por autenticacion
-    //   const protectedPaths = [
-    //     '/checkout',
-    //     '/checkout/address',
-    //     '/profile',
-    //     '/orders',
-    //     '/orders/:id',
-    //   ]
-    //   // Rutas de auth page
-    //   const authPaths = ['/auth/login', '/auth/new-account']
-    //   // Rutas protegidas para el rol admin
-    //   const adminProtectedPaths = [
-    //     '/admin',
-    //     '/admin/orders',
-    //     // '/admin/users',
-    //   ]
+      // Rutas protegidas por autenticacion
+      const protectedPaths = [
+        '/checkout',
+        '/checkout/address',
+        '/profile',
+        '/orders',
+        '/orders/:id',
+      ]
+      // Rutas de auth page
+      const authPaths = ['/auth/login', '/auth/new-account']
+      // Rutas protegidas para el rol admin
+      const adminProtectedPaths = [
+        '/admin',
+        '/admin/orders',
+        // '/admin/users',
+      ]
 
-    //   // Verificamos si la ruta en la que estamos actualmente coincide con alguna de las rutas protegidas, si coincide entonces isProtected es true, de lo contrario sera false
-    //   const isProtectedPath = protectedPaths.some((path) =>
-    //     nextUrl.pathname.startsWith(path)
-    //   )
+      // Verificamos si la ruta en la que estamos actualmente coincide con alguna de las rutas protegidas, si coincide entonces isProtected es true, de lo contrario sera false
+      const isProtectedPath = protectedPaths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      )
 
-    //   const isAuthPath = authPaths.some((path) =>
-    //     nextUrl.pathname.startsWith(path)
-    //   )
+      const isAuthPath = authPaths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      )
 
-    //   const isAdminPath = adminProtectedPaths.some((path) =>
-    //     nextUrl.pathname.startsWith(path)
-    //   )
+      const isAdminPath = adminProtectedPaths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      )
 
-    //   //Si estamos en una ruta protegida pero no estamos logeados, entonces redireccionamos al login '/auth/login'
-    //   if (isProtectedPath && !isLoggedIn) {
-    //     // Construimos la ruta a la que el usuario no autenticado sera redireccionado, en este caso la url sera por ejemplo 'http://localhost:3000/auth/login'
-    //     const redirectUrl = new URL('/auth/login', nextUrl.origin)
-    //     // Ahora ANTES de redireccionar al usuario a la ruta 'http://localhost:3000/auth/login' agregamos un query parameter llamado 'redirectTo' y como valor la ruta protegida a la que el usuario quiso acceder pero no pudo, el flujo seria el siguiente, el usuario quiere acceder por ejemplo a la ruta '/checkout/address' pero al ser una ruta protegida sera redireccionado al login, pero ANTES de redireccionarlo al login, agregaremos un query parameter a la url del login con la ruta '/checkout/address' (http://localhost:3000/auth/login?redirectTo=/checkout/address) para despues desde el formulario del login tomemos ese query parameter y asi cuando el usuario inicie sesion, hacer que vuelva a la misma ruta en donde estaba antes. La logica para redireccionar al usuario con el redirectTo esta en el componente LoginForm.tsx
-    //     redirectUrl.searchParams.append('redirectTo', nextUrl.pathname)
-    //     return Response.redirect(redirectUrl)
-    //   }
+      //Si estamos en una ruta protegida pero no estamos logeados, entonces redireccionamos al login '/auth/login'
+      if (isProtectedPath && !isLoggedIn) {
+        // Construimos la ruta a la que el usuario no autenticado sera redireccionado, en este caso la url sera por ejemplo 'http://localhost:3000/auth/login'
+        const redirectUrl = new URL('/auth/login', nextUrl.origin)
+        // Ahora ANTES de redireccionar al usuario a la ruta 'http://localhost:3000/auth/login' agregamos un query parameter llamado 'redirectTo' y como valor la ruta protegida a la que el usuario quiso acceder pero no pudo, el flujo seria el siguiente, el usuario quiere acceder por ejemplo a la ruta '/checkout/address' pero al ser una ruta protegida sera redireccionado al login, pero ANTES de redireccionarlo al login, agregaremos un query parameter a la url del login con la ruta '/checkout/address' (http://localhost:3000/auth/login?redirectTo=/checkout/address) para despues desde el formulario del login tomemos ese query parameter y asi cuando el usuario inicie sesion, hacer que vuelva a la misma ruta en donde estaba antes. La logica para redireccionar al usuario con el redirectTo esta en el componente LoginForm.tsx
+        redirectUrl.searchParams.append('redirectTo', nextUrl.pathname)
+        return Response.redirect(redirectUrl)
+      }
 
-    //   // Si ya estamos logueados pero queremos acceder a las rutas de login o new account entonces lo redireccionamos al home '/'
-    //   if (isAuthPath && isLoggedIn) {
-    //     const redirectUrl = new URL('/', nextUrl.origin)
-    //     return Response.redirect(redirectUrl)
-    //   }
+      // Si ya estamos logueados pero queremos acceder a las rutas de login o new account entonces lo redireccionamos al home '/'
+      if (isAuthPath && isLoggedIn) {
+        const redirectUrl = new URL('/', nextUrl.origin)
+        return Response.redirect(redirectUrl)
+      }
 
-    //   // Si el usuario tiene rol de 'user' pero quiere ingresar a la ruta que solo puede entrar un usuario con ro 'admin' entonces lo redireccionamos al home '/'
-    //   if (isAdminPath && auth?.user.role !== 'admin') {
-    //     const redirectUrl = new URL('/', nextUrl.origin)
-    //     return Response.redirect(redirectUrl)
-    //   }
+      // Si el usuario tiene rol de 'user' pero quiere ingresar a la ruta que solo puede entrar un usuario con ro 'admin' entonces lo redireccionamos al home '/'
+      if (isAdminPath && auth?.user.role !== 'admin') {
+        const redirectUrl = new URL('/', nextUrl.origin)
+        return Response.redirect(redirectUrl)
+      }
 
-    //   return true
-    // },
+      return true
+    },
 
     // Por defecto el parametro 'token' es un objeto que tiene informacion de la session, que es un objeton con las propiedades name, email, picture y sub, (sub seria el id del usuario), y esa es la informacion que se pasa a la sesion para poder usarla en la pagina, pero si queremos agrandar ese objeto con mas propiedades como por ejemplo el role, emailVerified, etc. tenemos que usar el parametro 'user'
     //* El parametro 'user' tiene la misma informacion que el objeto 'rest' que se retorna al final de este archivo, recordar que el objeto rest tiene toda la informacion del usuario porque cuando se realiza la autenticacion, toda esa informacion del usuario que obtenemos de la base de datos se guarda en ese objeto rest, asi que solo tenemos que sacar esa informacion que nos falta del parametro 'user' y pasarsela al objeto 'token'
