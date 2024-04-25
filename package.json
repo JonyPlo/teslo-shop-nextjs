@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run prisma:deploy && next build",
+    "build": "pnpm prisma:deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
@@ -15,7 +15,7 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "prisma:deploy": "npx prisma migrate deploy && prisma generate"
+    "prisma:deploy": "pnpm dlx prisma migrate deploy && pnpm prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.4",
@@ -33,6 +33,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.51.2",
     "react-icons": "5.0.1",
+    "sharp": "0.33.3",
     "swiper": "11.0.6",
     "tailwind-merge": "2.2.1",
     "tailwindcss-animate": "1.0.7",
