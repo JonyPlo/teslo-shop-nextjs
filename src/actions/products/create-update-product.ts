@@ -5,6 +5,11 @@ import { GenderEnum } from '../../interfaces/product/product.interface'
 import prisma from '@/lib/prisma'
 import { Product, Size } from '@prisma/client'
 import { logger } from '@/logs/winston.config'
+import { revalidatePath } from 'next/cache'
+import { v2 as cloudinary } from 'cloudinary'
+
+// En cloudinary.config guardamos el URL que obtenemos en nuestro dashboard de cloudinary para que cloudinary sepa a donde tiene que subir las imagenes
+cloudinary.config(process.env.CLOUDINARY_URL ?? '')
 
 const productSchema = z.object({
   id: z.string().uuid().optional().nullable(),
@@ -40,8 +45,6 @@ const productSchema = z.object({
 export const createUpdateProduct = async (formData: FormData) => {
   const data = Object.fromEntries(formData)
   const productParsed = productSchema.safeParse(data)
-
-  console.log(productParsed)
 
   if (!productParsed.success) {
     return {
@@ -85,7 +88,25 @@ export const createUpdateProduct = async (formData: FormData) => {
             tags: { set: tagsArray },
           },
         })
-        console.log({ product })
+      }
+
+      // Proceso de carga y guardado de imagenes
+      // formData.getAll('images') es un arreglo de archivos de tipo imagen
+      if (formData.getAll('images')) {
+        // uploadImages sube las imagenes a cloudinary y retorna un arreglo con las urls de cada imagen subida en cloudinary
+        const images = await uploadImages(formData.getAll('images') as File[])
+
+        if (!images) {
+          throw new Error('Error uploading images, rollingback')
+        }
+
+        // Subimos las imagenes a nuestra base de datos de postgres
+        await prisma.productImage.createMany({
+          data: images.map((image) => ({
+            url: image!,
+            productId: product.id,
+          })),
+        })
       }
 
       return {
@@ -93,8 +114,14 @@ export const createUpdateProduct = async (formData: FormData) => {
       }
     })
 
+    revalidatePath('/admin/products')
+    revalidatePath(`/admin/product/${product.slug}`)
+    revalidatePath(`/products/${product.slug}`)
+
     return {
       ok: true,
+      message: 'Product updated/created',
+      product: prismaTx.product,
     }
   } catch (error: any) {
     logger.error('Error', error)
@@ -103,5 +130,39 @@ export const createUpdateProduct = async (formData: FormData) => {
       ok: false,
       message: error.message,
     }
+  }
+}
+
+const uploadImages = async (images: File[]) => {
+  try {
+    // Recorrer las imagenes y guardarlas en cloudinary
+    const uploadPromises = images.map(async (image) => {
+      try {
+        // Transformamos el archivo a un buffer
+        const buffer = await image.arrayBuffer()
+        // Convertimos el buffer a un string en base64
+        const base64Image = Buffer.from(buffer).toString('base64')
+        // Creo la promesa de subida de imagen a cloudinary pero no le agrego el 'await' porque sera ejecutada dentro de un Promise.all
+        return (
+          cloudinary.uploader
+            .upload(`data:image/png;base64,${base64Image}`, {
+              // 'next-teslo-shop' es la carpeta de mi upload preset en cloudinary: https://console.cloudinary.com/settings/c-b4aa3c08e0e0ef0edf809aa566ead4/upload_presets/0ad5af11f61882a7825660b4d0f7b726/edit
+              folder: 'next-teslo-shop',
+            })
+            // result.secure_url es la url de la imagen que me creo cloudinary
+            .then((result) => result.secure_url)
+        )
+      } catch (error) {
+        logger.error('Error', error)
+        return null
+      }
+    })
+
+    const uploadedImages = await Promise.all(uploadPromises)
+
+    return uploadedImages
+  } catch (error) {
+    logger.error('Error', error)
+    return null
   }
 }

@@ -1,0 +1,40 @@
+
+[04-25-2024 01:15:45.103 AM]
+error: 	Error 
+Invalid `prisma.product.updateMany()` invocation:
+
+{
+  data: [
+    {
+      url: "https://res.cloudinary.com/cloudinary-jony/image/upload/v1714018544/next-teslo-shop/aixn66f0vvfizejkhryd.avif",
+      productId: "3899d37b-a1ff-478d-82b4-01c82934db39"
+    },
+    {
+      url: "https://res.cloudinary.com/cloudinary-jony/image/upload/v1714018544/next-teslo-shop/lok06d47gltm5pwx2xef.avif",
+      productId: "3899d37b-a1ff-478d-82b4-01c82934db39"
+    }
+  ]
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}
+
+Argument `data`: Invalid value provided. Expected ProductUpdateManyMutationInput or ProductUncheckedUpdateManyInput, provided (Object, Object).
+
+[04-25-2024 01:17:01.986 AM]
+error: 	Error 
+Invalid `prisma.productImage.updateMany()` invocation:
+
+{
+  data: [
+    {
+      url: "https://res.cloudinary.com/cloudinary-jony/image/upload/v1714018621/next-teslo-shop/pigbzj8zl1pbb0jsx9rk.avif",
+      productId: "3899d37b-a1ff-478d-82b4-01c82934db39"
+    },
+    {
+      url: "https://res.cloudinary.com/cloudinary-jony/image/upload/v1714018621/next-teslo-shop/bh0ji63grmveudwuga2n.avif",
+      productId: "3899d37b-a1ff-478d-82b4-01c82934db39"
+    }
+  ]
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}
+
+Argument `data`: Invalid value provided. Expected ProductImageUpdateManyMutationInput or ProductImageUncheckedUpdateManyInput, provided (Object, Object).

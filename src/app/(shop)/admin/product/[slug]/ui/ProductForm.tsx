@@ -1,15 +1,20 @@
 'use client'
 
 import { createUpdateProduct } from '@/actions'
-import { Category, Product, ProductImage } from '@/interfaces'
+import { ProductImage } from '@/components'
+import type {
+  Category,
+  Product,
+  ProductImage as ProductWithImage,
+} from '@/interfaces'
 import { cn } from '@/utils'
-import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useId } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface Props {
   // En este con la propiedad product, estamos usando el operador '&' para realizar una interseccion de tipos o concatenando tipos, en este caso Product es un interface que tiene diferentes propiedades como por ejemplo { id: string, name: string }, y al interface Product le estamos agregando una propiedad mas llamada 'ProductImage' que es de tipo ProductImage[] quedando la interfaz Product de la siguiente manera: { id: string, name: string, ProductImage: ProductImage[] }
-  product: Partial<Product> & { ProductImage?: ProductImage[] }
+  product: Partial<Product> & { ProductImage?: ProductWithImage[] }
   categories: Category[]
 }
 
@@ -23,12 +28,15 @@ interface FormInputs {
   tags: string
   gender: 'men' | 'women' | 'kid' | 'unisex'
   categoryId: string
+  // El tipo FileList ya viene en el navegador web asi que no lo importamos de ningun lado
+  images?: FileList
 }
 
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
 export const ProductForm = ({ product, categories }: Props) => {
   const id = useId()
+  const router = useRouter()
 
   const {
     register,
@@ -44,6 +52,7 @@ export const ProductForm = ({ product, categories }: Props) => {
       ...product,
       tags: product.tags?.join(', '),
       sizes: product.sizes ?? [],
+      images: undefined,
     },
   })
 
@@ -57,11 +66,8 @@ export const ProductForm = ({ product, categories }: Props) => {
   }
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    console.log(data)
-
     const formData = new FormData()
-
-    const { ...productToSave } = data
+    const { images, ...productToSave } = data
 
     if (product.id) formData.append('id', product.id ?? '')
     formData.append('title', productToSave.title)
@@ -75,8 +81,21 @@ export const ProductForm = ({ product, categories }: Props) => {
     formData.append('categoryId', productToSave.categoryId)
     formData.append('inStock', productToSave.inStock.toString())
 
-    const { ok } = await createUpdateProduct(formData)
-    console.log({ ok })
+    if (images) {
+      for (let i = 0; i < images.length; i++) {
+        formData.append('images', images[i])
+      }
+    }
+
+    const { ok, product: updatedCreatedProduct } =
+      await createUpdateProduct(formData)
+
+    if (!ok) {
+      alert('Error updating product')
+      return
+    }
+
+    router.replace(`/admin/product/${updatedCreatedProduct?.slug}`)
   }
 
   return (
@@ -240,24 +259,23 @@ export const ProductForm = ({ product, categories }: Props) => {
           <div className='mb-2 flex flex-col'>
             <label htmlFor={`${id}-pictures`}>Pictures</label>
             <input
-              // {...register('ProductImage')}
+              {...register('images')}
               id={`${id}-pictures`}
               type='file'
               multiple
               className='rounded-md border bg-gray-200 p-2'
-              accept='image/png, image/jpeg'
+              accept='image/png, image/jpeg, image/avif'
             />
           </div>
           <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
             {product.ProductImage?.map((image) => (
               <div key={image.id}>
-                <Image
+                <ProductImage
                   alt={product.title ?? ''}
-                  src={`/products/${image.url}`}
+                  src={image.url}
                   width={300}
                   height={300}
                   className='rounded-t shadow-md'
-                  priority
                 />
                 <button
                   type='button'
