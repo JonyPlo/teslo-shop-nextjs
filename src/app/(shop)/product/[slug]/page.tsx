@@ -33,13 +33,13 @@ export async function generateMetadata(
   // const previousImages = (await parent).openGraph?.images || []
 
   return {
-    metadataBase: new URL('http://localhost:3000/'),
+    metadataBase: new URL('https://teslo-shop-jp.vercel.app/'),
     title: product?.title ?? 'Product not found',
     description: product?.description ?? '',
     openGraph: {
       title: product?.title ?? 'Product not found',
       description: product?.description ?? '',
-      url: 'http://localhost:3000',
+      url: 'https://teslo-shop-jp.vercel.app/',
       siteName: 'Teslo Shop',
       // En la propiedad image tomamos una imagen basada en el producto que obtenemos actualmente y queremos obtener esa imagen, en este caso de carpeta public para que esa imagen se muestre cuando compartimos la url a alguien, es decir, si copiamos el link de un producto, entonces cuando le mandemos el link a alguien la otra persona recibirá el enlace junto a una imagen del producto que le queremos mostrar.
       // Tener en cuenta que normalmente en esta propiedad se agrega la url de la imagen subida en la nube, y no desde mi proyecto ya que se recomienda que las imágenes estén subidas en otro lado aparte al proyecto
