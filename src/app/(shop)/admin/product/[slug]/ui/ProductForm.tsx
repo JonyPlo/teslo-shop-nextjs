@@ -264,7 +264,7 @@ export const ProductForm = ({ product, categories }: Props) => {
               type='file'
               multiple
               className='rounded-md border bg-gray-200 p-2'
-              accept='image/png, image/jpeg, image/avif'
+              accept='image/png, image/jpeg, image/avif, image/webp'
             />
           </div>
           <div className='mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3'>
