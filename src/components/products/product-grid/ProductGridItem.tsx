@@ -1,3 +1,4 @@
+import { ProductImage } from '@/components/product/product-image/ProductImage'
 import type { Product } from '@/interfaces'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,25 +10,23 @@ interface Props {
 export const ProductGridItem = ({ product }: Props) => {
   return (
     <div className='fade-in'>
-      <div className='overflow-hidden'>
+      <div className='h-[85%] overflow-hidden'>
         <Link href={`/product/${product.slug}`} className='relative'>
           {/* Front image */}
-          <Image
-            src={`/products/${product.images[0]}`}
+          <ProductImage
+            src={product.images[0]}
             alt={`${product.title}`}
-            className='absolute top-0 rounded duration-150 ease-in-out hover:opacity-0'
+            className='absolute h-full rounded object-cover duration-150 ease-in-out hover:opacity-0'
             width={500}
             height={500}
-            priority
           />
           {/* Back image */}
-          <Image
-            src={`/products/${product.images[1]}`}
+          <ProductImage
+            src={product.images[1]}
             alt={`${product.title}`}
-            className='rounded-md'
+            className='h-full rounded-md object-cover'
             width={500}
             height={500}
-            priority
           />
         </Link>
       </div>

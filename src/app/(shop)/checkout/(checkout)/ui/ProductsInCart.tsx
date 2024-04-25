@@ -7,6 +7,7 @@ import Image from 'next/image'
 
 import { useCartBoundStore } from '@/store'
 import { currencyFormat } from '../../../../../utils/currencyFormat'
+import { ProductImage } from '@/components'
 
 export const ProductsInCart = () => {
   const [loaded, setLoaded] = useState(false)
@@ -33,13 +34,12 @@ export const ProductsInCart = () => {
           key={`${product.slug}-${product.size}`}
           className='mb-10 flex flex-col items-center lg:relative lg:flex-row lg:items-start'
         >
-          <Image
-            src={`/products/${product.image}`}
+          <ProductImage
+            src={product.image}
             width={150}
             height={150}
             alt={product.title}
             className='w-40 rounded md:mr-5'
-            priority
           />
           <div className='flex flex-col items-center lg:items-start '>
             <span>Quantity: {product.quantity}</span>

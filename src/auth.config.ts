@@ -20,8 +20,6 @@ export const authConfig: NextAuthConfig = {
       // Verificamos si el usuario esta autenticado o no
       const isLoggedIn = Boolean(auth?.user)
 
-      // Rutas de auth page
-      const authPaths = ['/auth/login', '/auth/new-account']
       // Rutas protegidas por autenticacion
       const protectedPaths = [
         '/checkout',
@@ -30,6 +28,14 @@ export const authConfig: NextAuthConfig = {
         '/orders',
         '/orders/:id',
       ]
+      // Rutas de auth page
+      const authPaths = ['/auth/login', '/auth/new-account']
+      // Rutas protegidas para el rol admin
+      const adminProtectedPaths = [
+        '/admin',
+        '/admin/orders',
+        // '/admin/users',
+      ]
 
       // Verificamos si la ruta en la que estamos actualmente coincide con alguna de las rutas protegidas, si coincide entonces isProtected es true, de lo contrario sera false
       const isProtectedPath = protectedPaths.some((path) =>
@@ -37,6 +43,10 @@ export const authConfig: NextAuthConfig = {
       )
 
       const isAuthPath = authPaths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      )
+
+      const isAdminPath = adminProtectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path)
       )
 
@@ -51,6 +61,12 @@ export const authConfig: NextAuthConfig = {
 
       // Si ya estamos logueados pero queremos acceder a las rutas de login o new account entonces lo redireccionamos al home '/'
       if (isAuthPath && isLoggedIn) {
+        const redirectUrl = new URL('/', nextUrl.origin)
+        return Response.redirect(redirectUrl)
+      }
+
+      // Si el usuario tiene rol de 'user' pero quiere ingresar a la ruta que solo puede entrar un usuario con ro 'admin' entonces lo redireccionamos al home '/'
+      if (isAdminPath && auth?.user.role !== 'admin') {
         const redirectUrl = new URL('/', nextUrl.origin)
         return Response.redirect(redirectUrl)
       }
