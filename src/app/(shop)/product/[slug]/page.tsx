@@ -1,7 +1,7 @@
 export const revalidate = 604800 // 7 Dias
 
 import { Metadata, ResolvingMetadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 import { titleFont } from '@/config/fonts'
 import {
@@ -65,6 +65,8 @@ export default async function ProductPage({ params }: Props) {
   if (!product) {
     notFound()
   }
+
+  if (product.images.length === 0) redirect('/')
 
   return (
     <div className='mb-20 mt-5 grid gap-3 md:grid-cols-3'>
