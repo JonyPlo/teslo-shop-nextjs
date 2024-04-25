@@ -1,6 +1,6 @@
 'use client'
 
-import { createUpdateProduct } from '@/actions'
+import { createUpdateProduct, deleteProductImage } from '@/actions'
 import { ProductImage } from '@/components'
 import type {
   Category,
@@ -267,7 +267,7 @@ export const ProductForm = ({ product, categories }: Props) => {
               accept='image/png, image/jpeg, image/avif'
             />
           </div>
-          <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>
+          <div className='mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3'>
             {product.ProductImage?.map((image) => (
               <div key={image.id}>
                 <ProductImage
@@ -275,12 +275,12 @@ export const ProductForm = ({ product, categories }: Props) => {
                   src={image.url}
                   width={300}
                   height={300}
-                  className='rounded-t shadow-md'
+                  className='w-full rounded-t shadow-md'
                 />
                 <button
                   type='button'
                   className='btn-danger w-full rounded-b-xl'
-                  onClick={() => console.log(image.id, image.url)}
+                  onClick={() => deleteProductImage(image.id, image.url)}
                 >
                   Delete
                 </button>
