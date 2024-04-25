@@ -5,11 +5,19 @@ interface Props {
   alt: string
   // De esta forma heredamos e tipo de clases de tailwind para que el string que clases de llegue a este componente tenga que tener clases heredadas de tailwind
   className?: React.StyleHTMLAttributes<HTMLImageElement>['className']
+  style?: React.StyleHTMLAttributes<HTMLImageElement>['style']
   width: number
   height: number
 }
 
-export const ProductImage = ({ src, alt, className, width, height }: Props) => {
+export const ProductImage = ({
+  src,
+  alt,
+  className,
+  style,
+  width,
+  height,
+}: Props) => {
   const localSrc = src
     ? src.startsWith('http')
       ? src
@@ -23,6 +31,7 @@ export const ProductImage = ({ src, alt, className, width, height }: Props) => {
       height={height}
       alt={alt}
       className={className}
+      style={style}
       priority
     />
   )
