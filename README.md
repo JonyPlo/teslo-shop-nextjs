@@ -1,13 +1,13 @@
 <!-- PROJECT LOGO -->
 <div align="center">
-  <a href="https://nexus-89i.netlify.app/">
-    <img src="https://github.com/JonyPlo/teslo-shop-nextjs/assets/52645615/64fb68f9-1d18-4c90-a481-41dba5d05b9a" alt="Nexus" width="300" />
+  <a href="https://teslo-shop-jp.vercel.app/">
+    <img src="https://github.com/JonyPlo/teslo-shop-nextjs/assets/52645615/64fb68f9-1d18-4c90-a481-41dba5d05b9a" alt="Teslo-shop" width="300" />
   </a>
 <br>
   <p>
     Teslo Shop, the online store where you'll find timeless and quality fashion to dress with style.
     <br />
-    <a href="https://nexus-89i.netlify.app/">
+    <a href="https://teslo-shop-jp.vercel.app/">
       <strong>Explore page »</strong>
     </a>
     <br />
