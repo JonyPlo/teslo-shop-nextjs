@@ -43,17 +43,14 @@ export const PlaceOrder = () => {
       }
     })
 
-    // Server action para crear la orden del producto y decrementar el stock de los productos en la base de datos
     const resp = await placeOrder(productsToOrder, addressStore)
 
-    // Si algo salio mal al guardar la orden en la db retornamos un error
     if (!resp.ok) {
       setIsPlacingOrder(false)
       setErrorMessage(resp.message)
       return
     }
 
-    // Si todo salio bien y se guardo la orden entonces limpiamos el carrito y redireccionamos al usuario al resumen de la orden
     clearCart()
     router.replace(`/orders/${resp.order?.id}`)
 
@@ -109,7 +106,6 @@ export const PlaceOrder = () => {
       <div className='mt-5 w-full'>
         <p className='mb-2 text-red-500'>{errorMessage}</p>
         <button
-          // href={`/orders/123`}
           className='btn-primary mb-5 w-full disabled:bg-gray-400'
           onClick={onPlaceOrder}
           disabled={isPlacingOrder}

@@ -24,14 +24,11 @@ export const getPaginatedProductsWithImages = async ({
     },
     take,
     skip: (page - 1) * take,
-    // Con include estoy diciendo que el objeto que me devuelve, incluya una propiedad con valores de otra tabla
+
     include: {
-      // Y aquí pido que incluya el ProductImage, en otras palabras, buscar en la tabla de ProductImage, las imágenes que estén relacionadas con cada producto.
-      // Esto hará que se cree una propiedad llamada ProductImage en el objeto de cada producto, y esta propiedad tendrá un arreglo con las imágenes de ese producto
       ProductImage: {
-        // Con take pido que solo traiga 2 imágenes por producto
         take: 2,
-        //  Con select digo que solo necesito la propiedad "url" de cada imagen, ya que una imagen tiene varias propiedades en la tabla
+
         select: {
           url: true,
         },
@@ -41,10 +38,8 @@ export const getPaginatedProductsWithImages = async ({
 
   try {
     const paginationPromises = await Promise.all([
-      // 1. Obtengo los productos
       prisma.product.findMany(findPaginatedProducts),
-      // 2. Obtengo el total de paginas
-      // Con el método .count() puedo obtener un numero que me indique la cantidad de items que tiene la tabla de products, y si enviamos un objeto vació como argumento estamos diciendo que cuente todos los productos
+
       prisma.product.count({ where: { gender } }),
     ])
 

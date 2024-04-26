@@ -3,7 +3,6 @@ import Image from 'next/image'
 interface Props {
   src?: string
   alt: string
-  // De esta forma heredamos e tipo de clases de tailwind para que el string que clases de llegue a este componente tenga que tener clases heredadas de tailwind
   className?: React.StyleHTMLAttributes<HTMLImageElement>['className']
   style?: React.StyleHTMLAttributes<HTMLImageElement>['style']
   width: number

@@ -13,7 +13,6 @@ import { NewAccountFormFields, newAccountSchema } from '@/validations'
 export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false)
 
-  // Query params
   const param = useSearchParams()
   const path = param.get('redirectTo') || '/'
 
@@ -23,7 +22,6 @@ export const RegisterForm = () => {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<NewAccountFormFields>({
-    // Para usar el metodo zodResolver() tenemos que instalar una dependencia extra de react hook form que es '@hookform/resolvers', y este contiene una diversidad de metodos para varios schema validators, uno de ellos es zod, y lo que hace practicamente es evaluar si lo que vamos escribiendo en los inputs coincide con el schema o no, y en base a eso nos ira mostrando los diferentes errores
     resolver: zodResolver(newAccountSchema),
   })
 
@@ -31,22 +29,16 @@ export const RegisterForm = () => {
     try {
       const { name, email, password } = data
 
-      // Server actions
-      // Realizamos la peticion para registrar al usuario
       const resp = await registerUser({ name, email, password })
-      // Si tenemos un error al crear el user mostramos el mensaje en pantalla
+
       if (!resp.ok) {
-        // Con setError() ingreso el string 'root' que significa que es un error general y no de algun input en particular, y como segundo argumento mandamos el objeto con el type, message, y lo que necesitemos para mostrar en pantalla despues
         return setError('root', {
           message: resp.message,
         })
       }
 
-      // Si el usuario fue creado, entonces lo logeamos y redireccionamos al usuario
-      // Recordar pasar el email como argumento con el toLowercase()
       await login(email.toLowerCase(), password)
 
-      // Si el query parameter 'redirectTo' tiene alguna ruta entonces redireccionamos al usuario a esa ruta cuando inicie sesion, de lo contrario lo redireccionamos al home '/'
       window.location.replace(path)
     } catch (error) {
       console.error(error)
@@ -63,16 +55,14 @@ export const RegisterForm = () => {
       <label htmlFor='text'>Full name *</label>
       <input
         className={cn(
-          // Base styles
           'rounded border bg-gray-200 px-5 py-2 focus:border focus:border-blue-500',
-          // Border styles
+
           {
             'border-red-500': errors.name,
           }
         )}
         type='text'
         placeholder='Eric Plodzien'
-        // La propiedad autoFocus hace que al cargar la pantalla automaticamente hara foco en este input
         autoFocus
         {...register('name')}
       />
@@ -87,9 +77,8 @@ export const RegisterForm = () => {
       </label>
       <input
         className={cn(
-          // Base styles
           'rounded border bg-gray-200 px-5 py-2',
-          // Border styles
+
           {
             'border-red-500': errors.email,
           }
@@ -110,9 +99,8 @@ export const RegisterForm = () => {
       <div className='relative flex items-center justify-end'>
         <input
           className={cn(
-            // Base styles
             'w-full rounded border bg-gray-200 px-5 py-2',
-            // Border styles
+
             {
               'border-red-500': errors.password,
             }

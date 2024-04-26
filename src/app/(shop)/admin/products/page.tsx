@@ -3,7 +3,6 @@ export const revalidate = 0
 import Link from 'next/link'
 import { getPaginatedProductsWithImages } from '@/actions'
 import { Pagination, ProductImage, Title } from '@/components'
-import Image from 'next/image'
 import { currencyFormat } from '@/utils'
 
 interface Props {

@@ -33,13 +33,10 @@ model Category {
   id   String @id @default(uuid())
   name String @unique
 
-  // Relacion entre el modelo Category y Product
-  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   Product Product[]
 }
 
 model Product {
-  // El @id que tiene la propiedad id se conoce como "clave primaria" en SQL, y se conoce como un indice para optimizar las busquedas, en este caso las busquedas por id.
   id          String   @id @default(uuid())
   title       String
   description String
@@ -50,52 +47,31 @@ model Product {
   tags        String[] @default([])
   gender      Gender
 
-  // Aqui establesco una relacion entre el modelo o la tabla Category con Product, y basicamente lo que hace es que en la parte que dice "references: [id]" esta tomando el id de del Category, y con "fields: [categoryId]" decimos que vamos a almacenar en categoryId ese valor del id que tomamos en la referencia, por lo tanto ahora categoryId tiene el mismo valor que el id de la categoria, y asi se crea la relacion
-  //* Cabe aclarar que la propiedad 'category' no se crea como columna en la tabla, solo sirve para crear la relacion y tomar el id de la categoria para almacenarlo en la propiedad 'categoryId', y 'categoryId' si se crea como una columna en la tabla
-  category   Category @relation(fields: [categoryId], references: [id])
-  // El campo categoryId, tambien es conocido como "clave foranea" en SQL. La clave foránea es un campo o columna de una tabla que hace referencia a la clave primaria de otra tabla, en este caso categoryId seria la clave foranea y hace referencia al id de la tabla Category que seria su clave primaria
+  category Category @relation(fields: [categoryId], references: [id])
   categoryId String
 
-  // Relacion entre el modelo Product y ProductImage
-  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
   ProductImage ProductImage[]
   OrderItem    OrderItem[]
 
-  // En Prisma, @@index([gender]) se utiliza para crear un índice en la base de datos en función de la columna gender en la tabla Product.
-  // Un índice en una base de datos es como un directorio que ayuda a acelerar las búsquedas y consultas. En este caso, el índice se crea en el campo o columna "gender", lo que significa que la base de datos puede buscar y acceder más eficientemente a los registros de la tabla Product basándose en los valores de la columna gender.
-  // En términos sencillos, el índice facilita la búsqueda de productos según su género, mejorando el rendimiento de las consultas relacionadas con esa columna en particular.
-  // Tener en cuenta tambien se pueden crear mas indices para mas campos si asi lo quisieramos
   @@index([gender])
 }
 
 model ProductImage {
-  // Clave Primaria
   id  Int    @id @default(autoincrement())
   url String
-
-  // Relacion
-  //* Esta propiedad no se crea como columna, solo sirve para entablar la relacion
-  product   Product @relation(fields: [productId], references: [id])
-  // Clave Foranea
+  product Product @relation(fields: [productId], references: [id])
   productId String
 }
 
 model User {
-  id          String    @id @default(uuid())
-  name        String
-  // Por defecto el @unique crea un indice para la propiedad o columna email
-  email       String    @unique
-  // El simbolo ? al final indica que es un campo opcional
+  id   String @id @default(uuid())
+  name String
+  email String @unique
   emailVerify DateTime?
   password    String
-  // La enumeracion Role tiene como opciones 'admin' y 'user', en este caso con @default estamos diciendo que el usuario se creara por defecto con el role en 'user', solamente podemos elegir opciones que tena la enumeracion Role
-  role        Role      @default(user)
-  image       String?
-
-  //* Aqui estoy entablando una relacion conocida como relacion de 1 a 1, este campo no se crea como una columna en esta tabla, solamente entabla la relacion, y como es 1 a 1 en este caso quiere decir que cada usuario de esta tabla solo tendra UNA sola doreccion
+  role  Role    @default(user)
+  image String?
   address UserAddress?
-
-  // A diferencia de la relacion 1 a 1, aqui estamos indicando que un mismo usuario puede tener varias ordenes a la vez
   Order Order[]
 }
 
@@ -116,16 +92,13 @@ model UserAddress {
   city       String
   telephone  String
 
-  // Relaciones
   country   Country @relation(fields: [countryId], references: [id])
   countryId String
 
-  user   User   @relation(fields: [userId], references: [id])
-  //* Cuando se entabla una relacion de 1 a 1, el campo que hace referencia a la relacion, en este caso es 'userId', debe ser unico, porque la direccion que se guarde en esta tabla solo le pertenecera a un solo usuario, asi que por eso agregamos el @unique
+  user User @relation(fields: [userId], references: [id])
   userId String @unique
 }
 
-// Order
 model Order {
   id           String    @id @default(uuid())
   subTotal     Float
@@ -134,20 +107,15 @@ model Order {
   itemsInOrder Int
   isPaid       Boolean   @default(false)
   paidAt       DateTime?
-
   createdAt DateTime @default(now())
-  // La opcion @updatedAt se encarga de actualizar la fecha del campo 'updateAt' cada vez que se actualice la orden
-  updateAt  DateTime @updatedAt
+  updateAt DateTime @updatedAt
 
-  // Relaciones
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
   OrderItem    OrderItem[]
   OrderAddress OrderAddress?
 
-  // En este campo llamado 'transactionId'  vamos a guardar el id de la transaccion, que seria el id de ese proveedor de terceros de pagos, en este caso usaremos Paypal, asi que este seria el id de la transaccion de Paypal, en otras palabras, Paypal, mercado pago, o la empresa de pago de terceros que usemos para los pagos, nos entregara un id de la transaccion o de pago, y ese id es el que tenemos que guardar en este campo
-  // De esta forma tambien se conoce como crear una 'relacion' entre esta tabla y la transaccion que me genero mi proveedor de terceros de pago
   transactionId String?
 }
 
@@ -157,7 +125,6 @@ model OrderItem {
   price    Float
   size     Size
 
-  // Relaciones
   order   Order  @relation(fields: [orderId], references: [id])
   orderId String
 
@@ -175,7 +142,6 @@ model OrderAddress {
   postalCode String
   telephone  String
 
-  // Relaciones
   country   Country @relation(fields: [countryId], references: [id])
   countryId String
 

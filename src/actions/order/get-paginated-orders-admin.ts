@@ -22,7 +22,6 @@ export const getPaginatedOrdersAdmin = async ({
   try {
     const paginatedOrdersByUserId = prisma.order.findMany({
       orderBy: {
-        // Traemos todas las ordenes de la base de datos y las ordenamos por fecha de creacion descendente
         createdAt: 'desc',
       },
 

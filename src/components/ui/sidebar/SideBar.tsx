@@ -20,17 +20,13 @@ export const SideBar = () => {
   const isSideMenuOpen = useUiBoundStore((state) => state.isSideMenuOpen)
   const closeMenu = useUiBoundStore((state) => state.setIsSideMenuOpen)
 
-  // El hook useSession es un metodo que nos devuelve la informacion de la persona que esta autenticada actualmente, es un hook que se puede usar del 'lado del cliente' en vez de usar el metodo 'auth()' desde el archivo 'auth.config.ts' que se usa en los componentes del lado del servidor
-  //! IMPORTANTE: Para que este hook funcione el componente debe estar envuelto por un HOC llamado '<SessionProvider />' de lo contrario nos dara error, asi que para eso vamos a crear un componente '<Provider />' que tendra el SessionProvider y usarlo en el punto mas alto de la aplicacion, en el componente Provider explico con mas detalles sobre como usarlo
   const { data: session } = useSession()
   const isAuthenticated = Boolean(session?.user)
   const isAdmin = session?.user.role === USER_ROLE.ADMIN
 
   const onLogout = async () => {
-    // Limpiamos el local storage por si se loguea otra persona en el mismo PC, no le aparezca el carrito de compras ni la direccion del usuario anterior
     localStorage.clear()
 
-    // Server Action
     await logout()
   }
 

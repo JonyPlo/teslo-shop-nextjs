@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 
 interface Props {
   countries: Country[]
-  // El tipo Partial en typescript hace que todas las propiedades que se manden en el generico sean opcionales, en este caso 'Address' es un interface con propiedades obligatorias, pero el Partial hace que todas las propiedades tengan el ? al final haciendo que ahora sean opcionales
+
   userAddressDataBase?: Partial<Address> | null
 }
 
@@ -23,7 +23,6 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
   const { data: session } = useSession()
   const router = useRouter()
 
-  // React hook form
   const {
     register,
     handleSubmit,
@@ -31,7 +30,6 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<AddressFormFields>({
-    // Si al cargar la pagina la direccion del usuario estaba guardada en la base de datos entonces usamos esa informacion para cargar los inputs, de lo contrario usamos el local storage de zustand que eso lo hacemos en el useeffect
     defaultValues: {
       ...userAddressDataBase,
       rememberAddress: false,
@@ -40,8 +38,6 @@ export const AddressForm = ({ countries, userAddressDataBase = {} }: Props) => {
   })
 
   useEffect(() => {
-    // El metodo reset de react hook form puede resetear el formulario si lo llamamos sin ningun argumento 'reset()' pero si le mandamos un objeto, este verificara si el nombre de las propiedades del objeto coinciden con el nombre de los campos del formulario, entonces establecera los valores del objeto en cada campo del formulario
-    //* Con este if pregunto si los datos de la direccion del usuario no vienen de la base de datos, entonces ejecuto el metodo reset de react hook form que tomara el objeto 'address' que viene del local storage y usara esos valores para los campos
     if (!userAddressDataBase) reset(address)
   }, [address, userAddressDataBase])
 

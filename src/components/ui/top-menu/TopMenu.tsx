@@ -27,7 +27,6 @@ export const TopMenu = () => {
       {/* Logo */}
       <div>
         <Link href={'/'}>
-          {/* De esta forma aplicamos una fuente diferente a una etiqueta, esta fuente aplica también para todas la etiquetas que estén dentro de ella */}
           <span className={`${titleFont.className} font-bold antialiased`}>
             Teslo
           </span>

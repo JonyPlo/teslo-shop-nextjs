@@ -9,7 +9,6 @@ const REGEX = Object.freeze({
   TELEPHONE: /^[0-9]*$/,
 })
 
-//! Recordar que el metodo required() no funciona cuando se usa zod con react hook form, en su lugar hay que usar min(1)
 export const addressSchema = z.object({
   firstName: z
     .string()
@@ -42,9 +41,9 @@ export const addressSchema = z.object({
     .regex(REGEX.ADDRESS, {
       message: 'Address must be a string or number only',
     })
-    // El metodo optional() hace que el campo sea opcional (address2?)
+
     .optional()
-    // El metodo or() hace que el campo pueda estar vacio y no marque ningun error, pero cuando tiene al menos 1 caracter entonces si se ejecutan las validaciones
+
     .or(z.literal('')),
   postalCode: z
     .string()

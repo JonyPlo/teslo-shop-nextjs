@@ -44,8 +44,6 @@ export const getOrderById = async (id: string) => {
             quantity: true,
             size: true,
 
-            // Dentro de un select, los campos que son relaciones como por ejemplo en este caso el campo 'product' nos permite hacer mas selecciones dentro de esa relacion
-            // En este caso estamos diciendo que dentro de 'OrderItems' seleccione solo algunos campos, y del 'product' que esta relacionado con este OrderItem, necesito tambien seleccionar solo algunos campos
             product: {
               select: {
                 title: true,
@@ -55,7 +53,7 @@ export const getOrderById = async (id: string) => {
                   select: {
                     url: true,
                   },
-                  // ProductImage, es un arreglo de objetos, el cual estoy pidiendo que cada objeto tenga un apropiedad 'url' con la url de cada imagen, pero si queremos tomar solo una imagen de ese arreglo lo podemos hacer con 'take: 1'
+
                   take: 1,
                 },
               },
@@ -65,10 +63,8 @@ export const getOrderById = async (id: string) => {
       },
     })
 
-    // Verificar si la orden no existe
     if (!order) throw new Error('Order not exist')
 
-    // Verifico si el usuario logueado no es un admin y el order que obtuvimos pertenece a otro usuario entonces retornamos un error
     if (session.user.role === 'user' && session.user.id !== order?.userId)
       throw new Error('You do not have privileges to view this order')
 

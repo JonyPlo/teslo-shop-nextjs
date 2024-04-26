@@ -1,6 +1,5 @@
 import { z } from 'zod'
 
-// Expresiones regulares
 const REGEX = Object.freeze({
   NAME: /^[A-Za-z\s?]*$/,
   EMAIL:
@@ -8,7 +7,6 @@ const REGEX = Object.freeze({
   PASSWORD: /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]*$/,
 })
 
-// Creacion del esquema del formulario con zod y las validaciones de cada campo
 export const newAccountSchema = z.object({
   name: z
     .string()
@@ -35,5 +33,4 @@ export const newAccountSchema = z.object({
     }),
 })
 
-// La propiedad infer del objeto zod se encarga de extraer el tipado del schema, este tipado es de typescript por lo que podremos usarlo en el useForm de react hook form
 export type NewAccountFormFields = z.infer<typeof newAccountSchema>

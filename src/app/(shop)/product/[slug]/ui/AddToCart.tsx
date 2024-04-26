@@ -1,7 +1,5 @@
 'use client'
 
-// Este client componente se crea en este path dentro de app y no en otra carpeta
-
 import { useState } from 'react'
 import { useCartBoundStore, useProductBoundStore } from '@/store'
 import {
@@ -53,7 +51,6 @@ export const AddToCart = ({ product }: Props) => {
     toggleShowToast({ showToastState, setShowToastState })
   }
 
-  // Toast constants
   const ADDED_TO_CART_TOAST_MESSAGE = GET_ADDED_TO_CART_TOAST_MESSAGE(
     product.title
   )
@@ -80,12 +77,10 @@ export const AddToCart = ({ product }: Props) => {
       />
       {/* Button */}
       {isLoading ? (
-        // Spinner
         <div className='my-5 ml-[3.8rem]'>
           <Spinner />
         </div>
       ) : (
-        // Add to cart button
         <button
           className='btn-primary my-5 text-center disabled:bg-gray-500'
           disabled={stock === 0}

@@ -14,10 +14,8 @@ export const Pagination = ({ totalPages }: Props) => {
   const searchParams = useSearchParams()
   const searchString = searchParams.get('page') ?? 1
 
-  // Validacion para parametros que sean letras '/?page=abc'
   const currentPage = +searchString
 
-  // Validacion para parametros que sean numeros negativos '/?page=-3'
   if (currentPage < 1 || isNaN(+searchString)) {
     redirect(pathName)
   }
@@ -27,17 +25,14 @@ export const Pagination = ({ totalPages }: Props) => {
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams)
 
-    // Este if simplemente devuelve el mismo url en el cual ya me encuentro por ejemplo '/?page=1'
     if (pageNumber === '...') {
       return `${pathName}?${params.toString()}`
     }
 
-    // Si el numero es igual a 0 en este caso el url sera '/'
     if (+pageNumber <= 0) {
       return `${pathName}?${params.toString()}`
     }
 
-    // Si la pagina es mayor al total de paginas entonces la url sera igual al url actual por ej '/?page=1'
     if (+pageNumber > totalPages) {
       return `${pathName}?${params.toString()}`
     }
@@ -63,10 +58,7 @@ export const Pagination = ({ totalPages }: Props) => {
             <li key={page + '-' + index} className='page-item'>
               <Link
                 className={cn(
-                  // Base styles
                   'page-link relative block rounded border-0 bg-transparent px-3 py-1.5 text-gray-800 outline-none transition-all duration-300 hover:bg-gray-200 hover:text-gray-800',
-
-                  // Current page styles
                   {
                     'bg-blue-600 text-white shadow-md hover:bg-blue-500 hover:text-white focus:shadow-md ':
                       page === currentPage,

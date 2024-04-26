@@ -1,4 +1,4 @@
-export const revalidate = 604800 // 7 Dias
+export const revalidate = 604800
 
 import { Metadata, ResolvingMetadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
@@ -18,15 +18,11 @@ interface Props {
   }
 }
 
-// De esta forma se crea una Metadata Dinámica, la cual toma datos de la URL para usarlos como metadatos
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // read route params
   const slug = params.slug
-
-  // obtengo el producto basado en el slug de la url
   const product = await getProductBySlug(slug)
 
   // optionally access and extend (rather than replace) parent metadata
@@ -41,20 +37,18 @@ export async function generateMetadata(
       description: product?.description ?? '',
       url: 'https://teslo-shop-jp.vercel.app/',
       siteName: 'Teslo Shop',
-      // En la propiedad image tomamos una imagen basada en el producto que obtenemos actualmente y queremos obtener esa imagen, en este caso de carpeta public para que esa imagen se muestre cuando compartimos la url a alguien, es decir, si copiamos el link de un producto, entonces cuando le mandemos el link a alguien la otra persona recibirá el enlace junto a una imagen del producto que le queremos mostrar.
-      // Tener en cuenta que normalmente en esta propiedad se agrega la url de la imagen subida en la nube, y no desde mi proyecto ya que se recomienda que las imágenes estén subidas en otro lado aparte al proyecto
+
       images: [
         {
           url: product?.images[1].startsWith('https')
-            ? product?.images[1] // Ruta absoluta para las imagenes subidas en cloudinary
-            : `/products/${product?.images[1]}`, // Ruta absoluta para las imagenes que estan localmente en el proyecto
+            ? product?.images[1]
+            : `/products/${product?.images[1]}`,
           width: 800, // Opcional
           height: 600, // Opcional
           alt: product?.title, // Opcional
         },
       ],
-      // Forma resumida sin opciones
-      // images: [`/products/${product?.images[1]}`],
+
       type: 'website',
     },
   }

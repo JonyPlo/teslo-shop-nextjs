@@ -11,7 +11,6 @@ export default function CartPage() {
   )
   const hasCookieCart = cookieStore.has('productsInCart')
 
-  // Redireccionamos al home si no existen productos en las cookies
   if (!hasCookieCart || productsInCart.length === 0) redirect('/')
 
   return (

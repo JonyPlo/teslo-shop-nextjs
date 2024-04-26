@@ -20,7 +20,7 @@ export const ProductsInCart = () => {
 
   useEffect(() => {
     setLoaded(true)
-    // Guardo el carrito en las cookies para poder hacer comprobaciones en el lado del servidor
+
     setCookie('productsInCart', productsInCart)
   }, [])
 

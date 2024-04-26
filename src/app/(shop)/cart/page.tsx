@@ -3,8 +3,6 @@ import { ProductsInCart } from './ui/ProductsInCart'
 import { OrderSummary } from './ui/OrderSummary'
 
 export default function CartPage() {
-  // redirect('/empty')
-
   return (
     <div className='flex items-center justify-center'>
       <div className='mb-20 flex w-[1000px] flex-col xl:mb-0'>
