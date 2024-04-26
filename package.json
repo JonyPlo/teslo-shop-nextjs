@@ -38,7 +38,6 @@
     "tailwind-merge": "2.2.1",
     "tailwindcss-animate": "1.0.7",
     "winston": "3.13.0",
-    "winston-daily-rotate-file": "5.0.0",
     "zod": "3.22.4",
     "zustand": "4.5.0"
   },
