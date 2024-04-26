@@ -1,6 +1,4 @@
 <!-- PROJECT LOGO -->
-<br>
-
 <div align="center">
   <a href="https://nexus-89i.netlify.app/">
     <img src="https://github.com/JonyPlo/teslo-shop-nextjs/assets/52645615/64fb68f9-1d18-4c90-a481-41dba5d05b9a" alt="Nexus" width="300" />
@@ -18,8 +16,7 @@
 
 ## 📋 Table of contents
 
-- [📋 Table of contents](#-table-of-contents)
-- [💻 Teslo Shop](#-teslo-shop)
+- [💻 Teslo Shop](#-teslo-shop) <!-- prettier-ignore -->
 - [⚒️ Technologies](#️-technologies)
 - [💿 Run in Dev mode](#-run-in-dev-mode)
 - [👨‍💻 Author](#-author)
